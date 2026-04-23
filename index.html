@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Diente de León · Joyería Artesanal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --white:#fff;--off:#fafaf8;--cream:#f5f0ea;--cream2:#ede6dc;
+  --text:#1a1612;--muted:#7a7068;--light:#b0a898;
+  --gold:#b8922a;--gold-light:#e8c96a;--teal:#7ab8b0;--rose:#d4788a;--sage:#8aaa88;
+  --border:#e8e2da;--border2:#d5cfc7;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;font-weight:300;background:var(--white);color:var(--text);font-size:13px;letter-spacing:0.03em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.serif{font-family:'Cormorant Garamond',serif;font-weight:300}
+button,input{font-family:'Montserrat',sans-serif}
+img{display:block}
+
+/* ── ANNOUNCE ── */
+.announce{background:var(--text);color:rgba(255,255,255,0.65);text-align:center;padding:0.55rem 1rem;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.5rem;height:72px;transition:all 0.3s}
+.nav-left,.nav-right{display:flex;align-items:center;gap:2rem}
+.nav-right{justify-content:flex-end;gap:1.6rem}
+.nav-link{font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text);text-decoration:none;cursor:pointer;transition:color 0.2s,border-color 0.2s;background:none;border:none;border-bottom:2px solid transparent;padding-bottom:2px;font-weight:500}
+.nav-link:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-logo{cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav-logo img{height:52px;width:52px;border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,0.10)}
+.nav-logo-text{display:none}
+.cart-btn{background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:6px;transition:color 0.2s;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase}
+.cart-btn:hover{color:var(--text)}
+.cart-count{background:var(--rose);color:white;border-radius:50%;width:16px;height:16px;font-size:0.5rem;display:flex;align-items:center;justify-content:center;font-weight:500}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none;animation:fadeIn 0.4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HERO ── */
+.hero{min-height:92vh;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:8vw 5vw 8vw 8vw;position:relative;z-index:2}
+.hero-eyebrow{font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem;font-weight:500}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--muted);display:block}
+.hero h1{font-size:clamp(4rem,7vw,6.5rem);line-height:0.95;font-style:italic;margin-bottom:1.8rem;color:var(--text)}
+.hero h1 span{display:block;font-style:normal;font-family:'Montserrat',sans-serif;font-size:0.2em;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;font-weight:600;border-bottom:1px solid var(--gold-light);padding-bottom:0.5em;display:inline-block}
+.hero-desc{font-size:0.88rem;color:var(--muted);line-height:2;margin-bottom:2.5rem;max-width:380px}
+.hero-btns{display:flex;gap:0.8rem;flex-wrap:wrap}
+.hero-right{background:var(--cream2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-right-inner{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.hero-bg-blob{position:absolute;border-radius:50%;filter:blur(60px)}
+.hero-main-svg{position:relative;z-index:2;width:min(380px,60%);animation:floatSvg 6s ease-in-out infinite}
+@keyframes floatSvg{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-scroll{position:absolute;bottom:2.5rem;left:8vw;display:flex;align-items:center;gap:0.8rem;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--text);font-weight:500;cursor:pointer;transition:color 0.2s}
+.hero-scroll:hover{color:var(--gold)}
+.hero-scroll-arrow{display:flex;flex-direction:column;align-items:center;gap:2px;animation:bounceDown 1.8s ease-in-out infinite}
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ── STRIP ── */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--text);border-top:none;border-bottom:none}
+.strip-item{padding:2.8rem 2rem;text-align:center;border-right:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;align-items:center;gap:0.9rem;transition:background 0.28s,transform 0.22s,box-shadow 0.22s;cursor:default;position:relative}
+.strip-item:last-child{border-right:none}
+.strip-item:hover{background:var(--gold);transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,0.28);z-index:2}
+.strip-item:hover .strip-ico{opacity:1;transform:scale(1.3);color:white}
+.strip-item:hover .strip-t{color:white}
+.strip-item:hover .strip-s{color:rgba(255,255,255,0.85)}
+.strip-ico{color:var(--gold);opacity:1;transition:opacity 0.25s,transform 0.25s,color 0.25s}
+.strip-ico svg{width:34px;height:34px}
+.strip-t{font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,1);font-weight:700;transition:color 0.25s}
+.strip-s{font-size:0.68rem;color:rgba(255,255,255,0.55);transition:color 0.25s;letter-spacing:0.05em}
+
+/* ── SECTION HEADER ── */
+.sec{padding:5rem 2.5rem}
+.sec-head{margin-bottom:3rem}
+.sec-head.center{text-align:center;display:flex;flex-direction:column;align-items:center}
+.sec-eyebrow{font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--light);margin-bottom:0.8rem}
+.sec-title{font-size:clamp(2rem,3.5vw,3rem);font-style:italic;line-height:1.05}
+.sec-title em{font-style:normal;color:var(--gold)}
+.sec-line{width:40px;height:1px;background:var(--border2);margin-top:1.2rem}
+
+/* ── FILTER TABS ── */
+.filters{display:flex;border-bottom:2px solid var(--border);margin-bottom:0;overflow-x:auto;scrollbar-width:none;gap:0.2rem;padding:0 0.5rem}
+.filters::-webkit-scrollbar{display:none}
+.ftab{background:none;border:none;border-bottom:3px solid transparent;padding:1rem 1.6rem;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;margin-bottom:-2px;transition:all 0.22s;font-family:'Montserrat',sans-serif;font-weight:500;position:relative}
+.ftab:hover{color:var(--gold);background:var(--cream)}
+.ftab.active{color:var(--text);border-bottom-color:var(--gold);font-weight:600}
+
+/* ── PRODUCT GRID ── */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border-left:1px solid var(--border);border-top:1px solid var(--border)}
+.pcard{border-right:1px solid var(--border);border-bottom:1px solid var(--border);cursor:pointer;position:relative;overflow:hidden;transition:all 0.3s;background:var(--white)}
+.pcard:hover{z-index:2;box-shadow:0 12px 48px rgba(0,0,0,0.14);transform:translateY(-4px)}
+.pcard-img{aspect-ratio:1;background:var(--cream);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pcard-img canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcard-img .preal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.pcard-overlay{position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(26,22,18,0.55));opacity:0;transition:opacity 0.3s;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:1.2rem;gap:0.4rem}
+.pcard:hover .pcard-overlay{opacity:1}
+.qadd{background:var(--gold);color:white;border:none;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.65rem 1.4rem;cursor:pointer;width:100%;transition:background 0.2s;transform:translateY(8px);transition:all 0.3s;font-weight:500}
+.pcard:hover .qadd{transform:translateY(0)}
+.qadd:hover{background:var(--text)}
+.pbadge{position:absolute;top:10px;left:10px;font-size:0.54rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.65rem;color:white;z-index:1;font-weight:500}
+.pinfo{padding:1.2rem 1.2rem 1.4rem}
+.pname{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;margin-bottom:0.25rem;line-height:1.2;color:var(--text)}
+.ptag{font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--light);margin-bottom:0.5rem}
+.pprice{font-size:0.9rem;color:var(--gold);font-weight:500}
+
+/* ── PERSONALIZER ── */
+.pers-wrap{max-width:960px;margin:0 auto;padding:0 2.5rem 5rem}
+.pers-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border)}
+.pers-preview{background:var(--cream);padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;gap:1.5rem;border-right:1px solid var(--border)}
+.pers-preview svg{width:240px;height:240px;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.12))}
+.pers-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;text-align:center}
+.pers-price{font-size:0.9rem;color:var(--gold)}
+.pers-desc{font-size:0.64rem;color:var(--muted);text-align:center;line-height:1.8;max-width:200px}
+.pers-opts{padding:2.5rem 2rem;display:flex;flex-direction:column;gap:1.6rem;overflow-y:auto}
+.opt-label{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.6rem}
+.metal-row{display:flex;gap:0.6rem}
+.mbtn{flex:1;border:1px solid var(--border);background:white;padding:0.7rem 0.5rem;cursor:pointer;font-size:0.58rem;letter-spacing:0.08em;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:5px;transition:all 0.2s}
+.mbtn:hover,.mbtn.sel{border-color:var(--text);color:var(--text)}
+.mbtn.sel{border-width:1.5px;background:var(--off)}
+.mswatch{width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,0.08)}
+.bead-row{display:flex;gap:0.5rem;flex-wrap:wrap}
+.bead{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:all 0.2s;flex-shrink:0}
+.bead.sel{border-color:var(--text);transform:scale(1.2)}
+.shape-row{display:flex;gap:0.4rem;flex-wrap:wrap}
+.spill{background:white;border:1px solid var(--border);padding:0.32rem 0.7rem;font-size:0.58rem;letter-spacing:0.06em;color:var(--muted);cursor:pointer;transition:all 0.2s}
+.spill:hover,.spill.sel{background:var(--text);color:white;border-color:var(--text)}
+.stone-row{display:flex;gap:0.4rem;flex-wrap:wrap}
+.stpill{background:white;border:1px solid var(--border);padding:0.3rem 0.65rem;font-size:0.56rem;color:var(--muted);cursor:pointer;transition:all 0.2s}
+.stpill:hover,.stpill.sel{background:var(--text);color:white;border-color:var(--text)}
+.pers-actions{display:flex;flex-direction:column;gap:0.5rem;margin-top:0.4rem}
+
+/* ── BUTTONS ── */
+.btn{border:none;cursor:pointer;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 2rem;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn-dark{background:var(--text);color:white}
+.btn-dark:hover{background:var(--gold)}
+.btn-outline{background:none;color:var(--text);border:1px solid var(--text)}
+.btn-outline:hover{background:var(--text);color:white}
+.btn-wa{background:white;color:#1a6130;border:1px solid rgba(26,97,48,0.4)}
+.btn-wa:hover{background:#1a6130;color:white}
+.btn-sm{padding:0.55rem 1.2rem;font-size:0.6rem}
+.btn-full{width:100%}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;border:1px solid var(--border);max-width:880px;margin:0 auto}
+.about-vis{background:var(--cream);display:flex;align-items:center;justify-content:center;padding:3.5rem;border-right:1px solid var(--border)}
+.about-circ{width:200px;height:200px;border-radius:50%;overflow:hidden;box-shadow:0 16px 50px rgba(0,0,0,0.1)}
+.about-text{padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:center}
+.about-text h2{font-size:2.2rem;font-style:italic;margin-bottom:1.2rem}
+.about-text p{font-size:0.74rem;color:var(--muted);line-height:2;margin-bottom:0.8rem}
+.pills{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.2rem;margin-bottom:1.5rem}
+.pill{border:1px solid var(--border);padding:0.25rem 0.7rem;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+
+/* ── EDITORIAL BANNER ── */
+.editorial{background:var(--text);color:white;padding:5rem 8vw;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.editorial-q{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-style:italic;line-height:1.15;font-weight:300}
+.editorial-q em{color:var(--gold-light);font-style:normal}
+.editorial-body{font-size:0.74rem;color:rgba(255,255,255,0.55);line-height:2}
+.editorial-body strong{color:rgba(255,255,255,0.85);font-weight:400}
+.editorial-btns{display:flex;gap:0.6rem;margin-top:1.8rem}
+.btn-gold{background:var(--gold);color:white;border:none;cursor:pointer;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.8rem 1.8rem;transition:background 0.2s}
+.btn-gold:hover{background:var(--gold-light);color:var(--text)}
+.btn-outline-white{background:none;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);cursor:pointer;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.8rem 1.8rem;transition:all 0.2s}
+.btn-outline-white:hover{color:white;border-color:rgba(255,255,255,0.6)}
+
+/* ── CART DRAWER ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.overlay.open{opacity:1;pointer-events:all}
+.drawer{position:fixed;right:0;top:0;height:100%;width:360px;background:white;z-index:201;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1)}
+.overlay.open .drawer{transform:translateX(0)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 1.8rem;border-bottom:1px solid var(--border)}
+.drawer-head h2{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem}
+.drawer-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--muted);line-height:1}
+.drawer-body{flex:1;overflow-y:auto;padding:1rem 1.8rem}
+.drawer-empty{text-align:center;padding:4rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--light);font-size:1.1rem}
+.cart-item{display:flex;gap:0.9rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:center}
+.cart-thumb{width:56px;height:56px;background:var(--cream);flex-shrink:0;overflow:hidden}
+.cart-thumb canvas{width:100%;height:100%}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;line-height:1.2}
+.cart-item-detail{font-size:0.58rem;color:var(--light);margin-top:0.15rem;letter-spacing:0.06em}
+.cart-item-price{font-size:0.78rem;color:var(--gold);margin-top:0.25rem}
+.cart-remove{background:none;border:none;cursor:pointer;color:var(--light);font-size:0.9rem;margin-left:auto;padding:0.2rem;transition:color 0.2s;flex-shrink:0}
+.cart-remove:hover{color:var(--rose)}
+.drawer-foot{padding:1.4rem 1.8rem;border-top:1px solid var(--border)}
+.cart-total{display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:1rem;font-weight:400}
+.cart-total span:last-child{color:var(--gold)}
+
+/* ── ADMIN ── */
+.admin-wrap{min-height:100vh;background:#f4f4f2}
+.admin-nav{background:var(--text);padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+.admin-nav-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:white;opacity:0.9}
+.admin-nav-right{display:flex;align-items:center;gap:1rem}
+.admin-nav-right span{font-size:0.62rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em}
+.admin-body{max-width:1100px;margin:0 auto;padding:2.5rem 2rem}
+.admin-h1{font-size:1.8rem;font-style:italic;margin-bottom:0.4rem}
+.admin-sub{font-size:0.7rem;color:var(--muted);margin-bottom:2rem}
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem}
+.admin-card{background:white;border:1px solid var(--border);overflow:hidden;transition:box-shadow 0.2s}
+.admin-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+.admin-img-wrap{aspect-ratio:1;background:var(--cream);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.admin-img-wrap canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.admin-img-wrap .areal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.upload-zone{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(26,22,18,0.45);opacity:0;transition:opacity 0.2s;cursor:pointer}
+.admin-card:hover .upload-zone{opacity:1}
+.upload-inner{background:white;color:var(--text);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1rem;display:flex;align-items:center;gap:5px}
+.upload-inner input{display:none}
+.admin-info{padding:1rem}
+.afield{display:flex;flex-direction:column;gap:0.25rem;margin-bottom:0.7rem}
+.afield label{font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.afield input{border:1px solid var(--border);padding:0.45rem 0.6rem;font-size:0.8rem;color:var(--text);outline:none;transition:border-color 0.2s;background:var(--off);width:100%}
+.afield input:focus{border-color:var(--text);background:white}
+.afield input.gold{color:var(--gold)}
+.save-btn{background:var(--text);color:white;border:none;padding:0.55rem 1rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;width:100%;transition:background 0.2s}
+.save-btn:hover{background:var(--gold)}
+.saved{font-size:0.58rem;color:var(--sage);text-align:center;margin-top:0.5rem;height:14px;transition:opacity 0.3s}
+
+/* ── LOGIN ── */
+.login-bg{position:fixed;inset:0;background:rgba(26,22,18,0.88);z-index:300;display:flex;align-items:center;justify-content:center}
+.login-box{background:white;width:360px;padding:2.8rem 2.2rem}
+.login-logo{display:flex;justify-content:center;margin-bottom:1.6rem}
+.login-logo svg{width:72px;height:72px}
+.login-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;text-align:center;margin-bottom:0.3rem}
+.login-sub{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:2rem}
+.lfield{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:1rem}
+.lfield label{font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.lfield input{border:1px solid var(--border);border-bottom:2px solid var(--border);padding:0.7rem 0.8rem;font-size:0.88rem;outline:none;transition:border-color 0.2s;background:var(--off);width:100%}
+.lfield input:focus{border-color:var(--text);background:white}
+.login-err{font-size:0.63rem;color:var(--rose);text-align:center;margin-top:0.7rem;min-height:1rem}
+.login-back{font-size:0.58rem;color:var(--muted);text-align:center;margin-top:1.2rem;cursor:pointer;transition:color 0.2s}
+.login-back:hover{color:var(--text)}
+
+/* ── FOOTER ── */
+footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem 2rem}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:rgba(255,255,255,0.85);margin-bottom:0.8rem}
+.footer-tagline{font-size:0.65rem;line-height:1.9;color:rgba(255,255,255,0.38)}
+.footer-head{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.92rem;color:rgba(255,255,255,0.75);margin-bottom:0.9rem;font-weight:300}
+.footer-link{font-size:0.63rem;line-height:2.2;color:rgba(255,255,255,0.38);text-decoration:none;display:block;cursor:pointer;transition:color 0.2s;background:none;border:none;text-align:left;letter-spacing:0.03em}
+.footer-link:hover{color:rgba(255,255,255,0.75)}
+.footer-bot{display:flex;justify-content:space-between;align-items:center;font-size:0.58rem;letter-spacing:0.06em}
+.admin-link{color:rgba(255,255,255,0.15);cursor:pointer;transition:color 0.2s;background:none;border:none;font-size:0.55rem;letter-spacing:0.06em}
+.admin-link:hover{color:rgba(255,255,255,0.45)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--text);color:white;padding:0.75rem 1.4rem;font-size:0.63rem;letter-spacing:0.06em;transform:translateY(80px);opacity:0;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);z-index:500;pointer-events:none;border-left:3px solid var(--gold)}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── TWEAKS PANEL ── */
+.tweaks-panel{position:fixed;bottom:1.5rem;left:1.5rem;background:white;border:1px solid var(--border);padding:1.2rem 1.4rem;z-index:400;display:none;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,0.12)}
+.tweaks-panel.open{display:block}
+.tweaks-title{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.tweak-row{margin-bottom:0.9rem}
+.tweak-label{font-size:0.57rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.35rem}
+.tweak-options{display:flex;gap:0.4rem;flex-wrap:wrap}
+.tweak-opt{background:var(--off);border:1px solid var(--border);padding:0.25rem 0.55rem;font-size:0.58rem;cursor:pointer;transition:all 0.2s;color:var(--muted)}
+.tweak-opt:hover,.tweak-opt.active{background:var(--text);color:white;border-color:var(--text)}
+.tweak-swatch{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform 0.2s}
+.tweak-swatch.active{border-color:var(--text);transform:scale(1.2)}
+
+@media(max-width:768px){
+  nav{padding:0 1.2rem;grid-template-columns:1fr auto 1fr}
+  .nav-left{display:none}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:3rem 1.5rem 2.5rem}
+  .hero-right{display:none}
+  .strip{grid-template-columns:1fr 1fr}
+  .strip-item:nth-child(2){border-right:none}
+  .strip-item:nth-child(3){border-top:1px solid var(--border)}
+  .editorial{grid-template-columns:1fr;gap:2rem;padding:3.5rem 1.5rem}
+  .about-grid{grid-template-columns:1fr}
+  .about-vis{display:none}
+  .pers-grid{grid-template-columns:1fr}
+  .pers-preview{border-right:none;border-bottom:1px solid var(--border)}
+  .footer-top{grid-template-columns:1fr;gap:2rem}
+  .drawer{width:100%}
+  .sec{padding:3.5rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<div id="store" style="display:none"></div>
+<div id="admin-root" style="display:none"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback}=React;
+
+// ── DATA ──
+const PRODUCTS_DEFAULT=[
+  {id:1,name:'Aros Flor Rocalla',cat:'aretes',metal:'gold',mc:'#c0392b',shape:'flower',stone:'none',price:18900,tag:'Oro 18K · Rocalla roja',badge:''},
+  {id:2,name:'Aros Corazón Violeta',cat:'aretes',metal:'silver',mc:'#8e44ad',shape:'heart',stone:'crystal',price:21900,tag:'Plata · Cristal',badge:'new'},
+  {id:3,name:'Aros Aro Multicolor',cat:'aretes',metal:'gold',mc:'multi',shape:'hoop',stone:'none',price:16900,tag:'Oro 18K · Multicolor',badge:''},
+  {id:4,name:'Aros Atrapasueños',cat:'aretes',metal:'gold',mc:'#16a085',shape:'dream',stone:'moonstone',price:24900,tag:'Oro 18K · Piedra luna',badge:'pop'},
+  {id:5,name:'Aros Estrella',cat:'aretes',metal:'silver',mc:'#2c3e50',shape:'star',stone:'none',price:17900,tag:'Plata · Negro',badge:''},
+  {id:6,name:'Aros Mariposa Fucsia',cat:'aretes',metal:'gold',mc:'#e84393',shape:'butterfly',stone:'none',price:19900,tag:'Oro 18K · Fucsia',badge:''},
+  {id:7,name:'Aros Gota Roja',cat:'aretes',metal:'gold',mc:'#c0392b',shape:'drop',stone:'crystal',price:18900,tag:'Oro 18K · Cristal',badge:''},
+  {id:8,name:'Árbol de la Vida',cat:'aretes',metal:'silver',mc:'multi',shape:'tree',stone:'none',price:22900,tag:'Plata · Multicolor',badge:'pop'},
+  {id:9,name:'Aros Flor Azul',cat:'aretes',metal:'silver',mc:'#2980b9',shape:'flower',stone:'none',price:18900,tag:'Plata · Azul',badge:''},
+  {id:10,name:'Aros Corazón Rojo',cat:'aretes',metal:'gold',mc:'#c0392b',shape:'heart',stone:'none',price:19900,tag:'Oro 18K · Rojo',badge:''},
+  {id:11,name:'Pulsera Cristal Multicolor',cat:'pulseras',metal:'silver',mc:'multi',shape:'hoop',stone:'crystal',price:14900,tag:'Plata · Multicolor',badge:''},
+  {id:12,name:'Pulsera Corazón',cat:'pulseras',metal:'gold',mc:'#c0392b',shape:'heart',stone:'none',price:16900,tag:'Oro 18K · Rojo',badge:''},
+  {id:13,name:'Collar Atrapasueños',cat:'collares',metal:'gold',mc:'#2980b9',shape:'dream',stone:'none',price:26900,tag:'Oro 18K · Azul',badge:''},
+  {id:14,name:'Collar Árbol de la Vida',cat:'collares',metal:'silver',mc:'multi',shape:'tree',stone:'moonstone',price:28900,tag:'Plata · Multicolor',badge:'pop'},
+  {id:15,name:'Collar Gota Turquesa',cat:'collares',metal:'silver',mc:'#16a085',shape:'drop',stone:'turquoise',price:22900,tag:'Plata · Turquesa',badge:''},
+  {id:16,name:'Anillo Flor Dorada',cat:'anillos',metal:'gold',mc:'#f1c40f',shape:'flower',stone:'none',price:13900,tag:'Oro 18K · Amarillo',badge:'new'},
+  {id:17,name:'Aros Aro Verde Esmeralda',cat:'aretes',metal:'gold',mc:'#27ae60',shape:'hoop',stone:'crystal',price:19900,tag:'Oro 18K · Verde · Gota',badge:'new'},
+  {id:18,name:'Aros Redondos Multicolor',cat:'aretes',metal:'gold',mc:'multi',shape:'hoop',stone:'none',price:21900,tag:'Oro 18K · Multicolor',badge:'pop'},
+];
+
+const badgeColors={new:'#8aaa88',pop:'#7ab8b0'};
+const badgeNames={new:'Nuevo',pop:'Popular'};
+const metalColors={gold:'#d4af37',silver:'#c0c0c0'};
+const shapeNames={flower:'Aros Flor',heart:'Aros Corazón',hoop:'Aros',dream:'Aros Atrapasueños',star:'Aros Estrella',butterfly:'Aros Mariposa',drop:'Aros Gota',tree:'Árbol de la Vida'};
+const shapePrices={flower:18900,heart:21900,hoop:16900,dream:24900,star:17900,butterfly:19900,drop:18900,tree:22900};
+const stoneExtra={none:0,crystal:2000,turquoise:3000,moonstone:4000,amethyst:3500};
+const stoneColors={none:null,crystal:'#d8f0ff',turquoise:'#40e0d0',moonstone:'#ede0ff',amethyst:'#9b59b6'};
+const stoneNames={none:'Sin piedra',crystal:'Cristal',turquoise:'Turquesa',moonstone:'Piedra luna',amethyst:'Amatista'};
+const beadColors=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7'];
+
+function loadProds(){try{const s=localStorage.getItem('dl_prods2');if(s)return JSON.parse(s);}catch(e){}return PRODUCTS_DEFAULT;}
+function saveProds(p){try{localStorage.setItem('dl_prods2',JSON.stringify(p));}catch(e){}}
+const DEFAULT_PHOTOS={
+  1:'uploads/IMG_9890.PNG',
+  2:'uploads/Gemini_Generated_Image_usedntusedntused.png',
+  3:'uploads/ChatGPT Image 23 abr 2026, 02_05_32 a.m..png',
+  4:'uploads/Gemini_Generated_Image_enghuqenghuqengh.png',
+  5:'uploads/Gemini_Generated_Image_jrn1majrn1majrn1.png',
+  6:'uploads/IMG_9889.PNG',
+  7:'uploads/ChatGPT Image 23 abr 2026, 01_32_29 a.m..png',
+  8:'uploads/IMG_9879.PNG',
+  9:'uploads/ChatGPT Image 23 abr 2026, 01_55_43 a.m..png',
+  10:'uploads/ChatGPT Image 23 abr 2026, 01_46_18 a.m..png',
+  11:'uploads/IMG_9891.PNG',
+  12:'uploads/ChatGPT Image 23 abr 2026, 01_38_51 a.m..png',
+  17:'uploads/IMG_9880.PNG',
+  18:'uploads/IMG_9881.PNG',
+};
+function loadPhotos(){try{const s=localStorage.getItem('dl_photos2');const saved=s?JSON.parse(s):{};return{...DEFAULT_PHOTOS,...saved};}catch(e){}return {...DEFAULT_PHOTOS};}
+function savePhotos(o){try{const filtered={};Object.keys(o).forEach(k=>{if(o[k]&&o[k].length<500000)filtered[k]=o[k];});localStorage.setItem('dl_photos2',JSON.stringify(filtered));}catch(e){}}
+
+function gBC(b,i){
+  if(b==='multi'){const c=['#c0392b','#e67e22','#f1c40f','#27ae60','#2980b9','#8e44ad','#e84393'];return c[i%c.length];}
+  return b;
+}
+
+function jSVG(shape,metal,bead,stone,W,H){
+  const m=metalColors[metal]||'#d4af37',sc=stoneColors[stone],cx=W/2,cy=H/2,r=Math.min(W,H)/220;
+  let h='';
+  if(shape==='flower'){
+    [[cx,cy-38*r],[cx+36*r,cy-12*r],[cx+22*r,cy+30*r],[cx-22*r,cy+30*r],[cx-36*r,cy-12*r]].forEach(([px,py])=>{const a=Math.atan2(py-cy,px-cx)*180/Math.PI+90;h+=`<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="${14*r}" ry="${20*r}" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}" transform="rotate(${a} ${px.toFixed(1)} ${py.toFixed(1)})"/>`;});
+    for(let i=0;i<22;i++){const a=i/22*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*38*r).toFixed(1)}" cy="${(cy+Math.sin(a)*38*r).toFixed(1)}" r="${i%3===0?4.5*r:3*r}" fill="${gBC(bead,i)}"/>`;}
+    h+=`<circle cx="${cx}" cy="${cy}" r="${sc?13*r:9*r}" fill="${sc||m}" stroke="${m}" stroke-width="${1.5*r}"/>`;
+  }else if(shape==='heart'){
+    h+=`<path d="M${cx} ${cy+55*r} C${cx} ${cy+55*r} ${cx-42*r} ${cy-2*r} a${26*r} ${26*r} 0 0 1 ${52*r} ${-16*r} a${26*r} ${26*r} 0 0 1 ${52*r} ${16*r} C${cx+42*r} ${cy+20*r} ${cx} ${cy+55*r}Z" fill="${m}" opacity="0.18" stroke="${m}" stroke-width="${1.5*r}"/>`;
+    for(let i=-4;i<=4;i++)for(let j=-5;j<=3;j++){const x=cx+i*9*r,y=cy+j*8*r-5*r;if((x-cx)**2*0.8+(y-cy+5*r)**2<(38*r)**2*0.9)h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${2.8*r}" fill="${gBC(bead,Math.abs(i+j))}"/>`;}
+    if(sc)h+=`<circle cx="${cx}" cy="${(cy-8*r).toFixed(1)}" r="${11*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;
+  }else if(shape==='hoop'){
+    h+=`<circle cx="${cx}" cy="${cy}" r="${58*r}" fill="none" stroke="${m}" stroke-width="${12*r}"/>`;
+    for(let i=0;i<30;i++){const a=i/30*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*58*r).toFixed(1)}" cy="${(cy+Math.sin(a)*58*r).toFixed(1)}" r="${i%4===0?4.5*r:3*r}" fill="${gBC(bead,i)}"/>`;}
+    if(sc)h+=`<circle cx="${cx}" cy="${cy}" r="${16*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;
+  }else if(shape==='dream'){
+    h+=`<circle cx="${cx}" cy="${(cy-12*r).toFixed(1)}" r="${44*r}" fill="none" stroke="${m}" stroke-width="${1.5*r}"/>`;
+    for(let i=0;i<8;i++){const a=i/8*Math.PI*2;h+=`<line x1="${cx}" y1="${(cy-12*r).toFixed(1)}" x2="${(cx+Math.cos(a)*44*r).toFixed(1)}" y2="${(cy-12*r+Math.sin(a)*44*r).toFixed(1)}" stroke="${m}" stroke-width="${r}" opacity="0.4"/>`;}
+    for(const f of[0.35,0.65,1])for(let i=0;i<20;i++){const a=i/20*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*44*r*f).toFixed(1)}" cy="${(cy-12*r+Math.sin(a)*44*r*f).toFixed(1)}" r="${2.5*r}" fill="${gBC(bead,i)}"/>`;}
+    [[cx-18*r,cy+36*r],[cx,cy+36*r],[cx+18*r,cy+36*r]].forEach(([x,y],i)=>{for(let k=0;k<(i===1?4:3);k++)h+=`<circle cx="${x.toFixed(1)}" cy="${(y+k*10*r).toFixed(1)}" r="${3*r}" fill="${gBC(bead,i*4+k)}"/>`;});
+    if(sc)h+=`<circle cx="${cx}" cy="${(cy-12*r).toFixed(1)}" r="${13*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;
+  }else if(shape==='star'){
+    const sp=Array.from({length:10},(_,i)=>{const a=i/10*Math.PI*2-Math.PI/2,ri=i%2===0?48*r:24*r;return`${i===0?'M':'L'}${(cx+Math.cos(a)*ri).toFixed(1)},${(cy+Math.sin(a)*ri).toFixed(1)}`;}).join(' ')+'Z';
+    h+=`<path d="${sp}" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}"/>`;
+    for(let i=0;i<5;i++){const a=i/5*Math.PI*2-Math.PI/2;h+=`<circle cx="${(cx+Math.cos(a)*48*r).toFixed(1)}" cy="${(cy+Math.sin(a)*48*r).toFixed(1)}" r="${4.5*r}" fill="${gBC(bead,i)}"/>`;}
+    h+=sc?`<circle cx="${cx}" cy="${cy}" r="${12*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`:`<circle cx="${cx}" cy="${cy}" r="${8*r}" fill="${m}"/>`;
+  }else if(shape==='butterfly'){
+    h+=`<path d="M${cx} ${cy} C${cx-8*r} ${cy-8*r} ${cx-44*r} ${cy-18*r} ${cx-42*r} ${cy} C${cx-40*r} ${cy+18*r} ${cx-8*r} ${cy+8*r} ${cx} ${cy}Z" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}"/>`;
+    h+=`<path d="M${cx} ${cy} C${cx+8*r} ${cy-8*r} ${cx+44*r} ${cy-18*r} ${cx+42*r} ${cy} C${cx+40*r} ${cy+18*r} ${cx+8*r} ${cy+8*r} ${cx} ${cy}Z" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}"/>`;
+    for(let i=0;i<16;i++){const a=i/8*Math.PI,s=i<8?-1:1;h+=`<circle cx="${(cx+s*(20+Math.cos(a)*22)*r).toFixed(1)}" cy="${(cy+Math.sin(a)*16*r).toFixed(1)}" r="${2.8*r}" fill="${gBC(bead,i)}"/>`;}
+    h+=`<ellipse cx="${cx}" cy="${cy}" rx="${5*r}" ry="${16*r}" fill="${m}" opacity="0.5"/>`;
+  }else if(shape==='drop'){
+    h+=`<path d="M${cx} ${cy-52*r} C${cx} ${cy-52*r} ${cx-36*r} ${cy-20*r} ${cx-36*r} ${cy} A${36*r} ${36*r} 0 0 0 ${cx+36*r} ${cy} C${cx+36*r} ${cy-20*r} ${cx} ${cy-52*r}Z" fill="${m}" opacity="0.18" stroke="${m}" stroke-width="${1.5*r}"/>`;
+    for(let i=-3;i<=3;i++)for(let j=-4;j<=2;j++){const x=cx+i*10*r,y=cy+j*10*r;if((x-cx)**2*0.9+(y-cy+8*r)**2<(32*r)**2)h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${3*r}" fill="${gBC(bead,Math.abs(i+j))}"/>`;}
+    if(sc)h+=`<circle cx="${cx}" cy="${cy}" r="${11*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;
+  }else if(shape==='tree'){
+    h+=`<circle cx="${cx}" cy="${(cy+4*r).toFixed(1)}" r="${50*r}" fill="none" stroke="${m}" stroke-width="${1.5*r}"/>`;
+    h+=`<line x1="${cx}" y1="${(cy-46*r).toFixed(1)}" x2="${cx}" y2="${(cy+54*r).toFixed(1)}" stroke="${m}" stroke-width="${2*r}"/>`;
+    [[-1,-30],[1,-30],[-1,-14],[1,-14],[-1,2],[1,2],[-1,16],[1,16]].forEach(([d,yo])=>{h+=`<path d="M${cx} ${cy+(yo+5)*r} Q${cx+d*15*r} ${cy+(yo-5)*r} ${cx+d*30*r} ${cy+yo*r}" fill="none" stroke="${m}" stroke-width="${1.5*r}"/>`;});
+    for(let i=0;i<24;i++){const a=i/24*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*50*r).toFixed(1)}" cy="${(cy+4*r+Math.sin(a)*50*r).toFixed(1)}" r="${2.5*r}" fill="${gBC(bead,i)}"/>`;}
+    if(sc)h+=`<circle cx="${cx}" cy="${(cy+4*r).toFixed(1)}" r="${12*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;
+  }
+  h+=`<line x1="${cx}" y1="${(cy-60*r).toFixed(1)}" x2="${cx}" y2="${(cy-46*r).toFixed(1)}" stroke="${m}" stroke-width="${2.5*r}" stroke-linecap="round"/>`;
+  return h;
+}
+
+function drawOnCanvas(canvas,p){
+  if(!canvas)return;
+  const w=canvas.width,h=canvas.height;
+  const ctx=canvas.getContext('2d');ctx.clearRect(0,0,w,h);
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 220 220">${jSVG(p.shape,p.metal,p.mc,p.stone,220,220)}</svg>`;
+  const blob=new Blob([svg],{type:'image/svg+xml'});
+  const url=URL.createObjectURL(blob);
+  const img=new Image();img.onload=()=>{ctx.drawImage(img,0,0,w,h);URL.revokeObjectURL(url);};img.src=url;
+}
+
+// ── LOGO IMAGE ──
+const LogoSVG=({size=56})=>(
+  <img
+    src="uploads/logo.jpg"
+    alt="Diente de León Boutique"
+    style={{width:size,height:size,borderRadius:'50%',objectFit:'cover',display:'block'}}
+  />
+);
+
+// ── PRODUCT CARD ──
+function PCard({p,photos,onAdd,onLoad}){
+  const cvRef=useRef(null);
+  useEffect(()=>{if(cvRef.current&&!photos[p.id])drawOnCanvas(cvRef.current,p);},[p,photos]);
+  const photoSrc=photos[p.id];
+  const isUrl=photoSrc&&!photoSrc.startsWith('data:');
+  return(
+    <div className="pcard">
+      <div className="pcard-img">
+        {p.badge&&<div className="pbadge" style={{background:badgeColors[p.badge]||'#333'}}>{badgeNames[p.badge]||p.badge}</div>}
+        <canvas ref={cvRef} width={180} height={180} style={{display:photoSrc?'none':'block'}}/>
+        {photoSrc&&<img className="preal" src={photoSrc} alt={p.name} style={{display:'block',position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>}
+        <div className="pcard-overlay">
+          <button className="qadd" onClick={e=>{e.stopPropagation();onAdd(p);}}>Agregar al carrito</button>
+        </div>
+      </div>
+      <div className="pinfo" onClick={()=>onLoad(p)}>
+        <div className="pname">{p.name}</div>
+        <div className="ptag">{p.tag}</div>
+        <div className="pprice">${p.price.toLocaleString('es-CL')}</div>
+      </div>
+    </div>
+  );
+}
+
+// ── HOME ──
+function HomePage({products,photos,onAdd,onLoad,goPage}){
+  const [filter,setFilter]=useState('all');
+  const filtered=filter==='all'?products:products.filter(p=>p.cat===filter);
+  const cats=['all','aretes','pulseras','collares','anillos'];
+  const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
+  return(
+    <div className="page active" id="page-home">
+      {/* HERO */}
+      <section className="hero">
+        <div className="hero-left">
+          
+          <h1><span>Joyería artesanal</span>Diente<br/>de León</h1>
+          <p className="hero-desc">Alambrismo tejido a mano con mostacillas rocallas, bases en oro 18K y plata. Cada pieza nace única e irrepetible desde el sur de Chile.</p>
+          <div className="hero-btns">
+            <button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button>
+            <button className="btn btn-outline" onClick={()=>goPage('pers')}>Personalizar joya</button>
+          </div>
+        </div>
+        <div className="hero-right">
+          <GoldSparkles/>
+          <div style={{position:'absolute',width:'340px',height:'340px',background:'#9ed4c8',borderRadius:'50%',filter:'blur(80px)',opacity:0.25,top:'10%',left:'20%'}}/>
+          <div style={{position:'absolute',width:'240px',height:'240px',background:'#e88ca0',borderRadius:'50%',filter:'blur(70px)',opacity:0.2,bottom:'15%',right:'10%'}}/>
+          <div style={{position:'absolute',width:'200px',height:'200px',background:'#f0c878',borderRadius:'50%',filter:'blur(60px)',opacity:0.22,top:'50%',right:'25%'}}/>
+
+          {/* Texto arriba */}
+          <div style={{position:'absolute',top:'7%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 3rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.5rem'}}>
+            <RotatingText/>
+            <div style={{display:'flex',alignItems:'center',gap:'0.7rem'}}>
+              <div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/>
+              <p style={{fontFamily:"'Montserrat',sans-serif",fontSize:'0.58rem',letterSpacing:'0.22em',textTransform:'uppercase',color:'rgba(42,36,32,0.38)'}}>con amor desde el sur</p>
+              <div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/>
+            </div>
+          </div>
+
+          {/* Logo central */}
+          <img
+            src="uploads/logo.jpg"
+            alt="Diente de León Boutique"
+            className="hero-main-svg"
+            style={{borderRadius:'50%',boxShadow:'0 24px 80px rgba(0,0,0,0.18)',objectFit:'cover',position:'relative',zIndex:2}}
+          />
+
+          {/* Texto abajo */}
+          <div style={{position:'absolute',bottom:'8%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 2rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.6rem'}}>
+            <div style={{width:'36px',height:'1px',background:'rgba(42,36,32,0.35)'}}/>
+            <p style={{fontFamily:"'Montserrat',sans-serif",fontSize:'0.68rem',letterSpacing:'0.25em',textTransform:'uppercase',color:'rgba(42,36,32,0.6)',fontWeight:500}}>Los Muermos · Región de Los Lagos</p>
+          </div>
+        </div>
+
+      </section>
+
+      {/* STRIP */}
+      <div className="strip">
+        {[
+          {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,t:'Hecho a mano',s:'Tejido con amor'},
+          {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,t:'Personalizable',s:'Tú eliges los colores'},
+          {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,t:'Hipoalergénico',s:'Seguro para tu piel'},
+          {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,t:'Envío a Chile',s:'Todo el país'},
+        ].map((item,i)=>(
+          <div key={i} className="strip-item">
+            <div className="strip-ico">{item.ico}</div>
+            <div className="strip-t">{item.t}</div>
+            <div className="strip-s">{item.s}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* PRODUCTOS */}
+      <section className="sec">
+        <div className="sec-head center">
+          <p className="sec-eyebrow">Piezas destacadas</p>
+          <h2 className="sec-title">Las más <em>amadas</em></h2>
+          <div className="sec-line"/>
+        </div>
+        <div className="filters" style={{marginBottom:'0'}}>
+          {cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>setFilter(c)}>{catLabel[c]}</button>)}
+        </div>
+        <div className="pgrid">
+          {filtered.map(p=><PCard key={p.id} p={p} photos={photos} onAdd={onAdd} onLoad={onLoad}/>)}
+        </div>
+      </section>
+
+      {/* EDITORIAL */}
+      <div className="editorial">
+        <div className="editorial-q">Cada joya nace de<br/>manos <em>dedicadas</em></div>
+        <div>
+          <p className="editorial-body">En Los Muermos, en el corazón del sur de Chile, tejemos a mano con técnica ladrillo para que cada pieza tenga <strong>una textura firme y llena de vida</strong>. Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos.</p>
+          <div className="editorial-btns">
+            <button className="btn-gold btn" onClick={()=>goPage('pers')}>Personalizar mi joya</button>
+            <button className="btn-outline-white btn" onClick={()=>goPage('nosotras')}>Nuestra historia</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── CATALOG ──
+function CatalogPage({products,photos,onAdd,onLoad}){
+  const [filter,setFilter]=useState('all');
+  const filtered=filter==='all'?products:products.filter(p=>p.cat===filter);
+  const cats=['all','aretes','pulseras','collares','anillos'];
+  const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
+  return(
+    <div className="page active" id="page-catalog">
+      <section className="sec" style={{paddingBottom:'0'}}>
+        <div className="sec-head center">
+          <p className="sec-eyebrow">Colección completa</p>
+          <h2 className="sec-title">Joyería <em>artesanal</em></h2>
+          <div className="sec-line"/>
+        </div>
+        <div className="filters">
+          {cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>setFilter(c)}>{catLabel[c]}</button>)}
+        </div>
+      </section>
+      <div className="pgrid">
+        {filtered.map(p=><PCard key={p.id} p={p} photos={photos} onAdd={onAdd} onLoad={onLoad}/>)}
+      </div>
+    </div>
+  );
+}
+
+// ── SVG LIVE PREVIEW ──
+function LiveJewel({shape,metal,mc,stone}){
+  return(
+    <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"
+      dangerouslySetInnerHTML={{__html:jSVG(shape,metal,mc,stone,220,220)}}
+      style={{filter:'drop-shadow(0 12px 32px rgba(0,0,0,0.15))'}}/>
+  );
+}
+
+// ── PERSONALIZER ──
+function PersPage({onAdd,goPage,initialPers}){
+  const [metal,setMetal]=useState(initialPers?.metal||'gold');
+  const [mc,setMc]=useState(initialPers?.mc||'#c0392b');
+  const [shape,setShape]=useState(initialPers?.shape||'flower');
+  const [stone,setStone]=useState(initialPers?.stone||'none');
+  const price=(shapePrices[shape]||18900)+(stoneExtra[stone]||0);
+  const mname=metal==='gold'?'Oro 18K':'Plata';
+
+  function handleAdd(){
+    onAdd({name:(shapeNames[shape]||'Joya')+' personalizado',metal,mc,shape,stone,price,tag:`${mname}${stone!=='none'?' · '+stoneNames[stone]:''}`});
+  }
+  function sendWA(){
+    const msg=`Hola! Me interesa una joya personalizada:\n- Tipo: ${shapeNames[shape]}\n- Metal: ${mname}\n- Piedra: ${stoneNames[stone]}\n- Precio estimado: $${price.toLocaleString('es-CL')}`;
+    window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');
+  }
+
+  const shapes=['flower','heart','hoop','dream','star','butterfly','drop','tree'];
+  const shapeLabels={flower:'Flor',heart:'Corazón',hoop:'Aro',dream:'Atrapasueños',star:'Estrella',butterfly:'Mariposa',drop:'Gota',tree:'Árbol de la Vida'};
+  const stones=['none','crystal','turquoise','moonstone','amethyst'];
+
+  return(
+    <div className="page active" id="page-pers">
+      <section className="sec" style={{paddingBottom:'1.5rem'}}>
+        <div className="sec-head center">
+          <p className="sec-eyebrow">Diseña tu joya</p>
+          <h2 className="sec-title">Tu pieza, <em>única</em></h2>
+          <div className="sec-line"/>
+        </div>
+      </section>
+      <div className="pers-wrap">
+        <div className="pers-grid">
+          <div className="pers-preview">
+            <LiveJewel shape={shape} metal={metal} mc={mc} stone={stone}/>
+            <div className="pers-name">{(shapeNames[shape]||'Joya')+' personalizado'}</div>
+            <div className="pers-price">${price.toLocaleString('es-CL')}</div>
+            <div className="pers-desc">Alambrismo en {mname.toLowerCase()}{stone!=='none'?' · '+stoneNames[stone]:''} · Mostacillas rocallas</div>
+          </div>
+          <div className="pers-opts">
+            {/* Metal */}
+            <div>
+              <span className="opt-label">Metal base</span>
+              <div className="metal-row">
+                {[['gold','Oro 18K','linear-gradient(135deg,#f0d060,#c9922a,#e8c060)'],['silver','Plata','linear-gradient(135deg,#ebebeb,#a0a0a0,#d8d8d8)']].map(([m,n,bg])=>(
+                  <button key={m} className={`mbtn${metal===m?' sel':''}`} onClick={()=>setMetal(m)}>
+                    <div className="mswatch" style={{background:bg}}/>
+                    {n}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {/* Mostacillas */}
+            <div>
+              <span className="opt-label">Mostacillas rocalla</span>
+              <div className="bead-row">
+                {beadColors.map(c=>(
+                  <div key={c} className={`bead${mc===c?' sel':''}`} style={{background:c}} onClick={()=>setMc(c)}/>
+                ))}
+                <div className={`bead${mc==='multi'?' sel':''}`}
+                  style={{background:'conic-gradient(#c0392b,#f1c40f,#27ae60,#2980b9,#8e44ad,#c0392b)'}}
+                  onClick={()=>setMc('multi')}/>
+              </div>
+            </div>
+            {/* Forma */}
+            <div>
+              <span className="opt-label">Forma</span>
+              <div className="shape-row">
+                {shapes.map(s=><button key={s} className={`spill${shape===s?' sel':''}`} onClick={()=>setShape(s)}>{shapeLabels[s]}</button>)}
+              </div>
+            </div>
+            {/* Piedra */}
+            <div>
+              <span className="opt-label">Piedra central</span>
+              <div className="stone-row">
+                {stones.map(s=><button key={s} className={`stpill${stone===s?' sel':''}`} onClick={()=>setStone(s)}>{stoneNames[s]}</button>)}
+              </div>
+            </div>
+            {/* Actions */}
+            <div className="pers-actions">
+              <button className="btn btn-dark btn-full" onClick={handleAdd}>Agregar al carrito</button>
+              <button className="btn btn-wa btn-full" onClick={sendWA}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+                Consultar por WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── NOSOTRAS ──
+function NosotrasPage({goPage}){
+  return(
+    <div className="page active" id="page-nosotras">
+      <section className="sec">
+        <div className="about-grid">
+          <div className="about-vis">
+            <div className="about-circ">
+              <img src="uploads/logo.jpg" alt="Diente de León Boutique" style={{width:'200px',height:'200px',objectFit:'cover',display:'block'}}/>
+            </div>
+          </div>
+          <div className="about-text">
+            <h2>Nuestra historia</h2>
+            <p>Somos una boutique artesanal de Los Muermos, en el sur de Chile. Cada joya nace de manos dedicadas: alambrismo cuidadoso, mostacillas rocallas tejidas en técnica ladrillo que forman una trama firme y llena de textura.</p>
+            <p>Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos. Creemos que cada persona merece una joya tan única como ella.</p>
+            <p>Con más de 466 publicaciones y 4.200 seguidoras en Instagram, nuestra comunidad crece desde la autenticidad y el amor por el oficio artesanal.</p>
+            <div className="pills">
+              {['Los Muermos','Hecho a mano','Hipoalergénico','Personalizable','Envío Chile'].map(t=><span key={t} className="pill">{t}</span>)}
+            </div>
+            <div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap'}}>
+              <button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button>
+              <button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// ── CART DRAWER ──
+function CartDrawer({cart,onClose,onRemove,onCheckout}){
+  const total=cart.reduce((s,i)=>s+i.price,0);
+  const cvRefs=useRef({});
+  useEffect(()=>{
+    cart.forEach((item,i)=>{
+      const cv=cvRefs.current[i];
+      if(cv)drawOnCanvas(cv,{...item,metal:item.metal==='Oro 18K'?'gold':'silver'});
+    });
+  },[cart]);
+  return(
+    <>
+      <div className="overlay open" onClick={onClose}>
+        <div className="drawer" onClick={e=>e.stopPropagation()}>
+          <div className="drawer-head">
+            <h2>Tu carrito</h2>
+            <button className="drawer-close" onClick={onClose}>×</button>
+          </div>
+          <div className="drawer-body">
+            {cart.length===0
+              ?<div className="drawer-empty">Tu carrito está vacío</div>
+              :cart.map((item,i)=>(
+                <div key={i} className="cart-item">
+                  <div className="cart-thumb"><canvas ref={el=>cvRefs.current[i]=el} width={56} height={56}/></div>
+                  <div style={{flex:1}}>
+                    <div className="cart-item-name">{item.name}</div>
+                    <div className="cart-item-detail">{item.metal}</div>
+                    <div className="cart-item-price">${item.price.toLocaleString('es-CL')}</div>
+                  </div>
+                  <button className="cart-remove" onClick={()=>onRemove(i)}>×</button>
+                </div>
+              ))
+            }
+          </div>
+          {cart.length>0&&(
+            <div className="drawer-foot">
+              <div className="cart-total"><span>Total</span><span>${total.toLocaleString('es-CL')}</span></div>
+              <button className="btn btn-dark btn-full" onClick={onCheckout}>Finalizar por WhatsApp</button>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ── ADMIN PRODUCT CARD ──
+function AdminCard({p,photos,onPhotoUpload,onSave}){
+  const cvRef=useRef(null);
+  const [name,setName]=useState(p.name);
+  const [price,setPrice]=useState(p.price);
+  const [saved,setSaved]=useState(false);
+  useEffect(()=>{if(cvRef.current&&!photos[p.id])drawOnCanvas(cvRef.current,p);},[p,photos]);
+  function handleSave(){onSave(p.id,name,price);setSaved(true);setTimeout(()=>setSaved(false),2000);}
+  return(
+    <div className="admin-card">
+      <div className="admin-img-wrap">
+        <canvas ref={cvRef} width={200} height={200} style={{display:photos[p.id]?'none':'block'}}/>
+        {photos[p.id]&&<img className="areal" src={photos[p.id]} alt={p.name} style={{display:'block'}}/>}
+        <label className="upload-zone">
+          <div className="upload-inner">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Subir foto
+          </div>
+          <input type="file" accept="image/*" style={{display:'none'}} onChange={e=>onPhotoUpload(e,p.id)}/>
+        </label>
+      </div>
+      <div className="admin-info">
+        <div className="afield"><label>Nombre</label><input value={name} onChange={e=>setName(e.target.value)}/></div>
+        <div className="afield"><label>Precio (CLP)</label><input type="number" className="gold" value={price} step={100} onChange={e=>setPrice(parseInt(e.target.value)||p.price)}/></div>
+        <button className="save-btn" onClick={handleSave}>Guardar cambios</button>
+        <div className="saved" style={{opacity:saved?1:0}}>✓ Guardado</div>
+      </div>
+    </div>
+  );
+}
+
+// ── ADMIN PANEL ──
+function AdminPanel({onLogout}){
+  const [products,setProducts]=useState(loadProds);
+  const [photos,setPhotos]=useState(loadPhotos);
+  function handlePhotoUpload(e,id){
+    const f=e.target.files[0];if(!f)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const data=ev.target.result;
+      const np={...photos,[id]:data};setPhotos(np);savePhotos(np);
+    };
+    reader.readAsDataURL(f);
+  }
+  function handleSave(id,name,price){
+    const np=products.map(p=>p.id===id?{...p,name,price}:p);
+    setProducts(np);saveProds(np);
+  }
+  return(
+    <div className="admin-wrap">
+      <div className="admin-nav">
+        <div className="admin-nav-brand">Diente de León · Admin</div>
+        <div className="admin-nav-right">
+          <span>andrea</span>
+          <button className="btn btn-sm" style={{background:'none',color:'rgba(255,255,255,0.65)',border:'1px solid rgba(255,255,255,0.25)'}} onClick={onLogout}>Cerrar sesión</button>
+        </div>
+      </div>
+      <div className="admin-body">
+        <h1 className="admin-h1">Panel de productos</h1>
+        <p className="admin-sub">Sube fotos y edita nombre y precio. Los cambios se reflejan en la tienda al instante.</p>
+        <div className="admin-grid">
+          {products.map(p=><AdminCard key={p.id} p={p} photos={photos} onPhotoUpload={handlePhotoUpload} onSave={handleSave}/>)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── LOGIN ──
+function LoginModal({onLogin,onClose}){
+  const [user,setUser]=useState('');
+  const [pass,setPass]=useState('');
+  const [err,setErr]=useState('');
+  function attempt(){
+    if(user==='andrea'&&pass==='dientedeleon2025'){onLogin();}
+    else{setErr('Usuario o contraseña incorrectos');setPass('');}
+  }
+  return(
+    <div className="login-bg">
+      <div className="login-box">
+        <div className="login-logo"><LogoSVG size={80}/></div>
+        <div className="login-title">Panel de Administración</div>
+        <div className="login-sub">Diente de León Boutique</div>
+        <div className="lfield"><label>Usuario</label><input value={user} onChange={e=>setUser(e.target.value)} placeholder="admin"/></div>
+        <div className="lfield"><label>Contraseña</label><input type="password" value={pass} onChange={e=>setPass(e.target.value)} onKeyDown={e=>e.key==='Enter'&&attempt()} placeholder="••••••••"/></div>
+        <button className="btn btn-dark btn-full" style={{marginTop:'0.5rem'}} onClick={attempt}>Ingresar</button>
+        <div className="login-err">{err}</div>
+        <div className="login-back" onClick={onClose}>← Volver a la tienda</div>
+      </div>
+    </div>
+  );
+}
+
+// ── TOAST ──
+function Toast({msg}){
+  return <div className={`toast${msg?' show':''}`}>{msg}</div>;
+}
+
+// ── TWEAKS ──
+const TWEAK_DEFAULTS=/*EDITMODE-BEGIN*/{
+  "accentColor": "gold",
+  "heroLayout": "split",
+  "cardStyle": "border"
+}/*EDITMODE-END*/;
+
+function TweaksPanel({open}){
+  const [accent,setAccent]=useState(TWEAK_DEFAULTS.accentColor);
+  const accentMap={gold:'#b8922a',teal:'#7ab8b0',rose:'#d4788a',sage:'#8aaa88'};
+  useEffect(()=>{
+    document.documentElement.style.setProperty('--gold',accentMap[accent]||accentMap.gold);
+    window.parent.postMessage({type:'__edit_mode_set_keys',edits:{accentColor:accent}},'*');
+  },[accent]);
+  if(!open)return null;
+  return(
+    <div className="tweaks-panel open">
+      <div className="tweaks-title">Tweaks</div>
+      <div className="tweak-row">
+        <span className="tweak-label">Color acento</span>
+        <div className="tweak-options">
+          {Object.entries(accentMap).map(([k,v])=>(
+            <div key={k} className={`tweak-swatch${accent===k?' active':''}`}
+              style={{background:v}} onClick={()=>setAccent(k)} title={k}/>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── DANDELION SEEDS (desactivado) ──
+function DandelionSeeds(){return null;}
+function _DandelionSeedsUnused(){
+  const canvasRef=useRef(null);
+  useEffect(()=>{
+    const canvas=canvasRef.current;
+    if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+    const W=canvas.width,H=canvas.height;
+    const cx=W/2,cy=H/2;
+    const seeds=Array.from({length:18},(_,i)=>{
+      const angle=(i/18)*Math.PI*2;
+      const speed=0.4+Math.random()*0.5;
+      const spin=(Math.random()-0.5)*0.04;
+      return{
+        x:cx,y:cy,
+        vx:Math.cos(angle)*speed*(0.6+Math.random()*0.8),
+        vy:Math.sin(angle)*speed*(0.6+Math.random()*0.8)-0.3,
+        rot:Math.random()*Math.PI*2,
+        spin,
+        alpha:0,
+        life:0,
+        maxLife:180+Math.random()*120,
+        size:5+Math.random()*5,
+        delay:Math.floor(Math.random()*60),
+        done:false
+      };
+    });
+    let frame=0,raf;
+    function drawSeed(x,y,rot,alpha,size){
+      ctx.save();
+      ctx.globalAlpha=alpha;
+      ctx.translate(x,y);
+      ctx.rotate(rot);
+      ctx.strokeStyle='#2a2420';
+      ctx.lineWidth=0.7;
+      // stem
+      ctx.beginPath();ctx.moveTo(0,size*1.2);ctx.lineTo(0,0);ctx.stroke();
+      // bulb
+      ctx.beginPath();ctx.ellipse(0,0,size*0.35,size*0.2,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(42,36,32,0.5)';ctx.fill();
+      // filaments
+      for(let k=-1;k<=1;k++){
+        ctx.beginPath();ctx.moveTo(0,0);
+        ctx.lineTo(k*size*0.55,-size*0.9);ctx.stroke();
+      }
+      ctx.restore();
+    }
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      frame++;
+      seeds.forEach(s=>{
+        if(s.done)return;
+        if(frame<s.delay){return;}
+        s.life++;
+        const t=s.life/s.maxLife;
+        s.x+=s.vx*(1-t*0.6);
+        s.y+=s.vy*(1-t*0.5);
+        s.vy+=0.008; // gravity
+        s.rot+=s.spin;
+        s.alpha=t<0.15?t/0.15:t>0.75?(1-(t-0.75)/0.25):1;
+        if(s.life>=s.maxLife){
+          s.x=cx;s.y=cy;s.life=0;
+          s.delay=Math.floor(Math.random()*40);
+        }
+        drawSeed(s.x,s.y,s.rot,s.alpha*0.6,s.size);
+      });
+      raf=requestAnimationFrame(tick);
+    }
+    tick();
+    return()=>cancelAnimationFrame(raf);
+  },[]);
+  return(
+    <canvas
+      ref={canvasRef}
+      width={400} height={400}
+      style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',pointerEvents:'none',zIndex:3,width:'min(480px,70%)',height:'min(480px,70%)'}}
+    />
+  );
+}
+
+// ── ROTATING TEXT ──
+const heroTexts=['Única como tú','Tejida a mano','Desde el sur de Chile','Tu joya, tu historia'];
+function RotatingText(){
+  const [idx,setIdx]=useState(0);
+  const [visible,setVisible]=useState(true);
+  useEffect(()=>{
+    const t=setInterval(()=>{
+      setVisible(false);
+      setTimeout(()=>{setIdx(i=>(i+1)%heroTexts.length);setVisible(true);},400);
+    },3000);
+    return()=>clearInterval(t);
+  },[]);
+  return(
+    <div style={{
+      fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',
+      fontSize:'clamp(1rem,1.4vw,1.2rem)',
+      color:'rgba(42,36,32,0.55)',
+      transition:'opacity 0.4s ease',
+      opacity:visible?1:0,
+      letterSpacing:'0.02em',
+      textAlign:'center',
+    }}>{heroTexts[idx]}</div>
+  );
+}
+
+// ── GOLD SPARKLES ──
+function GoldSparkles(){
+  const canvasRef=useRef(null);
+  useEffect(()=>{
+    const canvas=canvasRef.current;if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+    const W=canvas.width,H=canvas.height;
+    const particles=Array.from({length:28},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      r:1+Math.random()*2.5,
+      vx:(Math.random()-0.5)*0.3,
+      vy:-(0.2+Math.random()*0.4),
+      alpha:Math.random(),
+      dalpha:(Math.random()*0.008+0.003)*(Math.random()<0.5?1:-1),
+      hue:40+Math.random()*20,
+    }));
+    let raf;
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      particles.forEach(p=>{
+        p.x+=p.vx;p.y+=p.vy;
+        p.alpha+=p.dalpha;
+        if(p.alpha<=0||p.alpha>=1)p.dalpha*=-1;
+        if(p.y<-10)p.y=H+10;
+        if(p.x<-10)p.x=W+10;
+        if(p.x>W+10)p.x=-10;
+        ctx.save();
+        ctx.globalAlpha=Math.max(0,Math.min(1,p.alpha))*0.7;
+        ctx.fillStyle=`hsl(${p.hue},70%,55%)`;
+        ctx.shadowBlur=8;ctx.shadowColor=`hsl(${p.hue},80%,60%)`;
+        // star shape
+        ctx.beginPath();
+        for(let i=0;i<4;i++){
+          const a=i*Math.PI/2;
+          ctx.moveTo(p.x,p.y);
+          ctx.lineTo(p.x+Math.cos(a)*p.r*2,p.y+Math.sin(a)*p.r*2);
+        }
+        ctx.strokeStyle=`hsl(${p.hue},70%,55%)`;ctx.lineWidth=0.8;ctx.stroke();
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+        ctx.restore();
+      });
+      raf=requestAnimationFrame(tick);
+    }
+    tick();
+    return()=>cancelAnimationFrame(raf);
+  },[]);
+  return(
+    <canvas ref={canvasRef} width={520} height={700}
+      style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',zIndex:1}}/>
+  );
+}
+
+// ── APP ──
+function App(){
+  const [page,setPage]=useState(()=>localStorage.getItem('dl_page')||'home');
+  const [cart,setCart]=useState([]);
+  const [cartOpen,setCartOpen]=useState(false);
+  const [products,setProducts]=useState(loadProds);
+  const [photos,setPhotos]=useState(loadPhotos);
+  const [toast,setToast]=useState('');
+  const [isAdmin,setIsAdmin]=useState(false);
+  const [showLogin,setShowLogin]=useState(false);
+  const [persPref,setPersPref]=useState(null);
+  const [tweaksOpen,setTweaksOpen]=useState(false);
+
+  useEffect(()=>{localStorage.setItem('dl_page',page);},[page]);
+
+  useEffect(()=>{
+    window.addEventListener('message',e=>{
+      if(e.data?.type==='__activate_edit_mode')setTweaksOpen(true);
+      if(e.data?.type==='__deactivate_edit_mode')setTweaksOpen(false);
+    });
+    window.parent.postMessage({type:'__edit_mode_available'},'*');
+  },[]);
+
+  function showToast(m){setToast(m);setTimeout(()=>setToast(''),2400);}
+
+  function addToCart(item){
+    setCart(c=>[...c,item]);
+    showToast(item.name+' agregado al carrito');
+  }
+
+  function removeFromCart(i){setCart(c=>c.filter((_,idx)=>idx!==i));}
+
+  function checkoutWA(){
+    let msg='Hola! Quiero hacer un pedido:\n';
+    cart.forEach((it,i)=>{msg+=`${i+1}. ${it.name} (${it.metal}) - $${it.price.toLocaleString('es-CL')}\n`;});
+    msg+=`\nTotal: $${cart.reduce((s,it)=>s+it.price,0).toLocaleString('es-CL')}`;
+    window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');
+  }
+
+  function loadProduct(p){
+    setPersPref(p);
+    setPage('pers');
+    window.scrollTo(0,0);
+  }
+
+  function goPage(p){setPage(p);window.scrollTo(0,0);}
+
+  if(isAdmin) return(
+    <>
+      <AdminPanel onLogout={()=>setIsAdmin(false)}/>
+      <Toast msg={toast}/>
+    </>
+  );
+
+  return(
+    <>
+      {showLogin&&<LoginModal onLogin={()=>{setShowLogin(false);setIsAdmin(true);}} onClose={()=>setShowLogin(false)}/>}
+
+      <div className="announce">Envío a todo Chile · Material hipoalergénico · Hecho a mano en Los Muermos</div>
+
+      <nav>
+        <div className="nav-left">
+          <button className="nav-link" onClick={()=>goPage('home')}>Inicio</button>
+          <button className="nav-link" onClick={()=>goPage('catalog')}>Colección</button>
+          <button className="nav-link" onClick={()=>goPage('pers')}>Personalizar</button>
+        </div>
+        <div className="nav-logo" onClick={()=>goPage('home')}>
+          <LogoSVG/>
+          <span className="nav-logo-text">Diente de León</span>
+        </div>
+        <div className="nav-right">
+          <button className="nav-link" onClick={()=>goPage('nosotras')}>Nosotras</button>
+          <button className="cart-btn" onClick={()=>setCartOpen(true)}>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            {cart.length>0&&<span className="cart-count">{cart.length}</span>}
+          </button>
+        </div>
+      </nav>
+
+      {page==='home'&&<HomePage products={products} photos={photos} onAdd={addToCart} onLoad={loadProduct} goPage={goPage}/>}
+      {page==='catalog'&&<CatalogPage products={products} photos={photos} onAdd={addToCart} onLoad={loadProduct}/>}
+      {page==='pers'&&<PersPage onAdd={p=>{addToCart(p);}} goPage={goPage} initialPers={persPref}/>}
+      {page==='nosotras'&&<NosotrasPage goPage={goPage}/>}
+
+      <footer>
+        <div className="footer-top">
+          <div>
+            <div className="footer-brand">Diente de León</div>
+            <p className="footer-tagline">Boutique artesanal · Los Muermos<br/>Región de Los Lagos, Chile<br/>Hecho con amor desde el sur</p>
+          </div>
+          <div>
+            <div className="footer-head">Tienda</div>
+            {[['home','Inicio'],['catalog','Colección'],['pers','Personalizar'],['nosotras','Nosotras']].map(([pg,label])=>(
+              <button key={pg} className="footer-link" onClick={()=>goPage(pg)}>{label}</button>
+            ))}
+          </div>
+          <div>
+            <div className="footer-head">Contacto</div>
+            <a className="footer-link" href="https://www.instagram.com/joyeria_diente_de_leon" target="_blank" rel="noreferrer">@joyeria_diente_de_leon</a>
+            <button className="footer-link" onClick={()=>window.open('https://wa.me/56934828288','_blank')}>WhatsApp</button>
+          </div>
+        </div>
+        <div className="footer-bot">
+          <span>© 2025 Diente de León Boutique</span>
+          <button className="admin-link" onClick={()=>setShowLogin(true)}>admin</button>
+        </div>
+      </footer>
+
+      {cartOpen&&<CartDrawer cart={cart} onClose={()=>setCartOpen(false)} onRemove={removeFromCart} onCheckout={checkoutWA}/>}
+      <Toast msg={toast}/>
+      <TweaksPanel open={tweaksOpen}/>
+      {/* WhatsApp flotante */}
+      <a href="https://wa.me/56934828288?text=Hola!%20Me%20interesa%20conocer%20más%20sobre%20sus%20joyas%20✨" target="_blank" rel="noreferrer" style={{
+        position:'fixed',bottom:'1.8rem',right:'1.8rem',
+        width:'56px',height:'56px',borderRadius:'50%',
+        background:'#25d366',display:'flex',alignItems:'center',justifyContent:'center',
+        boxShadow:'0 4px 20px rgba(37,211,102,0.45)',zIndex:500,
+        transition:'transform 0.2s,box-shadow 0.2s',cursor:'pointer',textDecoration:'none',
+      }}
+      onMouseEnter={e=>{e.currentTarget.style.transform='scale(1.12)';e.currentTarget.style.boxShadow='0 6px 28px rgba(37,211,102,0.6)';}}
+      onMouseLeave={e=>{e.currentTarget.style.transform='scale(1)';e.currentTarget.style.boxShadow='0 4px 20px rgba(37,211,102,0.45)';}}>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+        </svg>
+      </a>
+    </>
+  );
+}
+
+// ── SEED CURSOR TRAIL ──
+function SeedTrail(){
+  useEffect(()=>{
+    const seeds=[];
+    function spawnSeed(x,y){
+      const el=document.createElement('div');
+      const angle=(Math.random()-0.5)*60;
+      const dist=30+Math.random()*40;
+      const size=6+Math.random()*8;
+      el.style.cssText=`position:fixed;left:${x}px;top:${y}px;pointer-events:none;z-index:9999;transition:all 1.4s cubic-bezier(0.2,0.8,0.4,1);opacity:0.7;transform:translate(-50%,-50%)`;
+      el.innerHTML=`<svg width="${size}" height="${size*2.5}" viewBox="0 0 10 25"><line x1="5" y1="25" x2="5" y2="10" stroke="#2a2420" stroke-width="0.8" opacity="0.5"/><ellipse cx="5" cy="10" rx="2" ry="1" fill="#2a2420" opacity="0.4"/><line x1="5" y1="10" x2="2" y2="4" stroke="#2a2420" stroke-width="0.5" opacity="0.35"/><line x1="5" y1="10" x2="5" y2="3" stroke="#2a2420" stroke-width="0.5" opacity="0.35"/><line x1="5" y1="10" x2="8" y2="4" stroke="#2a2420" stroke-width="0.5" opacity="0.35"/></svg>`;
+      document.body.appendChild(el);
+      requestAnimationFrame(()=>{
+        const tx=(Math.random()-0.5)*60;
+        const ty=-(50+Math.random()*60);
+        el.style.transform=`translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${angle}deg)`;
+        el.style.opacity='0';
+      });
+      setTimeout(()=>el.remove(),1500);
+    }
+    let last=0;
+    function onMove(e){
+      const now=Date.now();
+      if(now-last<120)return;
+      last=now;
+      spawnSeed(e.clientX,e.clientY);
+    }
+    window.addEventListener('mousemove',onMove);
+    return()=>window.removeEventListener('mousemove',onMove);
+  },[]);
+  return null;
+}
+
+ReactDOM.createRoot(document.getElementById('store')).render(<App/>);
+document.getElementById('store').style.display='block';
+</script>
+</body>
+</html>
