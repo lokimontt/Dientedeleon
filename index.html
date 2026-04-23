@@ -264,7 +264,7 @@ const stoneExtra={none:0,crystal:2000,turquoise:3000,moonstone:4000,amethyst:350
 const stoneColors={none:null,crystal:'#d8f0ff',turquoise:'#40e0d0',moonstone:'#ede0ff',amethyst:'#9b59b6'};
 const stoneNames={none:'Sin piedra',crystal:'Cristal',turquoise:'Turquesa',moonstone:'Piedra luna',amethyst:'Amatista'};
 const beadColors=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7'];
-const DEFAULT_PHOTOS={1:'uploads/IMG_9890.PNG',2:'uploads/Gemini_Generated_Image_usedntusedntused.png',3:'uploads/ChatGPT Image 23 abr 2026, 02_05_32 a.m..png',4:'uploads/Gemini_Generated_Image_enghuqenghuqengh.png',5:'uploads/Gemini_Generated_Image_jrn1majrn1majrn1.png',6:'uploads/IMG_9889.PNG',7:'uploads/ChatGPT Image 23 abr 2026, 01_32_29 a.m..png',8:'uploads/IMG_9879.PNG',9:'uploads/ChatGPT Image 23 abr 2026, 01_55_43 a.m..png',10:'uploads/ChatGPT Image 23 abr 2026, 01_46_18 a.m..png',11:'uploads/IMG_9891.PNG',12:'uploads/ChatGPT Image 23 abr 2026, 01_38_51 a.m..png',17:'uploads/IMG_9880.PNG',18:'uploads/IMG_9881.PNG'};
+const DEFAULT_PHOTOS={};
 function loadProds(){try{const s=localStorage.getItem('dl_prods2');if(s)return JSON.parse(s);}catch(e){}return PRODUCTS_DEFAULT;}
 function saveProds(p){try{localStorage.setItem('dl_prods2',JSON.stringify(p));}catch(e){}}
 function loadPhotos(){try{const s=localStorage.getItem('dl_photos2');const saved=s?JSON.parse(s):{};return{...DEFAULT_PHOTOS,...saved};}catch(e){}return{...DEFAULT_PHOTOS};}
