@@ -38,7 +38,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .hero{min-height:92vh;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
 .hero-left{display:flex;flex-direction:column;justify-content:center;padding:8vw 5vw 8vw 8vw;position:relative;z-index:2}
-.hero h1{font-size:clamp(4rem,7vw,6.5rem);line-height:0.95;font-style:italic;font-weight:500;margin-bottom:1.8rem;color:var(--text)}
+.hero-mobile-img{display:none}
 .hero h1 span{display:block;font-style:normal;font-family:'Montserrat',sans-serif;font-size:0.2em;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;font-weight:600;border-bottom:1px solid var(--gold-light);padding-bottom:0.5em;display:inline-block}
 .hero-desc{font-size:0.88rem;color:var(--muted);line-height:2;margin-bottom:2.5rem;max-width:380px}
 .hero-btns{display:flex;gap:0.8rem;flex-wrap:wrap}
@@ -218,10 +218,9 @@ footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem
   .hero{position:relative}
   .hero-right{display:none}
   .hero-left{padding:4rem 2rem 3rem;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center}
-  .hero h1{font-size:clamp(2rem,9vw,3.5rem);text-align:center;white-space:nowrap}
-  .hero h1 span{display:block;font-size:0.55em;letter-spacing:0.25em;margin-bottom:0.8rem;text-align:center;white-space:normal}
+  .hero h1{font-size:clamp(2rem,9vw,3.5rem);text-align:center;white-space:nowrap;font-weight:500;font-style:italic}
+  .hero h1 span{display:block;font-size:0.55em;letter-spacing:0.25em;margin-bottom:0.8rem;text-align:center;white-space:normal;font-weight:300}
   .hero-mobile-img{display:block;width:100%;height:200px;object-fit:cover;border-radius:8px;margin:1rem 0}
-  .hero-desc{max-width:320px;text-align:center;font-size:0.82rem}
   .hero-btns{justify-content:center;flex-direction:column;align-items:center;width:100%}
   .hero-btns .btn{width:100%;max-width:280px}
   .strip{grid-template-columns:1fr 1fr}
