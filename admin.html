@@ -3,275 +3,266 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Admin · Diente de León</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Diente de León · Joyería Artesanal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#f7f5f2;--surface:#ffffff;--surface2:#f0ede8;
+  --white:#fff;--off:#fafaf8;--cream:#f5f0ea;--cream2:#ede6dc;
   --text:#1a1612;--muted:#7a7068;--light:#b0a898;
-  --gold:#b8922a;--gold2:#e8c96a;--rose:#d4788a;--sage:#6a9e68;
-  --border:#e2ddd6;--border2:#ccc8c0;--red:#c0392b;
+  --gold:#b8922a;--gold-light:#e8c96a;--teal:#7ab8b0;--rose:#d4788a;--sage:#8aaa88;
+  --border:#e8e2da;--border2:#d5cfc7;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;font-weight:400;background:var(--bg);color:var(--text);font-size:13px;-webkit-font-smoothing:antialiased;min-height:100vh}
-button{font-family:'Montserrat',sans-serif;cursor:pointer}
-input,textarea,select{font-family:'Montserrat',sans-serif}
-.login-screen{position:fixed;inset:0;background:var(--text);display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity 0.4s}
-.login-screen.hide{opacity:0;pointer-events:none}
-.login-card{background:var(--surface);width:360px;padding:3rem 2.5rem}
-.login-top{text-align:center;margin-bottom:2.5rem}
-.login-logo{width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 1.2rem;display:block;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
-.login-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;margin-bottom:0.25rem}
-.login-sub{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--light)}
-.lf{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:1rem}
-.lf label{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
-.lf input{border:none;border-bottom:1.5px solid var(--border2);padding:0.6rem 0;font-size:0.88rem;outline:none;background:transparent;transition:border-color 0.2s;width:100%}
-.lf input:focus{border-bottom-color:var(--text)}
-.login-btn{width:100%;background:var(--text);color:white;border:none;padding:0.9rem;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem;transition:background 0.2s}
-.login-btn:hover{background:var(--gold)}
-.login-btn:disabled{opacity:0.5;cursor:not-allowed}
-.login-err{font-size:0.62rem;color:var(--rose);text-align:center;margin-top:0.7rem;min-height:1rem}
-.app{display:none;min-height:100vh;flex-direction:column}
-.app.visible{display:flex}
-.topbar{background:var(--text);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:50}
-.topbar-left{display:flex;align-items:center;gap:14px}
-.topbar-logo{width:36px;height:36px;border-radius:50%;object-fit:cover;opacity:0.9}
-.topbar-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:white;opacity:0.9}
-.topbar-sep{color:rgba(255,255,255,0.2)}
-.topbar-page{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
-.topbar-right{display:flex;align-items:center;gap:1rem}
-.topbar-user{font-size:0.6rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em}
-.topbar-btn{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:0.4rem 1rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s}
-.topbar-btn:hover{border-color:rgba(255,255,255,0.5);color:white}
-.topbar-store-btn{background:var(--gold);color:white;border:none;padding:0.4rem 1rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
-.topbar-store-btn:hover{background:var(--gold2);color:var(--text)}
-.main{flex:1;padding:2rem}
-.inner{max-width:1200px;margin:0 auto}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
-.stat{background:var(--surface);border:1px solid var(--border);padding:1.2rem 1.5rem;display:flex;flex-direction:column;gap:0.3rem}
-.stat-val{font-size:1.8rem;font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--text);line-height:1}
-.stat-lbl{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--light)}
-.toolbar{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.toolbar-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;flex:1}
-.cat-tabs{display:flex;gap:0;border:1px solid var(--border);overflow:hidden}
-.cat-tab{background:var(--surface);border:none;border-right:1px solid var(--border);padding:0.55rem 1.1rem;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);transition:all 0.2s;white-space:nowrap}
-.cat-tab:last-child{border-right:none}
-.cat-tab:hover{background:var(--surface2);color:var(--text)}
-.cat-tab.active{background:var(--text);color:white}
-.search-wrap{position:relative;flex:0 0 220px}
-.search-wrap input{width:100%;border:1px solid var(--border);padding:0.55rem 0.8rem 0.55rem 2rem;font-size:0.72rem;background:var(--surface);outline:none;transition:border-color 0.2s}
-.search-wrap input:focus{border-color:var(--text)}
-.search-ico{position:absolute;left:0.6rem;top:50%;transform:translateY(-50%);color:var(--light)}
-.add-btn{background:var(--text);color:white;border:none;padding:0.6rem 1.2rem;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;display:flex;align-items:center;gap:6px;transition:background 0.2s;white-space:nowrap}
-.add-btn:hover{background:var(--gold)}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
-.pcard{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:box-shadow 0.2s;position:relative}
-.pcard:hover{box-shadow:0 4px 24px rgba(0,0,0,0.08)}
-.pcard.inactive{opacity:0.5}
-.pcard-img{aspect-ratio:1;background:var(--surface2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.pcard-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.pcard-img canvas{position:absolute;inset:0;width:100%;height:100%}
-.pcard-img-overlay{position:absolute;inset:0;background:rgba(26,22,18,0.55);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center}
-.pcard:hover .pcard-img-overlay{opacity:1}
-.img-action{background:white;color:var(--text);border:none;padding:0.45rem 0.9rem;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s;display:flex;align-items:center;gap:4px;cursor:pointer}
-.img-action:hover{background:var(--gold);color:white}
-.badge-pill{position:absolute;top:8px;left:8px;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;color:white;font-weight:500;z-index:2}
-.pcard-body{padding:1.1rem}
-.pcard-cat{font-size:0.54rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--light);margin-bottom:0.35rem}
-.pcard-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;line-height:1.2;margin-bottom:0.5rem;color:var(--text)}
-.pcard-tag{font-size:0.6rem;color:var(--muted);margin-bottom:0.7rem}
-.pcard-price{font-size:1rem;color:var(--gold);font-weight:500;margin-bottom:0.8rem}
-.pcard-actions{display:flex;gap:0.4rem;border-top:1px solid var(--border);padding-top:0.8rem}
-.pact{flex:1;border:1px solid var(--border);background:var(--surface);padding:0.45rem;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px}
-.pact:hover{background:var(--text);color:white;border-color:var(--text)}
-.pact.danger:hover{background:var(--red);border-color:var(--red)}
-.pact.success:hover{background:var(--sage);border-color:var(--sage)}
-.modal-bg{position:fixed;inset:0;background:rgba(26,22,18,0.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fadeIn 0.2s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{background:var(--surface);width:100%;max-width:680px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.25)}
-.modal-head{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.8rem;border-bottom:1px solid var(--border);flex-shrink:0}
-.modal-head h2{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem}
-.modal-close{background:none;border:none;font-size:1.5rem;color:var(--muted);line-height:1;transition:color 0.2s}
-.modal-close:hover{color:var(--text)}
-.modal-body{overflow-y:auto;padding:1.8rem;display:flex;flex-direction:column;gap:1.2rem}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.form-row.tri{grid-template-columns:1fr 1fr 1fr}
-.field{display:flex;flex-direction:column;gap:0.3rem}
-.field label{font-size:0.56rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
-.field input,.field select,.field textarea{border:1px solid var(--border);padding:0.6rem 0.7rem;font-size:0.82rem;color:var(--text);outline:none;transition:border-color 0.2s;background:var(--bg);width:100%}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--text);background:white}
-.field textarea{resize:vertical;min-height:80px;line-height:1.7}
-.field input.gold{color:var(--gold)}
-.field-hint{font-size:0.58rem;color:var(--light);margin-top:0.2rem}
-.img-upload-zone{border:1.5px dashed var(--border2);padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;cursor:pointer;transition:all 0.2s;background:var(--bg);position:relative;overflow:hidden}
-.img-upload-zone:hover{border-color:var(--gold);background:var(--surface2)}
-.img-upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.img-upload-lbl{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--light)}
-.color-row{display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center}
-.color-dot{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:all 0.2s;flex-shrink:0}
-.color-dot.sel{border-color:var(--text);transform:scale(1.2)}
-.badge-row{display:flex;gap:0.4rem;flex-wrap:wrap}
-.badge-opt{border:1px solid var(--border);background:white;padding:0.28rem 0.7rem;font-size:0.56rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);transition:all 0.2s}
-.badge-opt:hover,.badge-opt.sel{background:var(--text);color:white;border-color:var(--text)}
-.modal-foot{padding:1.2rem 1.8rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:0.6rem;flex-shrink:0}
-.btn-cancel{background:none;border:1px solid var(--border);color:var(--muted);padding:0.65rem 1.4rem;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;transition:all 0.2s}
-.btn-cancel:hover{border-color:var(--text);color:var(--text)}
-.btn-save{background:var(--text);color:white;border:none;padding:0.65rem 1.8rem;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;transition:background 0.2s;display:flex;align-items:center;gap:6px}
-.btn-save:hover{background:var(--gold)}
-.btn-save:disabled{opacity:0.5;cursor:not-allowed}
-.confirm-modal{background:var(--surface);width:360px;padding:2rem;box-shadow:0 24px 60px rgba(0,0,0,0.2)}
-.confirm-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:0.7rem}
-.confirm-msg{font-size:0.72rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
-.confirm-actions{display:flex;gap:0.5rem;justify-content:flex-end}
-.btn-danger{background:var(--red);color:white;border:none;padding:0.6rem 1.4rem;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;transition:opacity 0.2s}
-.btn-danger:hover{opacity:0.85}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text);color:white;padding:0.75rem 1.8rem;font-size:0.65rem;letter-spacing:0.08em;opacity:0;transition:all 0.3s;z-index:600;pointer-events:none;border-left:3px solid var(--gold);white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.error{border-left-color:var(--rose)}
-.loading{display:flex;align-items:center;justify-content:center;padding:4rem;flex-direction:column;gap:1rem}
-.spinner{width:32px;height:32px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite}
-.spinner.sm{width:14px;height:14px;border-width:1.5px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-txt{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--light)}
-.empty{text-align:center;padding:4rem 2rem;border:1px dashed var(--border2);background:var(--surface)}
-.empty-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin-bottom:0.4rem}
-.empty-sub{font-size:0.68rem;color:var(--muted)}
-@media(max-width:768px){.stats{grid-template-columns:1fr 1fr}.form-row,.form-row.tri{grid-template-columns:1fr}.main{padding:1rem}.cat-tabs{display:none}}
+body{font-family:'Montserrat',sans-serif;font-weight:300;background:var(--white);color:var(--text);font-size:13px;letter-spacing:0.03em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.serif{font-family:'Cormorant Garamond',serif;font-weight:300}
+button,input{font-family:'Montserrat',sans-serif}
+img{display:block}
+.announce{background:var(--text);color:rgba(255,255,255,0.65);text-align:center;padding:0.55rem 1rem;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.5rem;height:72px;transition:all 0.3s}
+.nav-left,.nav-right{display:flex;align-items:center;gap:2rem}
+.nav-right{justify-content:flex-end;gap:1.6rem}
+.nav-link{font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text);text-decoration:none;cursor:pointer;transition:color 0.2s,border-color 0.2s;background:none;border:none;border-bottom:2px solid transparent;padding-bottom:2px;font-weight:500}
+.nav-link:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-logo{cursor:pointer;display:flex;flex-direction:row;align-items:center;gap:10px}
+.nav-logo img{height:52px;width:52px;border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,0.10);transition:transform 0.7s cubic-bezier(0.4,0,0.2,1)}
+.nav-logo img.spinning{transform:rotate(360deg)}
+.nav-logo-text{display:none;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--text);white-space:nowrap}
+@media(max-width:768px){.nav-logo-text{display:block}}
+.cart-btn{background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:6px;transition:color 0.2s;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase}
+.cart-btn:hover{color:var(--text)}
+.cart-count{background:var(--rose);color:white;border-radius:50%;width:16px;height:16px;font-size:0.5rem;display:flex;align-items:center;justify-content:center;font-weight:500}
+.page{display:none;animation:fadeIn 0.4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.hero{min-height:92vh;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:8vw 5vw 8vw 8vw;position:relative;z-index:2}
+.hero h1{font-size:clamp(4rem,7vw,6.5rem);line-height:0.95;font-style:normal;font-family:'Great Vibes',cursive;margin-bottom:1.8rem;color:var(--text)}
+.hero h1 span{display:block;font-style:normal;font-family:'Montserrat',sans-serif;font-size:0.2em;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;font-weight:600;border-bottom:2px solid var(--gold);padding-bottom:0.6em;display:inline-block;position:relative;cursor:default;transition:border-color 0.3s,letter-spacing 0.3s}
+.hero h1 span:hover{border-bottom-color:var(--gold-light);letter-spacing:0.55em}
+.hero-desc{font-size:0.88rem;color:var(--muted);line-height:2;margin-bottom:2.5rem;max-width:380px}
+.hero-btns{display:flex;gap:0.8rem;flex-wrap:wrap}
+.hero-right{background:var(--cream2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--text)}
+@media(max-width:1024px){.strip{grid-template-columns:repeat(2,1fr)}.strip-item:nth-child(2){border-right:none}.strip-item:nth-child(3){border-top:1px solid rgba(255,255,255,0.1)}.strip-item:nth-child(4){border-top:1px solid rgba(255,255,255,0.1)}}
+.strip-item{padding:2rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;align-items:center;gap:0.6rem;transition:background 0.28s,transform 0.22s,box-shadow 0.22s;cursor:default}
+.strip-item:last-child{border-right:none}
+.strip-item:hover{background:var(--gold);transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,0.28);z-index:2}
+.strip-item:hover .strip-ico{transform:scale(1.3);color:white}
+.strip-item:hover .strip-t{color:white}
+.strip-item:hover .strip-s{color:rgba(255,255,255,0.85)}
+.strip-ico{color:var(--gold);transition:transform 0.25s,color 0.25s}
+.strip-ico svg{width:34px;height:34px}
+.strip-t{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,1);font-weight:700;transition:color 0.25s}
+.strip-s{font-size:0.62rem;color:rgba(255,255,255,0.55);transition:color 0.25s;letter-spacing:0.03em}
+.sec{padding:5rem 2.5rem}
+.sec-head{margin-bottom:3rem}
+.sec-head.center{text-align:center;display:flex;flex-direction:column;align-items:center}
+.sec-eyebrow{font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--light);margin-bottom:0.8rem}
+.sec-title{font-size:clamp(2rem,3.5vw,3rem);font-style:italic;line-height:1.05}
+.sec-title em{font-style:normal;color:var(--gold)}
+.sec-line{width:40px;height:1px;background:var(--border2);margin-top:1.2rem}
+.filters{display:flex;border-bottom:2px solid var(--border);margin-bottom:0;overflow-x:auto;scrollbar-width:none;gap:0.2rem;padding:0 0.5rem}
+.filters::-webkit-scrollbar{display:none}
+.ftab{background:none;border:none;border-bottom:3px solid transparent;padding:1rem 1.6rem;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;margin-bottom:-2px;transition:all 0.22s;font-family:'Montserrat',sans-serif;font-weight:500}
+.ftab:hover{color:var(--gold);background:var(--cream)}
+.ftab.active{color:var(--text);border-bottom-color:var(--gold);font-weight:600}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border-left:1px solid var(--border);border-top:1px solid var(--border)}
+.pcard{border-right:1px solid var(--border);border-bottom:1px solid var(--border);cursor:pointer;position:relative;overflow:hidden;transition:all 0.3s;background:var(--white)}
+.pcard:hover{z-index:2;box-shadow:0 12px 48px rgba(0,0,0,0.14);transform:translateY(-4px)}
+.pcard-img{aspect-ratio:1;background:var(--cream);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pcard-img canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcard-img .preal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.pcard-overlay{position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(26,22,18,0.55));opacity:0;transition:opacity 0.3s;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:1.2rem;gap:0.4rem}
+.pcard:hover .pcard-overlay{opacity:1}
+.qadd{background:var(--gold);color:white;border:none;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.65rem 1.4rem;cursor:pointer;width:100%;transition:all 0.3s;transform:translateY(8px);font-weight:500}
+.pcard:hover .qadd{transform:translateY(0)}
+.qadd:hover{background:var(--text)}
+.pbadge{position:absolute;top:10px;left:10px;font-size:0.54rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.65rem;color:white;z-index:1;font-weight:500}
+.pinfo{padding:1.2rem 1.2rem 1.4rem;cursor:pointer}
+.pname{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;margin-bottom:0.25rem;line-height:1.2;color:var(--text)}
+.ptag{font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--light);margin-bottom:0.5rem}
+.pprice{font-size:0.9rem;color:var(--gold);font-weight:500}
+/* ── SKELETON LOADING ── */
+.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border-left:1px solid var(--border);border-top:1px solid var(--border)}
+.skeleton-card{border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.skeleton-img{aspect-ratio:1;background:linear-gradient(90deg,var(--cream) 25%,var(--cream2) 50%,var(--cream) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-body{padding:1.2rem}
+.skeleton-line{height:10px;background:linear-gradient(90deg,var(--cream) 25%,var(--cream2) 50%,var(--cream) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:0.6rem}
+.skeleton-line.short{width:60%}
+.skeleton-line.price{width:40%;height:14px;margin-top:0.4rem}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* ── PRODUCT MODAL ── */
+.pmodal-bg{position:fixed;inset:0;background:rgba(26,22,18,0.7);z-index:400;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fadeIn 0.25s ease}
+.pmodal{background:var(--white);width:100%;max-width:640px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,0.3)}
+.pmodal-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid var(--border);flex-shrink:0}
+.pmodal-head span{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--light)}
+.pmodal-close{background:none;border:none;cursor:pointer;font-size:1.6rem;color:var(--muted);line-height:1;transition:color 0.2s}
+.pmodal-close:hover{color:var(--text)}
+.pmodal-body{display:grid;grid-template-columns:1fr 1fr;flex:1;overflow:hidden}
+.pmodal-img{background:var(--cream);display:flex;align-items:center;justify-content:center;position:relative;padding:2rem}
+.pmodal-img canvas{width:200px;height:200px}
+.pmodal-img .mreal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pmodal-img .mbadge{position:absolute;top:12px;left:12px;font-size:0.54rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.65rem;color:white;font-weight:500}
+.pmodal-info{padding:2rem 1.8rem;display:flex;flex-direction:column;gap:1rem;overflow-y:auto}
+.pmodal-cat{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--light)}
+.pmodal-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;line-height:1.15;color:var(--text)}
+.pmodal-desc{font-size:0.72rem;color:var(--muted);line-height:1.9}
+.pmodal-pills{display:flex;flex-wrap:wrap;gap:0.35rem}
+.pmodal-pill{border:1px solid var(--border);padding:0.22rem 0.6rem;font-size:0.54rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.pmodal-price-row{display:flex;align-items:baseline;gap:0.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.pmodal-price{font-size:1.4rem;color:var(--gold);font-weight:500}
+.pmodal-ship{font-size:0.6rem;color:var(--light);letter-spacing:0.06em}
+.pmodal-actions{display:flex;flex-direction:column;gap:0.5rem}
+@media(max-width:540px){.pmodal-body{grid-template-columns:1fr}.pmodal-img{padding:1.5rem;min-height:200px}.pmodal-img canvas{width:150px;height:150px}}
+.pers-wrap{max-width:960px;margin:0 auto;padding:0 2.5rem 5rem}
+.pers-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border)}
+.pers-preview{background:var(--cream);padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;gap:1.5rem;border-right:1px solid var(--border)}
+.pers-preview svg{width:240px;height:240px;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.12))}
+.pers-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;text-align:center}
+.pers-price{font-size:0.9rem;color:var(--gold)}
+.pers-desc{font-size:0.64rem;color:var(--muted);text-align:center;line-height:1.8;max-width:200px}
+.pers-opts{padding:2.5rem 2rem;display:flex;flex-direction:column;gap:1.6rem;overflow-y:auto}
+.opt-label{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.6rem}
+.metal-row{display:flex;gap:0.6rem}
+.mbtn{flex:1;border:1px solid var(--border);background:white;padding:0.7rem 0.5rem;cursor:pointer;font-size:0.58rem;letter-spacing:0.08em;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:5px;transition:all 0.2s}
+.mbtn:hover,.mbtn.sel{border-color:var(--text);color:var(--text)}
+.mbtn.sel{border-width:1.5px;background:var(--off)}
+.mswatch{width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,0.08)}
+.bead-row{display:flex;gap:0.5rem;flex-wrap:wrap}
+.bead{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:all 0.2s;flex-shrink:0}
+.bead.sel{border-color:var(--text);transform:scale(1.2)}
+.shape-row{display:flex;gap:0.4rem;flex-wrap:wrap}
+.spill{background:white;border:1px solid var(--border);padding:0.32rem 0.7rem;font-size:0.58rem;letter-spacing:0.06em;color:var(--muted);cursor:pointer;transition:all 0.2s}
+.spill:hover,.spill.sel{background:var(--text);color:white;border-color:var(--text)}
+.stone-row{display:flex;gap:0.4rem;flex-wrap:wrap}
+.stpill{background:white;border:1px solid var(--border);padding:0.3rem 0.65rem;font-size:0.56rem;color:var(--muted);cursor:pointer;transition:all 0.2s}
+.stpill:hover,.stpill.sel{background:var(--text);color:white;border-color:var(--text)}
+.pers-actions{display:flex;flex-direction:column;gap:0.5rem;margin-top:0.4rem}
+.btn{border:none;cursor:pointer;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 2rem;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn-dark{background:var(--text);color:white}
+.btn-dark:hover{background:var(--gold)}
+.btn-outline{background:var(--text);color:white;border:1px solid var(--text)}
+.btn-outline:hover{background:var(--gold);color:white;border-color:var(--gold)}
+.btn-wa{background:white;color:#1a6130;border:1px solid rgba(26,97,48,0.4)}
+.btn-wa:hover{background:#1a6130;color:white}
+.btn-sm{padding:0.55rem 1.2rem;font-size:0.6rem}
+.btn-full{width:100%}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;border:1px solid var(--border);max-width:880px;margin:0 auto}
+.about-vis{background:var(--cream);display:flex;align-items:center;justify-content:center;padding:3.5rem;border-right:1px solid var(--border)}
+.about-circ{width:200px;height:200px;border-radius:50%;overflow:hidden;box-shadow:0 16px 50px rgba(0,0,0,0.1)}
+.about-text{padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:center}
+.about-text h2{font-size:2.2rem;font-style:italic;margin-bottom:1.2rem}
+.about-text p{font-size:0.74rem;color:var(--muted);line-height:2;margin-bottom:0.8rem}
+.pills{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.2rem;margin-bottom:1.5rem}
+.pill{border:1px solid var(--border);padding:0.25rem 0.7rem;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.editorial{background:var(--text);color:white;padding:5rem 8vw;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.editorial-q{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-style:italic;line-height:1.15;font-weight:300}
+.editorial-q em{color:var(--gold-light);font-style:normal}
+.editorial-body{font-size:0.74rem;color:rgba(255,255,255,0.55);line-height:2}
+.editorial-body strong{color:rgba(255,255,255,0.85);font-weight:400}
+.editorial-btns{display:flex;gap:0.6rem;margin-top:1.8rem}
+.btn-gold{background:var(--gold);color:white;border:none;cursor:pointer;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.8rem 1.8rem;transition:background 0.2s}
+.btn-gold:hover{background:var(--gold-light);color:var(--text)}
+.btn-outline-white{background:none;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);cursor:pointer;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.8rem 1.8rem;transition:all 0.2s}
+.btn-outline-white:hover{color:white;border-color:rgba(255,255,255,0.6)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.overlay.open{opacity:1;pointer-events:all}
+.drawer{position:fixed;right:0;top:0;height:100%;width:360px;background:white;z-index:201;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1)}
+.overlay.open .drawer{transform:translateX(0)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 1.8rem;border-bottom:1px solid var(--border)}
+.drawer-head h2{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem}
+.drawer-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--muted);line-height:1}
+.drawer-body{flex:1;overflow-y:auto;padding:1rem 1.8rem}
+.drawer-empty{text-align:center;padding:4rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--light);font-size:1.1rem}
+.cart-item{display:flex;gap:0.9rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:center}
+.cart-thumb{width:56px;height:56px;background:var(--cream);flex-shrink:0;overflow:hidden}
+.cart-thumb canvas{width:100%;height:100%}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;line-height:1.2}
+.cart-item-detail{font-size:0.58rem;color:var(--light);margin-top:0.15rem;letter-spacing:0.06em}
+.cart-item-price{font-size:0.78rem;color:var(--gold);margin-top:0.25rem}
+.cart-remove{background:none;border:none;cursor:pointer;color:var(--light);font-size:0.9rem;margin-left:auto;padding:0.2rem;transition:color 0.2s;flex-shrink:0}
+.cart-remove:hover{color:var(--rose)}
+.drawer-foot{padding:1.4rem 1.8rem;border-top:1px solid var(--border)}
+.cart-total{display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:1rem;font-weight:400}
+.cart-total span:last-child{color:var(--gold)}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--text);color:white;padding:0.75rem 1.4rem;font-size:0.63rem;letter-spacing:0.06em;transform:translateY(80px);opacity:0;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);z-index:500;pointer-events:none;border-left:3px solid var(--gold)}
+.toast.show{transform:translateY(0);opacity:1}
+footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem 2rem}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:rgba(255,255,255,0.85);margin-bottom:0.8rem}
+.footer-tagline{font-size:0.65rem;line-height:1.9;color:rgba(255,255,255,0.38)}
+.footer-head{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.92rem;color:rgba(255,255,255,0.75);margin-bottom:0.9rem;font-weight:300}
+.footer-link{font-size:0.63rem;line-height:2.2;color:rgba(255,255,255,0.38);text-decoration:none;display:block;cursor:pointer;transition:color 0.2s;background:none;border:none;text-align:left;letter-spacing:0.03em}
+.footer-link:hover{color:rgba(255,255,255,0.75)}
+.footer-bot{display:flex;justify-content:space-between;align-items:center;font-size:0.58rem;letter-spacing:0.06em}
+.hero-mobile-img{display:none}
+@media(max-width:768px){
+  nav{padding:0 1rem;grid-template-columns:auto 1fr auto;height:64px}
+  .nav-left{display:none}
+  .nav-logo{gap:8px}
+  .nav-logo-text{font-size:1rem}
+  .nav-right{gap:1rem}
+  .hero{grid-template-columns:1fr;min-height:auto;position:relative}
+  .hero-right{display:none}
+  .hero-left{padding:4rem 2rem 3rem;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .hero h1{font-size:clamp(2.5rem,9vw,4rem) !important;text-align:center;white-space:nowrap;font-weight:600;font-style:italic;line-height:1.1}
+  .hero h1 span{font-size:0.9em !important;letter-spacing:0.2em;margin-bottom:0.8rem;text-align:center;white-space:normal;font-weight:300;font-style:normal;display:block;border:none;padding:0;color:var(--gold)}
+  .hero-mobile-img{display:block;width:100%;height:200px;object-fit:cover;border-radius:8px;margin:1rem 0}
+  .hero-desc{max-width:320px;text-align:center;font-size:0.82rem}
+  .hero-btns{justify-content:center;flex-direction:column;align-items:center;width:100%}
+  .hero-btns .btn{width:100%;max-width:280px}
+  .strip{grid-template-columns:1fr 1fr}
+  .editorial{grid-template-columns:1fr;gap:2rem;padding:3.5rem 1.5rem}
+  .about-grid{grid-template-columns:1fr}
+  .about-vis{display:none}
+  .pers-grid{grid-template-columns:1fr}
+  .pers-preview{border-right:none;border-bottom:1px solid var(--border)}
+  .footer-top{grid-template-columns:1fr;gap:2rem}
+  .drawer{width:100%}
+  .sec{padding:3.5rem 1.5rem}
+}
 </style>
 </head>
 <body>
+<div id="store" style="display:none"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback}=React;
 
-<div class="login-screen" id="loginScreen">
-  <div class="login-card">
-    <div class="login-top">
-      <img src="uploads/logo.jpg" class="login-logo" onerror="this.style.display='none'">
-      <div class="login-title">Panel de Administración</div>
-      <div class="login-sub">Diente de León · Boutique Artesanal</div>
-    </div>
-    <div class="lf"><label>Email</label><input type="email" id="loginEmail" placeholder="andrea.barria88@gmail.com" autocomplete="email"></div>
-    <div class="lf"><label>Contraseña</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"></div>
-    <button class="login-btn" id="loginBtn" onclick="doLogin()">Ingresar</button>
-    <div class="login-err" id="loginErr"></div>
-  </div>
-</div>
-
-<div class="app" id="app">
-  <div class="topbar">
-    <div class="topbar-left">
-      <img src="uploads/logo.jpg" class="topbar-logo" onerror="this.style.display='none'">
-      <span class="topbar-title">Diente de León</span>
-      <span class="topbar-sep">·</span>
-      <span class="topbar-page">Administración</span>
-    </div>
-    <div class="topbar-right">
-      <span class="topbar-user" id="topbarUser"></span>
-      <a href="index.html" class="topbar-store-btn" target="_blank">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Ver tienda
-      </a>
-      <button class="topbar-btn" onclick="doLogout()">Cerrar sesión</button>
-    </div>
-  </div>
-  <div class="main"><div class="inner">
-    <div class="stats">
-      <div class="stat"><div class="stat-val" id="statTotal">—</div><div class="stat-lbl">Productos totales</div></div>
-      <div class="stat"><div class="stat-val" id="statAretes">—</div><div class="stat-lbl">Aros</div></div>
-      <div class="stat"><div class="stat-val" id="statPulseras">—</div><div class="stat-lbl">Pulseras</div></div>
-      <div class="stat"><div class="stat-val" id="statCollares">—</div><div class="stat-lbl">Collares · Anillos</div></div>
-    </div>
-    <div class="toolbar">
-      <div class="toolbar-title">Productos</div>
-      <div class="cat-tabs">
-        <button class="cat-tab active" onclick="setCat('all',this)">Todos</button>
-        <button class="cat-tab" onclick="setCat('aretes',this)">Aros</button>
-        <button class="cat-tab" onclick="setCat('pulseras',this)">Pulseras</button>
-        <button class="cat-tab" onclick="setCat('collares',this)">Collares</button>
-        <button class="cat-tab" onclick="setCat('anillos',this)">Anillos</button>
-      </div>
-      <div class="search-wrap">
-        <svg class="search-ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="renderGrid()">
-      </div>
-      <button class="add-btn" onclick="openModal()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Nuevo producto
-      </button>
-    </div>
-    <div id="gridWrap"></div>
-  </div></div>
-</div>
-
-<div class="modal-bg" id="productModal" style="display:none" onclick="if(event.target===this)closeModal()">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-head"><h2 id="modalTitle">Nuevo producto</h2><button class="modal-close" onclick="closeModal()">×</button></div>
-    <div class="modal-body">
-      <div class="field">
-        <label>Foto del producto</label>
-        <div class="img-upload-zone">
-          <input type="file" id="imgFile" accept="image/*" onchange="previewImg(this)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b0a898" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <div class="img-upload-lbl" id="uploadLbl">Clic o arrastra una foto aquí</div>
-          <img id="imgPreview" style="display:none;max-height:160px;width:100%;object-fit:contain;margin-top:0.5rem">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label>Nombre del producto *</label><input type="text" id="fNombre" placeholder="Ej: Aros Flor Rocalla Roja" maxlength="120"></div>
-        <div class="field"><label>Categoría *</label><select id="fCategoria"><option value="">— Seleccionar —</option><option value="aretes">Aros</option><option value="pulseras">Pulseras</option><option value="collares">Collares</option><option value="anillos">Anillos</option></select></div>
-      </div>
-      <div class="field"><label>Descripción</label><textarea id="fDescripcion" placeholder="Describe el material, técnica y características únicas..." maxlength="600"></textarea></div>
-      <div class="form-row">
-        <div class="field"><label>Etiqueta (ej: Oro 18K · Rocalla roja)</label><input type="text" id="fTag" placeholder="Metal · Material" maxlength="80"></div>
-        <div class="field"><label>Precio (CLP) *</label><input type="number" id="fPrecio" class="gold" placeholder="18900" step="100" min="0" max="9999999"></div>
-      </div>
-      <div class="form-row tri">
-        <div class="field"><label>Metal base</label><select id="fMetal"><option value="gold">Oro 18K</option><option value="silver">Plata</option></select></div>
-        <div class="field"><label>Forma / diseño</label><select id="fShape"><option value="flower">Flor</option><option value="heart">Corazón</option><option value="hoop">Aro</option><option value="dream">Atrapasueños</option><option value="star">Estrella</option><option value="butterfly">Mariposa</option><option value="drop">Gota</option><option value="tree">Árbol de la Vida</option></select></div>
-        <div class="field"><label>Piedra central</label><select id="fStone"><option value="none">Sin piedra</option><option value="crystal">Cristal</option><option value="turquoise">Turquesa</option><option value="moonstone">Piedra luna</option><option value="amethyst">Amatista</option></select></div>
-      </div>
-      <div class="field"><label>Color mostacilla rocalla</label><div class="color-row" id="colorRow"></div></div>
-      <div class="field"><label>Badge destacado</label><div class="badge-row"><button type="button" class="badge-opt sel" data-badge="" onclick="selBadge('')">Sin badge</button><button type="button" class="badge-opt" data-badge="new" onclick="selBadge('new')">Nuevo</button><button type="button" class="badge-opt" data-badge="pop" onclick="selBadge('pop')">Popular</button><button type="button" class="badge-opt" data-badge="sale" onclick="selBadge('sale')">Oferta</button></div></div>
-      <div class="form-row">
-        <div class="field"><label>Orden en la tienda</label><input type="number" id="fOrden" placeholder="0" min="0" max="9999"><div class="field-hint">Menor número = aparece primero</div></div>
-        <div class="field"><label>Estado</label><select id="fActivo"><option value="true">Activo (visible en tienda)</option><option value="false">Inactivo (oculto)</option></select></div>
-      </div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
-      <button class="btn-save" id="btnSave" onclick="saveProduct()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-        Guardar producto
-      </button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-bg" id="confirmModal" style="display:none" onclick="if(event.target===this)closeConfirm()">
-  <div class="confirm-modal">
-    <div class="confirm-title">Eliminar producto</div>
-    <div class="confirm-msg" id="confirmMsg">¿Estás segura? Esta acción no se puede deshacer.</div>
-    <div class="confirm-actions">
-      <button class="btn-cancel" onclick="closeConfirm()">Cancelar</button>
-      <button class="btn-danger" id="confirmBtn">Eliminar</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
+// ── SUPABASE CONFIG ──
 const SB_URL='https://fzznsf vovotttjtznkzy.supabase.co'.replace(' ','');
-const SB_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6em5zZnZvdm90dHRqdHpua3p5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNjczNDcsImV4cCI6MjA5MjY0MzM0N30.VuJNdHM-zvoIsvOhFlH7aodF9jlzbcAyPucVGYRfnoM';
-const BUCKET='fotos-productos';
-const metalColors={gold:'#d4af37',silver:'#c0c0c0'};
-const stoneColors={none:null,crystal:'#d8f0ff',turquoise:'#40e0d0',moonstone:'#ede0ff',amethyst:'#9b59b6'};
-const beadColorList=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7','multi'];
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6em5zZnZvdm90dHRqdHpua3p5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNjczNDcsImV4cCI6MjA5MjY0MzM0N30.VuJNdHM-zvoIsvOhFlH7aodF9jlzbcAyPucVGYRfnoM';
+
+async function fetchProducts(){
+  try{
+    const res=await fetch(`${SB_URL}/rest/v1/productos?select=*&activo=eq.true&order=orden.asc,created_at.desc`,{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    });
+    if(!res.ok)throw new Error('Error '+res.status);
+    return await res.json();
+  }catch(e){
+    console.warn('Supabase error:',e.message);
+    return [];
+  }
+}
+
+// ── HELPERS ──
 const badgeColors={new:'#8aaa88',pop:'#7ab8b0',sale:'#d4788a'};
 const badgeNames={new:'Nuevo',pop:'Popular',sale:'Oferta'};
-const catNames={aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
-let products=[],currentCat='all',editingId=null,selectedColor='#c0392b',selectedBadge='',newImgFile=null,accessToken=null;
+const metalColors={gold:'#d4af37',silver:'#c0c0c0'};
+const stoneColors={none:null,crystal:'#d8f0ff',turquoise:'#40e0d0',moonstone:'#ede0ff',amethyst:'#9b59b6'};
+const stoneNames={none:'Sin piedra',crystal:'Cristal',turquoise:'Turquesa',moonstone:'Piedra luna',amethyst:'Amatista'};
+const shapeNames={flower:'Aros Flor',heart:'Aros Corazón',hoop:'Aros',dream:'Aros Atrapasueños',star:'Aros Estrella',butterfly:'Aros Mariposa',drop:'Aros Gota',tree:'Árbol de la Vida'};
+const shapePrices={flower:18900,heart:21900,hoop:16900,dream:24900,star:17900,butterfly:19900,drop:18900,tree:22900};
+const stoneExtra={none:0,crystal:2000,turquoise:3000,moonstone:4000,amethyst:3500};
+const beadColors=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7'];
+const catLabels={aretes:'Aretes',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
 
-function gBC(b,i){if(b==='multi'){const c=['#c0392b','#e67e22','#f1c40f','#27ae60','#2980b9','#8e44ad','#e84393'];return c[i%c.length];}return b||'#c0392b';}
+function gBC(b,i){if(b==='multi'){const c=['#c0392b','#e67e22','#f1c40f','#27ae60','#2980b9','#8e44ad','#e84393'];return c[i%c.length];}return b;}
 
 function jSVG(shape,metal,bead,stone,W,H){
   const m=metalColors[metal]||'#d4af37',sc=stoneColors[stone]||null,cx=W/2,cy=H/2,r=Math.min(W,H)/220;
@@ -284,14 +275,14 @@ function jSVG(shape,metal,bead,stone,W,H){
   else if(shape==='butterfly'){h+=`<path d="M${cx} ${cy} C${cx-8*r} ${cy-8*r} ${cx-44*r} ${cy-18*r} ${cx-42*r} ${cy} C${cx-40*r} ${cy+18*r} ${cx-8*r} ${cy+8*r} ${cx} ${cy}Z" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}"/>`;h+=`<path d="M${cx} ${cy} C${cx+8*r} ${cy-8*r} ${cx+44*r} ${cy-18*r} ${cx+42*r} ${cy} C${cx+40*r} ${cy+18*r} ${cx+8*r} ${cy+8*r} ${cx} ${cy}Z" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}"/>`;for(let i=0;i<16;i++){const a=i/8*Math.PI,s=i<8?-1:1;h+=`<circle cx="${(cx+s*(20+Math.cos(a)*22)*r).toFixed(1)}" cy="${(cy+Math.sin(a)*16*r).toFixed(1)}" r="${2.8*r}" fill="${gBC(bead,i)}"/>`;}h+=`<ellipse cx="${cx}" cy="${cy}" rx="${5*r}" ry="${16*r}" fill="${m}" opacity="0.5"/>`;}
   else if(shape==='drop'){h+=`<path d="M${cx} ${cy-52*r} C${cx} ${cy-52*r} ${cx-36*r} ${cy-20*r} ${cx-36*r} ${cy} A${36*r} ${36*r} 0 0 0 ${cx+36*r} ${cy} C${cx+36*r} ${cy-20*r} ${cx} ${cy-52*r}Z" fill="${m}" opacity="0.18" stroke="${m}" stroke-width="${1.5*r}"/>`;for(let i=-3;i<=3;i++)for(let j=-4;j<=2;j++){const x=cx+i*10*r,y=cy+j*10*r;if((x-cx)**2*0.9+(y-cy+8*r)**2<(32*r)**2)h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${3*r}" fill="${gBC(bead,Math.abs(i+j))}"/>`;}if(sc)h+=`<circle cx="${cx}" cy="${cy}" r="${11*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
   else if(shape==='tree'){h+=`<circle cx="${cx}" cy="${(cy+4*r).toFixed(1)}" r="${50*r}" fill="none" stroke="${m}" stroke-width="${1.5*r}"/>`;h+=`<line x1="${cx}" y1="${(cy-46*r).toFixed(1)}" x2="${cx}" y2="${(cy+54*r).toFixed(1)}" stroke="${m}" stroke-width="${2*r}"/>`;[[-1,-30],[1,-30],[-1,-14],[1,-14],[-1,2],[1,2],[-1,16],[1,16]].forEach(([d,yo])=>{h+=`<path d="M${cx} ${cy+(yo+5)*r} Q${cx+d*15*r} ${cy+(yo-5)*r} ${cx+d*30*r} ${cy+yo*r}" fill="none" stroke="${m}" stroke-width="${1.5*r}"/>`;});for(let i=0;i<24;i++){const a=i/24*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*50*r).toFixed(1)}" cy="${(cy+4*r+Math.sin(a)*50*r).toFixed(1)}" r="${2.5*r}" fill="${gBC(bead,i)}"/>`;}if(sc)h+=`<circle cx="${cx}" cy="${(cy+4*r).toFixed(1)}" r="${12*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
-  else{h+=`<circle cx="${cx}" cy="${cy}" r="${50*r}" fill="${m}" opacity="0.15" stroke="${m}" stroke-width="${1.5*r}"/>`;}
   h+=`<line x1="${cx}" y1="${(cy-60*r).toFixed(1)}" x2="${cx}" y2="${(cy-46*r).toFixed(1)}" stroke="${m}" stroke-width="${2.5*r}" stroke-linecap="round"/>`;
   return h;
 }
 
-function drawSVGOnCanvas(canvas,p){
+function drawOnCanvas(canvas,p){
   if(!canvas)return;
-  const w=canvas.width,h=canvas.height,ctx=canvas.getContext('2d');
+  const w=canvas.width,h=canvas.height;
+  const ctx=canvas.getContext('2d');
   ctx.clearRect(0,0,w,h);
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 220 220">${jSVG(p.shape||'flower',p.metal||'gold',p.mc||'#c0392b',p.stone||'none',220,220)}</svg>`;
   const blob=new Blob([svg],{type:'image/svg+xml'});
@@ -301,234 +292,503 @@ function drawSVGOnCanvas(canvas,p){
   img.src=url;
 }
 
-// ── AUTH ──
-async function doLogin(){
-  const email=document.getElementById('loginEmail').value.trim();
-  const pass=document.getElementById('loginPass').value;
-  const btn=document.getElementById('loginBtn');
-  const err=document.getElementById('loginErr');
-  err.textContent='';btn.disabled=true;btn.textContent='Ingresando...';
-  try{
-    const res=await fetch(`${SB_URL}/auth/v1/token?grant_type=password`,{
-      method:'POST',
-      headers:{'apikey':SB_ANON,'Content-Type':'application/json'},
-      body:JSON.stringify({email,password:pass})
+// ── SKELETON ──
+function SkeletonGrid(){
+  return(
+    <div className="skeleton-grid">
+      {Array.from({length:8}).map((_,i)=>(
+        <div className="skeleton-card" key={i}>
+          <div className="skeleton-img"/>
+          <div className="skeleton-body">
+            <div className="skeleton-line short"/>
+            <div className="skeleton-line"/>
+            <div className="skeleton-line short"/>
+            <div className="skeleton-line price"/>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── LOGO ──
+function LogoImg({size=56}){
+  const [spin,setSpin]=useState(false);
+  function handleClick(){if(spin)return;setSpin(true);setTimeout(()=>setSpin(false),700);}
+  return <img src="uploads/logo.jpg" alt="Diente de León" className={spin?'spinning':''} onClick={handleClick} style={{width:size,height:size,borderRadius:'50%',objectFit:'cover',display:'block'}}/>;
+}
+
+// ── PRODUCT MODAL ──
+function ProductModal({p,onAdd,onClose}){
+  const cvRef=useRef(null);
+  useEffect(()=>{
+    if(cvRef.current&&!p.imagen_url)drawOnCanvas(cvRef.current,p);
+  },[p]);
+  useEffect(()=>{
+    document.body.style.overflow='hidden';
+    return()=>{document.body.style.overflow='';};
+  },[]);
+  const metalLabel=p.metal==='gold'?'Golden':'Plata';
+  const stoneLabel=p.stone&&p.stone!=='none'?stoneNames[p.stone]:'';
+  function sendWA(){
+    const msg=`Hola! Me interesa este producto:\n- ${p.nombre||p.name}\n- ${p.tag||''}\n- $${(p.precio||p.price||0).toLocaleString('es-CL')}\n\n¿Está disponible?`;
+    window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');
+  }
+  const nombre=p.nombre||p.name||'';
+  const precio=p.precio||p.price||0;
+  const tag=p.tag||'';
+  const categoria=p.categoria||p.cat||'';
+  const badge=p.badge||'';
+  const desc=p.descripcion||`Joya artesanal tejida a mano con mostacillas rocallas. Base en ${metalLabel}. Material 100% hipoalergénico, elaborada en Los Muermos, sur de Chile.`;
+  return(
+    <div className="pmodal-bg" onClick={onClose}>
+      <div className="pmodal" onClick={e=>e.stopPropagation()}>
+        <div className="pmodal-head">
+          <span>Detalle del producto</span>
+          <button className="pmodal-close" onClick={onClose}>×</button>
+        </div>
+        <div className="pmodal-body">
+          <div className="pmodal-img">
+            {badge&&<div className="mbadge" style={{background:badgeColors[badge]||'#333'}}>{badgeNames[badge]||badge}</div>}
+            {p.imagen_url
+              ?<img className="mreal" src={p.imagen_url} alt={nombre}/>
+              :<canvas ref={cvRef} width={200} height={200}/>
+            }
+          </div>
+          <div className="pmodal-info">
+            <div>
+              <p className="pmodal-cat">{catLabels[categoria]||categoria}</p>
+              <h3 className="pmodal-name">{nombre}</h3>
+            </div>
+            <p className="pmodal-desc">{desc}</p>
+            <div className="pmodal-pills">
+              <span className="pmodal-pill">{metalLabel}</span>
+              <span className="pmodal-pill">Hecho a mano</span>
+              <span className="pmodal-pill">Hipoalergénico</span>
+              {stoneLabel&&<span className="pmodal-pill">{stoneLabel}</span>}
+              <span className="pmodal-pill">Los Muermos</span>
+            </div>
+            <div className="pmodal-price-row">
+              <span className="pmodal-price">${precio.toLocaleString('es-CL')}</span>
+              <span className="pmodal-ship">Envío a todo Chile</span>
+            </div>
+            <div className="pmodal-actions">
+              <button className="btn btn-dark btn-full" onClick={()=>{onAdd({name:nombre,metal:metalLabel,price:precio,tag,shape:p.shape||'flower',mc:p.mc||'#c0392b',stone:p.stone||'none'});onClose();}}>Agregar al carrito</button>
+              <button className="btn btn-wa btn-full" onClick={sendWA}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+                Consultar por WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── PRODUCT CARD ──
+function PCard({p,onAdd,onOpen}){
+  const cvRef=useRef(null);
+  useEffect(()=>{if(cvRef.current&&!p.imagen_url)drawOnCanvas(cvRef.current,p);},[p]);
+  const nombre=p.nombre||p.name||'';
+  const precio=p.precio||p.price||0;
+  const tag=p.tag||'';
+  const badge=p.badge||'';
+  return(
+    <div className="pcard">
+      <div className="pcard-img" onClick={()=>onOpen(p)} style={{cursor:'pointer'}}>
+        {badge&&<div className="pbadge" style={{background:badgeColors[badge]||'#333'}}>{badgeNames[badge]||badge}</div>}
+        {p.imagen_url
+          ?<img className="preal" src={p.imagen_url} alt={nombre} style={{display:'block',position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>
+          :<canvas ref={cvRef} width={180} height={180}/>
+        }
+        <div className="pcard-overlay">
+          <button className="qadd" onClick={e=>{e.stopPropagation();onAdd({name:nombre,metal:p.metal==='gold'?'Golden':'Plata',price:precio,tag,shape:p.shape||'flower',mc:p.mc||'#c0392b',stone:p.stone||'none'});}}>Agregar al carrito</button>
+        </div>
+      </div>
+      <div className="pinfo" onClick={()=>onOpen(p)}>
+        <div className="pname">{nombre}</div>
+        <div className="ptag">{tag}</div>
+        <div className="pprice">${precio.toLocaleString('es-CL')}</div>
+      </div>
+    </div>
+  );
+}
+
+// ── ANIMACIONES HERO ──
+const heroTexts=['Única como tú','Tejida a mano','Desde el sur de Chile','Tu joya, tu historia'];
+function RotatingText(){
+  const [idx,setIdx]=useState(0);const [vis,setVis]=useState(true);
+  useEffect(()=>{const t=setInterval(()=>{setVis(false);setTimeout(()=>{setIdx(i=>(i+1)%heroTexts.length);setVis(true);},400);},3000);return()=>clearInterval(t);},[]);
+  return<div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',fontSize:'clamp(1rem,1.4vw,1.2rem)',color:'rgba(42,36,32,0.55)',transition:'opacity 0.4s ease',opacity:vis?1:0,letterSpacing:'0.02em',textAlign:'center'}}>{heroTexts[idx]}</div>;
+}
+function GoldSparkles(){
+  const cvRef=useRef(null);
+  useEffect(()=>{
+    const canvas=cvRef.current;if(!canvas)return;
+    const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+    const particles=Array.from({length:28},()=>({x:Math.random()*W,y:Math.random()*H,r:1+Math.random()*2.5,vx:(Math.random()-0.5)*0.3,vy:-(0.2+Math.random()*0.4),alpha:Math.random(),dalpha:(Math.random()*0.008+0.003)*(Math.random()<0.5?1:-1),hue:40+Math.random()*20}));
+    let raf;
+    function tick(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.alpha+=p.dalpha;if(p.alpha<=0||p.alpha>=1)p.dalpha*=-1;if(p.y<-10)p.y=H+10;if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,p.alpha))*0.7;ctx.fillStyle=`hsl(${p.hue},70%,55%)`;ctx.beginPath();for(let i=0;i<4;i++){const a=i*Math.PI/2;ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+Math.cos(a)*p.r*2,p.y+Math.sin(a)*p.r*2);}ctx.strokeStyle=`hsl(${p.hue},70%,55%)`;ctx.lineWidth=0.8;ctx.stroke();ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();});raf=requestAnimationFrame(tick);}
+    tick();return()=>cancelAnimationFrame(raf);
+  },[]);
+  return<canvas ref={cvRef} width={520} height={700} style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',zIndex:1}}/>;
+}
+function LiveJewel({shape,metal,mc,stone}){
+  return<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" dangerouslySetInnerHTML={{__html:jSVG(shape,metal,mc,stone,220,220)}} style={{filter:'drop-shadow(0 8px 24px rgba(0,0,0,0.12))'}}/>;
+}
+
+// ── PAGES ──
+function HomePage({products,loading,onAdd,onOpen,goPage}){
+  const [filter,setFilter]=useState('all');
+  const [visibleCount,setVisibleCount]=useState(10);
+  const cats=['all','aretes','pulseras','collares','anillos'];
+  const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
+  const filtered=filter==='all'?products:products.filter(p=>(p.categoria||p.cat)===filter);
+  const visible=filtered.slice(0,visibleCount);
+  return(<div className="page active">
+    <section className="hero">
+      <div className="hero-left">
+        <h1><span>Joyería artesanal</span><br/>Diente de León</h1>
+        <img src="uploads/hero-mobile.jpg" alt="Joyería Diente de León" className="hero-mobile-img"/>
+        <p className="hero-desc">Alambrismo tejido a mano con mostacillas rocallas, bases en oro y plata. Cada pieza nace única e irrepetible desde el sur de Chile.</p>
+        <div className="hero-btns">
+          <button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button>
+          <button className="btn btn-outline" onClick={()=>goPage('pers')}>Personalizar joya</button>
+        </div>
+      </div>
+      <div className="hero-right">
+        <GoldSparkles/>
+        <div style={{position:'absolute',width:'340px',height:'340px',background:'#9ed4c8',borderRadius:'50%',filter:'blur(80px)',opacity:0.25,top:'10%',left:'20%'}}/>
+        <div style={{position:'absolute',width:'240px',height:'240px',background:'#e88ca0',borderRadius:'50%',filter:'blur(70px)',opacity:0.2,bottom:'15%',right:'10%'}}/>
+        <div style={{position:'absolute',top:'7%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 3rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.5rem'}}>
+          <RotatingText/>
+          <div style={{display:'flex',alignItems:'center',gap:'0.7rem'}}>
+            <div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/>
+            <p style={{fontFamily:"'Montserrat',sans-serif",fontSize:'0.58rem',letterSpacing:'0.22em',textTransform:'uppercase',color:'rgba(42,36,32,0.38)'}}>con amor desde el sur</p>
+            <div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/>
+          </div>
+        </div>
+        <img src="uploads/logo.jpg" alt="Diente de León" className="hero-main-svg" style={{borderRadius:'50%',boxShadow:'0 24px 80px rgba(0,0,0,0.18)',objectFit:'cover',position:'relative',zIndex:2,width:'min(380px,60%)',animation:'floatSvg 6s ease-in-out infinite'}}/>
+        <style>{`@keyframes floatSvg{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}`}</style>
+        <div style={{position:'absolute',bottom:'8%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 2rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.6rem'}}>
+          <div style={{width:'36px',height:'1px',background:'rgba(42,36,32,0.35)'}}/>
+          <p style={{fontFamily:"'Montserrat',sans-serif",fontSize:'0.68rem',letterSpacing:'0.25em',textTransform:'uppercase',color:'rgba(42,36,32,0.6)',fontWeight:500}}>Los Muermos · Región de Los Lagos</p>
+        </div>
+      </div>
+    </section>
+    <div className="strip">{[
+      {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,t:'Hecho a mano',s:'Tejido con amor'},
+      {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,t:'Personalizable',s:'Tú eliges los colores'},
+      {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,t:'Hipoalergénico',s:'Seguro para tu piel'},
+      {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,t:'Envío a Chile',s:'Todo el país'},
+    ].map((item,i)=><div key={i} className="strip-item"><div className="strip-ico">{item.ico}</div><div className="strip-t">{item.t}</div><div className="strip-s">{item.s}</div></div>)}</div>
+    <section className="sec">
+      <div className="sec-head center">
+        <p className="sec-eyebrow">Piezas destacadas</p>
+        <h2 className="sec-title">Las más <em>amadas</em></h2>
+        <div className="sec-line"/>
+      </div>
+      <div className="filters" style={{marginBottom:'0'}}>{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>{setFilter(c);setVisibleCount(10);}}>{catLabel[c]}</button>)}</div>
+      <div className="pgrid">{visible.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>
+      {!loading&&visibleCount<filtered.length&&<div style={{textAlign:'center',padding:'2rem 0 0'}}><button onClick={()=>setVisibleCount(c=>c+10)} style={{background:'var(--text)',color:'white',border:'none',padding:'0.85rem 2.5rem',fontSize:'0.65rem',letterSpacing:'0.15em',textTransform:'uppercase',cursor:'pointer',fontFamily:"'Montserrat',sans-serif"}} onMouseOver={e=>e.currentTarget.style.background='var(--gold)'} onMouseOut={e=>e.currentTarget.style.background='var(--text)'}>Ver más productos</button></div>}
+    </section>
+    <div className="editorial">
+      <div className="editorial-q">Cada joya nace de<br/>manos <em>dedicadas</em></div>
+      <div>
+        <p className="editorial-body">En Los Muermos, en el corazón del sur de Chile, tejemos a mano con técnica ladrillo para que cada pieza tenga <strong>una textura firme y llena de vida</strong>. Usamos bases bañadas en golden y plata, con materiales 100% hipoalergénicos.</p>
+        <div className="editorial-btns">
+          <button className="btn-gold btn" onClick={()=>goPage('pers')}>Personalizar mi joya</button>
+          <button className="btn-outline-white btn" onClick={()=>goPage('nosotras')}>Nuestra historia</button>
+        </div>
+      </div>
+    </div>
+  </div>);
+}
+
+function CatalogPage({products,loading,onAdd,onOpen}){
+  const [filter,setFilter]=useState('all');
+  const [visibleCount,setVisibleCount]=useState(10);
+  const cats=['all','aretes','pulseras','collares','anillos'];
+  const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
+  const filtered=filter==='all'?products:products.filter(p=>(p.categoria||p.cat)===filter);
+  const visible=filtered.slice(0,visibleCount);
+  return(<div className="page active">
+    <section className="sec" style={{paddingBottom:'0'}}>
+      <div className="sec-head center">
+        <p className="sec-eyebrow">Colección completa</p>
+        <h2 className="sec-title">Joyería <em>artesanal</em></h2>
+        <div className="sec-line"/>
+      </div>
+      <div className="filters">{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>{setFilter(c);setVisibleCount(10);}}>{catLabel[c]}</button>)}</div>
+    </section>
+    <div>
+      {loading?<SkeletonGrid/>:<div className="pgrid">{visible.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>}
+      {!loading&&visibleCount<filtered.length&&<div style={{textAlign:'center',padding:'2rem 0'}}><button onClick={()=>setVisibleCount(c=>c+10)} style={{background:'var(--text)',color:'white',border:'none',padding:'0.85rem 2.5rem',fontSize:'0.65rem',letterSpacing:'0.15em',textTransform:'uppercase',cursor:'pointer',fontFamily:"'Montserrat',sans-serif"}} onMouseOver={e=>e.currentTarget.style.background='var(--gold)'} onMouseOut={e=>e.currentTarget.style.background='var(--text)'}>Ver más productos</button></div>}
+    </div>
+  </div>);
+}
+
+function PersPage({products,onAdd,goPage}){
+  const [imgIdx,setImgIdx]=useState(0);
+  const [step,setStep]=useState(1);
+  const [metal,setMetal]=useState('gold');
+  const [colors,setColors]=useState(['#c0392b']);
+
+  const activeProds=products.filter(p=>p.activo!==false&&p.imagen_url);
+  const curProd=activeProds[imgIdx];
+  const price=curProd?.precio||18900;
+  const mname=metal==='gold'?'Golden':'Silver';
+  const allBeadColors=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7','#ffffff','#1abc9c','#d35400','#7f8c8d','#f39c12'];
+
+  function prevImg(){setImgIdx(i=>(i-1+activeProds.length)%activeProds.length);}
+  function nextImg(){setImgIdx(i=>(i+1)%activeProds.length);}
+  function addColor(){if(colors.length<3)setColors(c=>[...c,'#e67e22']);}
+  function removeColor(i){if(colors.length>1)setColors(c=>c.filter((_,idx)=>idx!==i));}
+  function changeColor(i,c){setColors(prev=>prev.map((x,idx)=>idx===i?c:x));}
+
+  function buildMsg(){
+    return `Hola! Me interesa una joya personalizada:\n- Modelo de inspiración: ${curProd?curProd.nombre:'—'}\n- Metal: ${mname}\n- Colores mostacilla: ${colors.join(' + ')}\n- Precio referencia: $${price.toLocaleString('es-CL')}\n\n¿Está disponible?`;
+  }
+  function handleAdd(){
+    onAdd({name:`Personalizado — ${curProd?.nombre||'Joya'}`,metal:mname,shape:curProd?.shape||'flower',mc:colors[0],stone:'none',price,
+      tag:`${mname} · Personalizado`,personalizado:true,
+      detalles:{modelo:curProd?.nombre||'—',metal:mname,colores:colors}});
+  }
+  function sendWA(){window.open(`https://wa.me/56934828288?text=${encodeURIComponent(buildMsg())}`,'_blank');}
+
+  const stepLabel=['Modelo','Metal','Mostacillas','Resumen'];
+
+  return(<div className="page active">
+    <section className="sec" style={{paddingBottom:'1.5rem'}}>
+      <div className="sec-head center">
+        <p className="sec-eyebrow">Diseña tu joya</p>
+        <h2 className="sec-title">Tu pieza, <em>única</em></h2>
+        <div className="sec-line"/>
+      </div>
+    </section>
+
+    {/* Stepper */}
+    <div style={{display:'flex',justifyContent:'center',maxWidth:'500px',margin:'0 auto 2rem',padding:'0 1.5rem'}}>
+      {stepLabel.map((lbl,i)=>{
+        const n=i+1;const active=step===n;const done=step>n;
+        return(<div key={n} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',cursor:done?'pointer':'default',position:'relative'}} onClick={()=>done&&setStep(n)}>
+          {n<4&&<div style={{position:'absolute',top:'13px',left:'50%',right:'-50%',height:'1px',background:done?'var(--gold)':'var(--border)',zIndex:0}}/>}
+          <div style={{width:'26px',height:'26px',borderRadius:'50%',background:active?'var(--text)':done?'var(--gold)':'var(--border2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'0.58rem',color:active||done?'white':'var(--muted)',fontWeight:500,zIndex:1,position:'relative'}}>{done?'✓':n}</div>
+          <div style={{fontSize:'0.5rem',letterSpacing:'0.08em',textTransform:'uppercase',color:active?'var(--text)':done?'var(--gold)':'var(--light)',textAlign:'center',lineHeight:1.3}}>{lbl}</div>
+        </div>);
+      })}
+    </div>
+
+    {/* Layout lado a lado */}
+    <div style={{maxWidth:'860px',margin:'0 auto',padding:'0 1.5rem 4rem',display:'grid',gridTemplateColumns:'1fr 1fr',gap:'2rem',alignItems:'start'}}>
+
+      {/* FOTO */}
+      <div style={{position:'sticky',top:'80px'}}>
+        <div style={{background:'var(--cream)',aspectRatio:'1',position:'relative',overflow:'hidden'}}>
+          {curProd?.imagen_url
+            ?<img src={curProd.imagen_url} alt={curProd.nombre} style={{width:'100%',height:'100%',objectFit:'cover'}}/>
+            :<div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100%',color:'var(--light)',fontSize:'0.65rem',letterSpacing:'0.1em',textTransform:'uppercase'}}>Sin fotos aún</div>
+          }
+          {step===1&&activeProds.length>1&&<>
+            <button onClick={prevImg} style={{position:'absolute',left:'0.4rem',top:'50%',transform:'translateY(-50%)',background:'rgba(255,255,255,0.92)',border:'1px solid var(--border)',width:'32px',height:'32px',borderRadius:'50%',cursor:'pointer',fontSize:'1.1rem',display:'flex',alignItems:'center',justifyContent:'center',lineHeight:1}}>‹</button>
+            <button onClick={nextImg} style={{position:'absolute',right:'0.4rem',top:'50%',transform:'translateY(-50%)',background:'rgba(255,255,255,0.92)',border:'1px solid var(--border)',width:'32px',height:'32px',borderRadius:'50%',cursor:'pointer',fontSize:'1.1rem',display:'flex',alignItems:'center',justifyContent:'center',lineHeight:1}}>›</button>
+          </>}
+        </div>
+        {curProd&&<div style={{textAlign:'center',marginTop:'0.6rem'}}>
+          <div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',fontSize:'1rem',color:'var(--text)'}}>{curProd.nombre}</div>
+          {step===1&&<div style={{fontSize:'0.58rem',color:'var(--light)',letterSpacing:'0.1em',textTransform:'uppercase',marginTop:'0.15rem'}}>{imgIdx+1} / {activeProds.length}</div>}
+        </div>}
+        <div style={{textAlign:'center',marginTop:'0.6rem',fontSize:'1.3rem',color:'var(--gold)',fontWeight:500}}>${price.toLocaleString('es-CL')}</div>
+      </div>
+
+      {/* OPCIONES */}
+      <div style={{display:'flex',flexDirection:'column',gap:'1.5rem'}}>
+
+        {/* PASO 1 — Modelo */}
+        {step===1&&<div>
+          <p style={{fontSize:'0.65rem',color:'var(--muted)',marginBottom:'1rem',lineHeight:1.8}}>Navega entre los modelos para elegir tu inspiración.</p>
+          <button className="btn btn-dark btn-full" onClick={()=>setStep(2)}>Continuar →</button>
+        </div>}
+
+        {/* PASO 2 — Metal */}
+        {step===2&&<div>
+          <span style={{fontSize:'0.58rem',letterSpacing:'0.18em',textTransform:'uppercase',color:'var(--muted)',display:'block',marginBottom:'0.8rem'}}>Metal base</span>
+          <div style={{display:'flex',flexDirection:'column',gap:'0.5rem',marginBottom:'1.2rem'}}>
+            {[['gold','Golden','linear-gradient(135deg,#f0d060,#c9922a,#e8c060)'],['silver','Silver','linear-gradient(135deg,#ebebeb,#a0a0a0,#d8d8d8)']].map(([m,n,bg])=>(
+              <button key={m} onClick={()=>setMetal(m)} style={{border:`2px solid ${metal===m?'var(--text)':'var(--border)'}`,background:metal===m?'var(--off)':'white',padding:'0.8rem 1rem',cursor:'pointer',display:'flex',alignItems:'center',gap:'0.8rem',transition:'all 0.2s',fontFamily:"'Montserrat',sans-serif"}}>
+                <div style={{width:'28px',height:'28px',borderRadius:'50%',background:bg,border:'1px solid rgba(0,0,0,0.1)',flexShrink:0}}/>
+                <span style={{fontSize:'0.7rem',letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--text)',fontWeight:metal===m?500:400}}>{n}</span>
+              </button>
+            ))}
+          </div>
+          <div style={{display:'flex',gap:'0.5rem'}}>
+            <button className="btn btn-outline" style={{flex:1}} onClick={()=>setStep(1)}>←</button>
+            <button className="btn btn-dark" style={{flex:3}} onClick={()=>setStep(3)}>Continuar →</button>
+          </div>
+        </div>}
+
+        {/* PASO 3 — Colores */}
+        {step===3&&<div>
+          <span style={{fontSize:'0.58rem',letterSpacing:'0.18em',textTransform:'uppercase',color:'var(--muted)',display:'block',marginBottom:'0.8rem'}}>Mostacillas rocalla</span>
+          <div style={{display:'flex',flexDirection:'column',gap:'0.8rem',marginBottom:'1rem'}}>
+            {colors.map((c,i)=>(
+              <div key={i}>
+                <div style={{fontSize:'0.54rem',letterSpacing:'0.12em',textTransform:'uppercase',color:'var(--light)',marginBottom:'0.4rem',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                  <span>Color {i+1}</span>
+                  {colors.length>1&&<button onClick={()=>removeColor(i)} style={{background:'none',border:'none',cursor:'pointer',color:'var(--rose)',fontSize:'0.7rem',padding:0}}>× Quitar</button>}
+                </div>
+                <div style={{display:'flex',flexWrap:'wrap',gap:'0.35rem'}}>
+                  {allBeadColors.map(bc=>(
+                    <div key={bc} onClick={()=>changeColor(i,bc)} style={{width:'clamp(20px,5vw,26px)',height:'clamp(20px,5vw,26px)',borderRadius:'50%',background:bc,cursor:'pointer',border:c===bc?'3px solid var(--text)':'2px solid rgba(0,0,0,0.1)',transform:c===bc?'scale(1.2)':'scale(1)',transition:'all 0.15s',flexShrink:0,boxSizing:'border-box'}}/>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          {colors.length<3&&<button onClick={addColor} style={{border:'1.5px dashed var(--border2)',background:'white',color:'var(--muted)',padding:'0.5rem 1rem',fontSize:'0.6rem',letterSpacing:'0.1em',textTransform:'uppercase',cursor:'pointer',fontFamily:"'Montserrat',sans-serif",display:'flex',alignItems:'center',gap:'0.4rem',marginBottom:'1rem',width:'100%'}}>
+            <span style={{fontSize:'1rem',lineHeight:1}}>+</span> Agregar otro color
+          </button>}
+          <div style={{display:'flex',gap:'0.5rem'}}>
+            <button className="btn btn-outline" style={{flex:1}} onClick={()=>setStep(2)}>←</button>
+            <button className="btn btn-dark" style={{flex:3}} onClick={()=>setStep(4)}>Ver resumen →</button>
+          </div>
+        </div>}
+
+        {/* PASO 4 — Resumen */}
+        {step===4&&<div>
+          <span style={{fontSize:'0.58rem',letterSpacing:'0.18em',textTransform:'uppercase',color:'var(--muted)',display:'block',marginBottom:'0.8rem'}}>Tu personalizado</span>
+          <div style={{background:'var(--cream)',padding:'1.2rem',marginBottom:'1.2rem',borderLeft:'3px solid var(--gold)'}}>
+            {[['Modelo',curProd?.nombre||'—'],['Metal',mname]].map(([k,v])=>(
+              <div key={k} style={{display:'flex',justifyContent:'space-between',fontSize:'0.68rem',marginBottom:'0.5rem'}}>
+                <span style={{color:'var(--muted)'}}>{k}</span>
+                <span style={{color:'var(--text)',fontWeight:500}}>{v}</span>
+              </div>
+            ))}
+            <div style={{display:'flex',justifyContent:'space-between',fontSize:'0.68rem',marginBottom:'0.5rem',alignItems:'center'}}>
+              <span style={{color:'var(--muted)'}}>Mostacillas</span>
+              <div style={{display:'flex',gap:'5px',alignItems:'center'}}>
+                {colors.map((c,i)=><div key={i} style={{width:'16px',height:'16px',borderRadius:'50%',background:c,border:'1px solid rgba(0,0,0,0.12)'}}/>)}
+              </div>
+            </div>
+            <div style={{display:'flex',justifyContent:'space-between',fontSize:'0.82rem',marginTop:'0.8rem',paddingTop:'0.8rem',borderTop:'1px solid var(--border)'}}>
+              <span style={{color:'var(--muted)'}}>Precio referencia</span>
+              <span style={{color:'var(--gold)',fontWeight:500}}>${price.toLocaleString('es-CL')}</span>
+            </div>
+          </div>
+          <div style={{display:'flex',gap:'0.5rem',marginBottom:'0.5rem'}}>
+            <button className="btn btn-outline" style={{flex:1}} onClick={()=>setStep(3)}>←</button>
+            <button className="btn btn-dark" style={{flex:3}} onClick={handleAdd}>Agregar al carrito</button>
+          </div>
+          <button className="btn btn-wa btn-full" onClick={sendWA}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </button>
+        </div>}
+
+      </div>
+    </div>
+  </div>);
+}
+
+
+function NosotrasPage({goPage}){
+  return(<div className="page active"><section className="sec"><div className="about-grid"><div className="about-vis"><div className="about-circ"><img src="uploads/logo.jpg" alt="Diente de León" style={{width:'200px',height:'200px',objectFit:'cover',display:'block'}}/></div></div><div className="about-text"><h2>Nuestra historia</h2><p>Somos una boutique artesanal de Los Muermos, en el sur de Chile. Cada joya nace de manos dedicadas: alambrismo cuidadoso, mostacillas rocallas tejidas en técnica ladrillo que forman una trama firme y llena de textura.</p><p>Usamos bases bañadas en golden y plata, con materiales 100% hipoalergénicos. Creemos que cada persona merece una joya tan única como ella.</p><p>Con más de 466 publicaciones y 4.200 seguidoras en Instagram, nuestra comunidad crece desde la autenticidad y el amor por el oficio artesanal.</p><div className="pills">{['Los Muermos','Hecho a mano','Hipoalergénico','Personalizable','Envío Chile'].map(t=><span key={t} className="pill">{t}</span>)}</div><div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap'}}><button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button><button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button></div></div></div></section></div>);
+}
+
+function CartDrawer({cart,onClose,onRemove,onCheckout}){
+  const total=cart.reduce((s,i)=>s+i.price,0);
+  const cvRefs=useRef({});
+  useEffect(()=>{cart.forEach((item,i)=>{const cv=cvRefs.current[i];if(cv)drawOnCanvas(cv,{shape:item.shape||'flower',metal:item.metal==='Golden'?'gold':'silver',mc:item.mc||'#c0392b',stone:item.stone||'none'});});},[cart]);
+  return(<div className="overlay open" onClick={onClose}><div className="drawer" onClick={e=>e.stopPropagation()}><div className="drawer-head"><h2>Tu carrito</h2><button className="drawer-close" onClick={onClose}>×</button></div><div className="drawer-body">{cart.length===0?<div className="drawer-empty">Tu carrito está vacío</div>:cart.map((item,i)=><div key={i} className="cart-item"><div className="cart-thumb"><canvas ref={el=>cvRefs.current[i]=el} width={56} height={56}/></div><div style={{flex:1}}><div className="cart-item-name">{item.name}</div><div className="cart-item-detail">{item.metal}</div><div className="cart-item-price">${item.price.toLocaleString('es-CL')}</div></div><button className="cart-remove" onClick={()=>onRemove(i)}>×</button></div>)}</div>{cart.length>0&&<div className="drawer-foot"><div className="cart-total"><span>Total</span><span>${total.toLocaleString('es-CL')}</span></div><button className="btn btn-dark btn-full" onClick={onCheckout}>Finalizar por WhatsApp</button></div>}</div></div>);
+}
+
+function Toast({msg}){return<div className={`toast${msg?' show':''}`}>{msg}</div>;}
+
+// ── APP ──
+function App(){
+  const [page,setPage]=useState('home');
+  const [cart,setCart]=useState([]);
+  const [cartOpen,setCartOpen]=useState(false);
+  const [products,setProducts]=useState([]);
+  const [loading,setLoading]=useState(true);
+  const [toast,setToast]=useState('');
+  const [modalProduct,setModalProduct]=useState(null);
+
+  useEffect(()=>{
+    fetchProducts().then(data=>{
+      setProducts(data);
+      setLoading(false);
     });
-    const data=await res.json();
-    if(!res.ok||!data.access_token){err.textContent='Email o contraseña incorrectos';return;}
-    accessToken=data.access_token;
-    document.getElementById('loginScreen').classList.add('hide');
-    document.getElementById('app').classList.add('visible');
-    document.getElementById('topbarUser').textContent=data.user?.email||'';
-    setTimeout(()=>document.getElementById('loginScreen').style.display='none',400);
-    loadProducts();
-  }catch(e){err.textContent='Error de conexión. Intenta de nuevo.';}
-  finally{btn.disabled=false;btn.textContent='Ingresar';}
-}
+  },[]);
 
-async function doLogout(){
-  try{await fetch(`${SB_URL}/auth/v1/logout`,{method:'POST',headers:{'apikey':SB_ANON,'Authorization':'Bearer '+accessToken}});}catch(e){}
-  accessToken=null;products=[];
-  document.getElementById('app').classList.remove('visible');
-  document.getElementById('loginScreen').style.display='flex';
-  setTimeout(()=>document.getElementById('loginScreen').classList.remove('hide'),10);
-  document.getElementById('loginEmail').value='';document.getElementById('loginPass').value='';
-}
-
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-
-// ── SUPABASE (autenticado) ──
-async function sbFetch(path,opts={}){
-  const res=await fetch(SB_URL+path,{...opts,headers:{'apikey':SB_ANON,'Authorization':'Bearer '+accessToken,'Content-Type':'application/json','Prefer':opts.prefer||'',...opts.headers}});
-  if(res.status===401){showToast('Sesión expirada. Vuelve a iniciar sesión.',true);doLogout();throw new Error('Unauthorized');}
-  if(!res.ok){throw new Error(await res.text());}
-  const txt=await res.text();return txt?JSON.parse(txt):null;
-}
-
-async function sbUpload(file,path){
-  const res=await fetch(`${SB_URL}/storage/v1/object/${BUCKET}/${path}`,{method:'POST',headers:{'apikey':SB_ANON,'Authorization':'Bearer '+accessToken,'Content-Type':file.type,'Cache-Control':'3600','x-upsert':'true'},body:file});
-  if(!res.ok)throw new Error(await res.text());
-  return`${SB_URL}/storage/v1/object/public/${BUCKET}/${path}`;
-}
-
-// ── PRODUCTOS ──
-async function loadProducts(){
-  showLoading();
-  try{
-    const data=await sbFetch('/rest/v1/productos?select=*&order=orden.asc,created_at.desc');
-    products=data||[];updateStats();renderGrid();
-  }catch(e){if(e.message!=='Unauthorized')showToast('Error al cargar productos',true);}
-}
-
-function updateStats(){
-  document.getElementById('statTotal').textContent=products.length;
-  document.getElementById('statAretes').textContent=products.filter(p=>p.categoria==='aretes').length;
-  document.getElementById('statPulseras').textContent=products.filter(p=>p.categoria==='pulseras').length;
-  document.getElementById('statCollares').textContent=products.filter(p=>p.categoria==='collares'||p.categoria==='anillos').length;
-}
-
-function setCat(cat,btn){
-  currentCat=cat;
-  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  renderGrid();
-}
-
-function renderGrid(){
-  const search=document.getElementById('searchInput').value.toLowerCase();
-  const filtered=products.filter(p=>(currentCat==='all'||p.categoria===currentCat)&&(!search||p.nombre.toLowerCase().includes(search)||(p.tag||'').toLowerCase().includes(search)));
-  const wrap=document.getElementById('gridWrap');
-  wrap.innerHTML='';
-  if(filtered.length===0){
-    const e=document.createElement('div');e.className='empty';
-    const t=document.createElement('div');t.className='empty-title';t.textContent='Sin productos en esta categoría';
-    const s=document.createElement('div');s.className='empty-sub';s.textContent='Haz clic en "Nuevo producto" para agregar uno.';
-    e.appendChild(t);e.appendChild(s);wrap.appendChild(e);return;
+  function showToast(m){setToast(m);setTimeout(()=>setToast(''),2400);}
+  function addToCart(item){setCart(c=>[...c,item]);showToast(item.name+' agregado al carrito');}
+  function removeFromCart(i){setCart(c=>c.filter((_,idx)=>idx!==i));}
+  function checkoutWA(){
+    let msg='Hola! Quiero hacer un pedido:\n';
+    cart.forEach((it,i)=>{
+      msg+=`${i+1}. ${it.name} — $${it.price.toLocaleString('es-CL')}`;
+      if(it.personalizado&&it.detalles){
+        const d=it.detalles;
+        msg+=`\n   Metal: ${d.metal} | Mostacillas: ${d.colores?d.colores.join(' + '):'—'} | Modelo: ${d.modelo||'—'}`;
+      }
+      msg+='\n';
+    });
+    msg+=`\nTotal: $${cart.reduce((s,it)=>s+it.price,0).toLocaleString('es-CL')}`;
+    window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');
   }
-  const visible=filtered;
-  const grid=document.createElement('div');grid.className='pgrid';wrap.appendChild(grid);
-  visible.forEach(p=>{
-    const card=document.createElement('div');card.className='pcard'+(p.activo===false?' inactive':'');
-    const imgWrap=document.createElement('div');imgWrap.className='pcard-img';
-    if(p.badge){const bp=document.createElement('div');bp.className='badge-pill';bp.style.background=badgeColors[p.badge]||'#888';bp.textContent=badgeNames[p.badge]||p.badge;imgWrap.appendChild(bp);}
-    if(p.imagen_url){const img=document.createElement('img');img.src=p.imagen_url;img.alt=p.nombre;img.loading='lazy';imgWrap.appendChild(img);}
-    else{const cv=document.createElement('canvas');cv.width=260;cv.height=260;imgWrap.appendChild(cv);setTimeout(()=>drawSVGOnCanvas(cv,p),50);}
-    const overlay=document.createElement('div');overlay.className='pcard-img-overlay';
-    const lbl=document.createElement('label');lbl.className='img-action';
-    lbl.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Cambiar foto';
-    const fi=document.createElement('input');fi.type='file';fi.accept='image/*';fi.style.display='none';
-    fi.addEventListener('change',()=>quickUploadPhoto(fi,p.id));
-    lbl.appendChild(fi);overlay.appendChild(lbl);imgWrap.appendChild(overlay);card.appendChild(imgWrap);
-    const body=document.createElement('div');body.className='pcard-body';
-    const cat=document.createElement('div');cat.className='pcard-cat';cat.textContent=catNames[p.categoria]||p.categoria;
-    const name=document.createElement('div');name.className='pcard-name';name.textContent=p.nombre;
-    const tag=document.createElement('div');tag.className='pcard-tag';tag.textContent=p.tag||'';
-    const price=document.createElement('div');price.className='pcard-price';price.textContent='$'+(p.precio||0).toLocaleString('es-CL');
-    const actions=document.createElement('div');actions.className='pcard-actions';
-    const bEdit=document.createElement('button');bEdit.className='pact';bEdit.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar';bEdit.addEventListener('click',()=>openModal(p.id));
-    const bTog=document.createElement('button');bTog.className='pact success';
-    bTog.innerHTML=p.activo===false?'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Activar':'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Ocultar';
-    bTog.addEventListener('click',()=>toggleActivo(p.id,p.activo));
-    const bDel=document.createElement('button');bDel.className='pact danger';bDel.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg> Eliminar';
-    bDel.addEventListener('click',()=>confirmDelete(p.id,p.nombre));
-    actions.appendChild(bEdit);actions.appendChild(bTog);actions.appendChild(bDel);
-    body.appendChild(cat);body.appendChild(name);body.appendChild(tag);body.appendChild(price);body.appendChild(actions);
-    card.appendChild(body);grid.appendChild(card);
-  });
-}
+  function goPage(p){setPage(p);window.scrollTo(0,0);}
 
-function showLoading(){const w=document.getElementById('gridWrap');w.innerHTML='';const l=document.createElement('div');l.className='loading';const sp=document.createElement('div');sp.className='spinner';const tx=document.createElement('div');tx.className='loading-txt';tx.textContent='Cargando productos...';l.appendChild(sp);l.appendChild(tx);w.appendChild(l);}
-
-async function quickUploadPhoto(input,productId){
-  const file=input.files[0];if(!file)return;
-  showToast('Subiendo foto...');
-  try{
-    const ext=file.name.split('.').pop();
-    const url=await sbUpload(file,`producto-${productId}-${Date.now()}.${ext}`);
-    await sbFetch(`/rest/v1/productos?id=eq.${productId}`,{method:'PATCH',prefer:'return=minimal',body:JSON.stringify({imagen_url:url})});
-    const idx=products.findIndex(p=>p.id===productId);
-    if(idx!==-1)products[idx].imagen_url=url;
-    renderGrid();showToast('Foto actualizada ✓');
-  }catch(e){if(e.message!=='Unauthorized')showToast('Error: '+e.message,true);}
+  return(<>
+    <div className="announce">Envío a todo Chile · Material hipoalergénico · Hecho a mano en Los Muermos</div>
+    <nav>
+      <div className="nav-left">
+        <button className="nav-link" onClick={()=>goPage('home')}>Inicio</button>
+        <button className="nav-link" onClick={()=>goPage('catalog')}>Colección</button>
+        <button className="nav-link" onClick={()=>goPage('pers')}>Personalizar</button>
+      </div>
+      <div className="nav-logo" onClick={()=>goPage('home')}><LogoImg/><span className="nav-logo-text">Diente de León</span></div>
+      <div className="nav-right">
+        <button className="nav-link" onClick={()=>goPage('nosotras')}>Nosotras</button>
+        <button className="cart-btn" onClick={()=>setCartOpen(true)}>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          {cart.length>0&&<span className="cart-count">{cart.length}</span>}
+        </button>
+      </div>
+    </nav>
+    {page==='home'&&<HomePage products={products} loading={loading} onAdd={addToCart} onOpen={setModalProduct} goPage={goPage}/>}
+    {page==='catalog'&&<CatalogPage products={products} loading={loading} onAdd={addToCart} onOpen={setModalProduct}/>}
+    {page==='pers'&&<PersPage products={products} onAdd={addToCart} goPage={goPage}/>}
+    {page==='nosotras'&&<NosotrasPage goPage={goPage}/>}
+    {modalProduct&&<ProductModal p={modalProduct} onAdd={addToCart} onClose={()=>setModalProduct(null)}/>}
+    <footer>
+      <div className="footer-top">
+        <div>
+          <div className="footer-brand">Diente de León</div>
+          <p className="footer-tagline">Boutique artesanal · Los Muermos<br/>Región de Los Lagos, Chile<br/>Hecho con amor desde el sur</p>
+        </div>
+        <div>
+          <div className="footer-head">Tienda</div>
+          {[['home','Inicio'],['catalog','Colección'],['pers','Personalizar'],['nosotras','Nosotras']].map(([pg,label])=><button key={pg} className="footer-link" onClick={()=>goPage(pg)}>{label}</button>)}
+        </div>
+        <div>
+          <div className="footer-head">Contacto</div>
+          <a className="footer-link" href="https://www.instagram.com/joyeria_diente_de_leon" target="_blank" rel="noreferrer">@joyeria_diente_de_leon</a>
+          <button className="footer-link" onClick={()=>window.open('https://wa.me/56934828288','_blank')}>WhatsApp</button>
+        </div>
+      </div>
+      <div className="footer-bot"><span>© 2025 Diente de León Boutique</span></div>
+    </footer>
+    {cartOpen&&<CartDrawer cart={cart} onClose={()=>setCartOpen(false)} onRemove={removeFromCart} onCheckout={checkoutWA}/>}
+    <Toast msg={toast}/>
+    <a href="https://wa.me/56934828288?text=Hola!%20Me%20interesa%20conocer%20más%20sobre%20sus%20joyas%20✨" target="_blank" rel="noreferrer" style={{position:'fixed',bottom:'1.8rem',right:'1.8rem',width:'56px',height:'56px',borderRadius:'50%',background:'#25d366',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 4px 20px rgba(37,211,102,0.45)',zIndex:500,cursor:'pointer',textDecoration:'none'}}>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+    </a>
+  </>);
 }
-
-function buildColorRow(){
-  const row=document.getElementById('colorRow');row.innerHTML='';
-  beadColorList.forEach(c=>{
-    const dot=document.createElement('div');dot.className='color-dot'+(c===selectedColor?' sel':'');
-    dot.style.background=c==='multi'?'conic-gradient(#c0392b,#f1c40f,#27ae60,#2980b9,#8e44ad,#c0392b)':c;
-    dot.addEventListener('click',()=>selColor(c));row.appendChild(dot);
-  });
-}
-function selColor(c){selectedColor=c;buildColorRow();}
-function selBadge(b){selectedBadge=b;document.querySelectorAll('.badge-opt').forEach(el=>el.classList.toggle('sel',el.dataset.badge===b));}
-
-function openModal(id=null){
-  editingId=id;newImgFile=null;
-  if(id){
-    const p=products.find(x=>x.id===id);if(!p)return;
-    document.getElementById('modalTitle').textContent='Editar producto';
-    document.getElementById('fNombre').value=p.nombre||'';
-    document.getElementById('fCategoria').value=p.categoria||'';
-    document.getElementById('fDescripcion').value=p.descripcion||'';
-    document.getElementById('fTag').value=p.tag||'';
-    document.getElementById('fPrecio').value=p.precio||'';
-    document.getElementById('fMetal').value=p.metal||'gold';
-    document.getElementById('fShape').value=p.shape||'flower';
-    document.getElementById('fStone').value=p.stone||'none';
-    document.getElementById('fOrden').value=p.orden||0;
-    document.getElementById('fActivo').value=String(p.activo!==false);
-    selectedColor=p.mc||'#c0392b';selectedBadge=p.badge||'';
-    if(p.imagen_url){document.getElementById('imgPreview').src=p.imagen_url;document.getElementById('imgPreview').style.display='block';document.getElementById('uploadLbl').textContent='Clic para cambiar foto';}
-    else{document.getElementById('imgPreview').style.display='none';document.getElementById('uploadLbl').textContent='Clic o arrastra una foto aquí';}
-  }else{
-    document.getElementById('modalTitle').textContent='Nuevo producto';
-    ['fNombre','fDescripcion','fTag','fPrecio'].forEach(i=>document.getElementById(i).value='');
-    document.getElementById('fCategoria').value='';document.getElementById('fMetal').value='gold';document.getElementById('fShape').value='flower';document.getElementById('fStone').value='none';document.getElementById('fOrden').value=0;document.getElementById('fActivo').value='true';
-    document.getElementById('imgPreview').style.display='none';document.getElementById('uploadLbl').textContent='Clic o arrastra una foto aquí';document.getElementById('imgFile').value='';
-    selectedColor='#c0392b';selectedBadge='';
-  }
-  buildColorRow();selBadge(selectedBadge);
-  document.getElementById('productModal').style.display='flex';document.body.style.overflow='hidden';
-}
-function closeModal(){document.getElementById('productModal').style.display='none';document.body.style.overflow='';editingId=null;newImgFile=null;}
-function previewImg(input){const file=input.files[0];if(!file)return;newImgFile=file;const r=new FileReader();r.onload=e=>{document.getElementById('imgPreview').src=e.target.result;document.getElementById('imgPreview').style.display='block';document.getElementById('uploadLbl').textContent=file.name;};r.readAsDataURL(file);}
-
-async function saveProduct(){
-  const nombre=document.getElementById('fNombre').value.trim();
-  const categoria=document.getElementById('fCategoria').value;
-  const precio=parseInt(document.getElementById('fPrecio').value)||0;
-  if(!nombre){showToast('El nombre es obligatorio',true);return;}
-  if(!categoria){showToast('Selecciona una categoría',true);return;}
-  if(!precio){showToast('Ingresa un precio válido',true);return;}
-  const btn=document.getElementById('btnSave');
-  btn.disabled=true;btn.innerHTML='<div class="spinner sm" style="display:inline-block;margin-right:6px"></div> Guardando...';
-  try{
-    let imagen_url=null;
-    if(newImgFile){const ext=newImgFile.name.split('.').pop();imagen_url=await sbUpload(newImgFile,`producto-${Date.now()}.${ext}`);}
-    else if(editingId)imagen_url=products.find(p=>p.id===editingId)?.imagen_url||null;
-    const payload={nombre,categoria,descripcion:document.getElementById('fDescripcion').value.trim()||null,tag:document.getElementById('fTag').value.trim()||null,precio,metal:document.getElementById('fMetal').value,shape:document.getElementById('fShape').value,stone:document.getElementById('fStone').value,mc:selectedColor,badge:selectedBadge||null,orden:parseInt(document.getElementById('fOrden').value)||0,activo:document.getElementById('fActivo').value==='true',imagen_url};
-    if(editingId){
-      await sbFetch(`/rest/v1/productos?id=eq.${editingId}`,{method:'PATCH',prefer:'return=representation',body:JSON.stringify(payload)});
-      const idx=products.findIndex(p=>p.id===editingId);if(idx!==-1)products[idx]={...products[idx],...payload};
-      showToast('Producto actualizado ✓');
-    }else{
-      const result=await sbFetch('/rest/v1/productos',{method:'POST',prefer:'return=representation',body:JSON.stringify(payload)});
-      if(result&&result[0])products.unshift(result[0]);
-      showToast('Producto creado ✓');
-    }
-    closeModal();updateStats();renderGrid();
-  }catch(e){if(e.message!=='Unauthorized')showToast('Error al guardar: '+e.message,true);}
-  finally{btn.disabled=false;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardar producto';}
-}
-
-async function toggleActivo(id,current){
-  try{
-    const newVal=current===false;
-    await sbFetch(`/rest/v1/productos?id=eq.${id}`,{method:'PATCH',prefer:'return=minimal',body:JSON.stringify({activo:newVal})});
-    const idx=products.findIndex(p=>p.id===id);if(idx!==-1)products[idx].activo=newVal;
-    renderGrid();showToast(newVal?'Producto activado ✓':'Producto ocultado');
-  }catch(e){if(e.message!=='Unauthorized')showToast('Error: '+e.message,true);}
-}
-
-function confirmDelete(id,nombre){
-  document.getElementById('confirmMsg').textContent=`¿Eliminar "${nombre}"? Esta acción no se puede deshacer.`;
-  document.getElementById('confirmBtn').onclick=async()=>{
-    try{
-      await sbFetch(`/rest/v1/productos?id=eq.${id}`,{method:'DELETE'});
-      products=products.filter(p=>p.id!==id);updateStats();renderGrid();showToast('Producto eliminado');
-    }catch(e){if(e.message!=='Unauthorized')showToast('Error al eliminar',true);}
-    closeConfirm();
-  };
-  document.getElementById('confirmModal').style.display='flex';document.body.style.overflow='hidden';
-}
-function closeConfirm(){document.getElementById('confirmModal').style.display='none';document.body.style.overflow='';}
-
-let toastTimer;
-function showToast(msg,isError=false){
-  const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(isError?' error':'');
-  clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.className='toast';},2800);
-}
+ReactDOM.createRoot(document.getElementById('store')).render(<App/>);
+document.getElementById('store').style.display='block';
 </script>
 </body>
 </html>
