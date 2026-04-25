@@ -328,7 +328,7 @@ function ProductModal({p,onAdd,onClose}){
     document.body.style.overflow='hidden';
     return()=>{document.body.style.overflow='';};
   },[]);
-  const metalLabel=p.metal==='gold'?'Oro 18K':'Plata';
+  const metalLabel=p.metal==='gold'?'Golden':'Plata';
   const stoneLabel=p.stone&&p.stone!=='none'?stoneNames[p.stone]:'';
   function sendWA(){
     const msg=`Hola! Me interesa este producto:\n- ${p.nombre||p.name}\n- ${p.tag||''}\n- $${(p.precio||p.price||0).toLocaleString('es-CL')}\n\n¿Está disponible?`;
@@ -403,7 +403,7 @@ function PCard({p,onAdd,onOpen}){
           :<canvas ref={cvRef} width={180} height={180}/>
         }
         <div className="pcard-overlay">
-          <button className="qadd" onClick={e=>{e.stopPropagation();onAdd({name:nombre,metal:p.metal==='gold'?'Oro 18K':'Plata',price:precio,tag,shape:p.shape||'flower',mc:p.mc||'#c0392b',stone:p.stone||'none'});}}>Agregar al carrito</button>
+          <button className="qadd" onClick={e=>{e.stopPropagation();onAdd({name:nombre,metal:p.metal==='gold'?'Golden':'Plata',price:precio,tag,shape:p.shape||'flower',mc:p.mc||'#c0392b',stone:p.stone||'none'});}}>Agregar al carrito</button>
         </div>
       </div>
       <div className="pinfo" onClick={()=>onOpen(p)}>
@@ -451,7 +451,7 @@ function HomePage({products,loading,onAdd,onOpen,goPage}){
       <div className="hero-left">
         <h1><span>Joyería artesanal</span><br/>Diente de León</h1>
         <img src="uploads/hero-mobile.jpg" alt="Joyería Diente de León" className="hero-mobile-img"/>
-        <p className="hero-desc">Alambrismo tejido a mano con mostacillas rocallas, bases en oro 18K y plata. Cada pieza nace única e irrepetible desde el sur de Chile.</p>
+        <p className="hero-desc">Alambrismo tejido a mano con mostacillas rocallas, bases en oro y plata. Cada pieza nace única e irrepetible desde el sur de Chile.</p>
         <div className="hero-btns">
           <button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button>
           <button className="btn btn-outline" onClick={()=>goPage('pers')}>Personalizar joya</button>
@@ -496,7 +496,7 @@ function HomePage({products,loading,onAdd,onOpen,goPage}){
     <div className="editorial">
       <div className="editorial-q">Cada joya nace de<br/>manos <em>dedicadas</em></div>
       <div>
-        <p className="editorial-body">En Los Muermos, en el corazón del sur de Chile, tejemos a mano con técnica ladrillo para que cada pieza tenga <strong>una textura firme y llena de vida</strong>. Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos.</p>
+        <p className="editorial-body">En Los Muermos, en el corazón del sur de Chile, tejemos a mano con técnica ladrillo para que cada pieza tenga <strong>una textura firme y llena de vida</strong>. Usamos bases bañadas en golden y plata, con materiales 100% hipoalergénicos.</p>
         <div className="editorial-btns">
           <button className="btn-gold btn" onClick={()=>goPage('pers')}>Personalizar mi joya</button>
           <button className="btn-outline-white btn" onClick={()=>goPage('nosotras')}>Nuestra historia</button>
@@ -538,7 +538,7 @@ function PersPage({products,onAdd,goPage}){
   const activeProds=products.filter(p=>p.activo!==false&&p.imagen_url);
   const curProd=activeProds[imgIdx];
   const price=curProd?.precio||18900;
-  const mname=metal==='gold'?'Oro 18K':'Plata';
+  const mname=metal==='gold'?'Golden':'Silver';
   const allBeadColors=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7','#ffffff','#1abc9c','#d35400','#7f8c8d','#f39c12'];
 
   function prevImg(){setImgIdx(i=>(i-1+activeProds.length)%activeProds.length);}
@@ -615,7 +615,7 @@ function PersPage({products,onAdd,goPage}){
         {step===2&&<div>
           <span style={{fontSize:'0.58rem',letterSpacing:'0.18em',textTransform:'uppercase',color:'var(--muted)',display:'block',marginBottom:'0.8rem'}}>Metal base</span>
           <div style={{display:'flex',flexDirection:'column',gap:'0.5rem',marginBottom:'1.2rem'}}>
-            {[['gold','Oro 18K','linear-gradient(135deg,#f0d060,#c9922a,#e8c060)'],['silver','Plata','linear-gradient(135deg,#ebebeb,#a0a0a0,#d8d8d8)']].map(([m,n,bg])=>(
+            {[['gold','Golden','linear-gradient(135deg,#f0d060,#c9922a,#e8c060)'],['silver','Silver','linear-gradient(135deg,#ebebeb,#a0a0a0,#d8d8d8)']].map(([m,n,bg])=>(
               <button key={m} onClick={()=>setMetal(m)} style={{border:`2px solid ${metal===m?'var(--text)':'var(--border)'}`,background:metal===m?'var(--off)':'white',padding:'0.8rem 1rem',cursor:'pointer',display:'flex',alignItems:'center',gap:'0.8rem',transition:'all 0.2s',fontFamily:"'Montserrat',sans-serif"}}>
                 <div style={{width:'28px',height:'28px',borderRadius:'50%',background:bg,border:'1px solid rgba(0,0,0,0.1)',flexShrink:0}}/>
                 <span style={{fontSize:'0.7rem',letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--text)',fontWeight:metal===m?500:400}}>{n}</span>
@@ -693,13 +693,13 @@ function PersPage({products,onAdd,goPage}){
 
 
 function NosotrasPage({goPage}){
-  return(<div className="page active"><section className="sec"><div className="about-grid"><div className="about-vis"><div className="about-circ"><img src="uploads/logo.jpg" alt="Diente de León" style={{width:'200px',height:'200px',objectFit:'cover',display:'block'}}/></div></div><div className="about-text"><h2>Nuestra historia</h2><p>Somos una boutique artesanal de Los Muermos, en el sur de Chile. Cada joya nace de manos dedicadas: alambrismo cuidadoso, mostacillas rocallas tejidas en técnica ladrillo que forman una trama firme y llena de textura.</p><p>Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos. Creemos que cada persona merece una joya tan única como ella.</p><p>Con más de 466 publicaciones y 4.200 seguidoras en Instagram, nuestra comunidad crece desde la autenticidad y el amor por el oficio artesanal.</p><div className="pills">{['Los Muermos','Hecho a mano','Hipoalergénico','Personalizable','Envío Chile'].map(t=><span key={t} className="pill">{t}</span>)}</div><div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap'}}><button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button><button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button></div></div></div></section></div>);
+  return(<div className="page active"><section className="sec"><div className="about-grid"><div className="about-vis"><div className="about-circ"><img src="uploads/logo.jpg" alt="Diente de León" style={{width:'200px',height:'200px',objectFit:'cover',display:'block'}}/></div></div><div className="about-text"><h2>Nuestra historia</h2><p>Somos una boutique artesanal de Los Muermos, en el sur de Chile. Cada joya nace de manos dedicadas: alambrismo cuidadoso, mostacillas rocallas tejidas en técnica ladrillo que forman una trama firme y llena de textura.</p><p>Usamos bases bañadas en golden y plata, con materiales 100% hipoalergénicos. Creemos que cada persona merece una joya tan única como ella.</p><p>Con más de 466 publicaciones y 4.200 seguidoras en Instagram, nuestra comunidad crece desde la autenticidad y el amor por el oficio artesanal.</p><div className="pills">{['Los Muermos','Hecho a mano','Hipoalergénico','Personalizable','Envío Chile'].map(t=><span key={t} className="pill">{t}</span>)}</div><div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap'}}><button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button><button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button></div></div></div></section></div>);
 }
 
 function CartDrawer({cart,onClose,onRemove,onCheckout}){
   const total=cart.reduce((s,i)=>s+i.price,0);
   const cvRefs=useRef({});
-  useEffect(()=>{cart.forEach((item,i)=>{const cv=cvRefs.current[i];if(cv)drawOnCanvas(cv,{shape:item.shape||'flower',metal:item.metal==='Oro 18K'?'gold':'silver',mc:item.mc||'#c0392b',stone:item.stone||'none'});});},[cart]);
+  useEffect(()=>{cart.forEach((item,i)=>{const cv=cvRefs.current[i];if(cv)drawOnCanvas(cv,{shape:item.shape||'flower',metal:item.metal==='Golden'?'gold':'silver',mc:item.mc||'#c0392b',stone:item.stone||'none'});});},[cart]);
   return(<div className="overlay open" onClick={onClose}><div className="drawer" onClick={e=>e.stopPropagation()}><div className="drawer-head"><h2>Tu carrito</h2><button className="drawer-close" onClick={onClose}>×</button></div><div className="drawer-body">{cart.length===0?<div className="drawer-empty">Tu carrito está vacío</div>:cart.map((item,i)=><div key={i} className="cart-item"><div className="cart-thumb"><canvas ref={el=>cvRefs.current[i]=el} width={56} height={56}/></div><div style={{flex:1}}><div className="cart-item-name">{item.name}</div><div className="cart-item-detail">{item.metal}</div><div className="cart-item-price">${item.price.toLocaleString('es-CL')}</div></div><button className="cart-remove" onClick={()=>onRemove(i)}>×</button></div>)}</div>{cart.length>0&&<div className="drawer-foot"><div className="cart-total"><span>Total</span><span>${total.toLocaleString('es-CL')}</span></div><button className="btn btn-dark btn-full" onClick={onCheckout}>Finalizar por WhatsApp</button></div>}</div></div>);
 }
 
