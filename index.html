@@ -529,18 +529,36 @@ function CatalogPage({products,loading,onAdd,onOpen}){
   </div>);
 }
 
-function PersPage({onAdd,goPage}){
+function PersPage({products,onAdd,goPage}){
+  const [imgIdx,setImgIdx]=useState(0);
+  const [step,setStep]=useState(1);
   const [metal,setMetal]=useState('gold');
-  const [mc,setMc]=useState('#c0392b');
-  const [shape,setShape]=useState('flower');
-  const [stone,setStone]=useState('none');
-  const price=(shapePrices[shape]||18900)+(stoneExtra[stone]||0);
+  const [colors,setColors]=useState(['#c0392b']);
+
+  const activeProds=products.filter(p=>p.activo!==false&&p.imagen_url);
+  const curProd=activeProds[imgIdx];
+  const price=curProd?.precio||18900;
   const mname=metal==='gold'?'Oro 18K':'Plata';
-  function handleAdd(){onAdd({name:(shapeNames[shape]||'Joya')+' personalizado',metal:mname,mc,shape,stone,price,tag:`${mname}${stone!=='none'?' · '+stoneNames[stone]:''}`});}
-  function sendWA(){const msg=`Hola! Me interesa una joya personalizada:\n- Tipo: ${shapeNames[shape]}\n- Metal: ${mname}\n- Piedra: ${stoneNames[stone]}\n- Precio estimado: $${price.toLocaleString('es-CL')}`;window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');}
-  const shapes=['flower','heart','hoop','dream','star','butterfly','drop','tree'];
-  const shapeLabels={flower:'Flor',heart:'Corazón',hoop:'Aro',dream:'Atrapasueños',star:'Estrella',butterfly:'Mariposa',drop:'Gota',tree:'Árbol de la Vida'};
-  const stones=['none','crystal','turquoise','moonstone','amethyst'];
+  const allBeadColors=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7','#ffffff','#1abc9c','#d35400','#7f8c8d','#f39c12'];
+
+  function prevImg(){setImgIdx(i=>(i-1+activeProds.length)%activeProds.length);}
+  function nextImg(){setImgIdx(i=>(i+1)%activeProds.length);}
+  function addColor(){if(colors.length<3)setColors(c=>[...c,'#e67e22']);}
+  function removeColor(i){if(colors.length>1)setColors(c=>c.filter((_,idx)=>idx!==i));}
+  function changeColor(i,c){setColors(prev=>prev.map((x,idx)=>idx===i?c:x));}
+
+  function buildMsg(){
+    return `Hola! Me interesa una joya personalizada:\n- Modelo de inspiración: ${curProd?curProd.nombre:'—'}\n- Metal: ${mname}\n- Colores mostacilla: ${colors.join(' + ')}\n- Precio referencia: $${price.toLocaleString('es-CL')}\n\n¿Está disponible?`;
+  }
+  function handleAdd(){
+    onAdd({name:`Personalizado — ${curProd?.nombre||'Joya'}`,metal:mname,shape:curProd?.shape||'flower',mc:colors[0],stone:'none',price,
+      tag:`${mname} · Personalizado`,personalizado:true,
+      detalles:{modelo:curProd?.nombre||'—',metal:mname,colores:colors}});
+  }
+  function sendWA(){window.open(`https://wa.me/56934828288?text=${encodeURIComponent(buildMsg())}`,'_blank');}
+
+  const stepLabel=['Modelo','Metal','Mostacillas','Resumen'];
+
   return(<div className="page active">
     <section className="sec" style={{paddingBottom:'1.5rem'}}>
       <div className="sec-head center">
@@ -549,43 +567,130 @@ function PersPage({onAdd,goPage}){
         <div className="sec-line"/>
       </div>
     </section>
-    <div className="pers-wrap">
-      <div className="pers-grid">
-        <div className="pers-preview">
-          <LiveJewel shape={shape} metal={metal} mc={mc} stone={stone}/>
-          <div className="pers-name">{(shapeNames[shape]||'Joya')+' personalizado'}</div>
-          <div className="pers-price">${price.toLocaleString('es-CL')}</div>
-          <div className="pers-desc">Alambrismo en {mname.toLowerCase()}{stone!=='none'?' · '+stoneNames[stone]:''} · Mostacillas rocallas</div>
+
+    {/* Stepper */}
+    <div style={{display:'flex',justifyContent:'center',maxWidth:'500px',margin:'0 auto 2rem',padding:'0 1.5rem'}}>
+      {stepLabel.map((lbl,i)=>{
+        const n=i+1;const active=step===n;const done=step>n;
+        return(<div key={n} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',cursor:done?'pointer':'default',position:'relative'}} onClick={()=>done&&setStep(n)}>
+          {n<4&&<div style={{position:'absolute',top:'13px',left:'50%',right:'-50%',height:'1px',background:done?'var(--gold)':'var(--border)',zIndex:0}}/>}
+          <div style={{width:'26px',height:'26px',borderRadius:'50%',background:active?'var(--text)':done?'var(--gold)':'var(--border2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'0.58rem',color:active||done?'white':'var(--muted)',fontWeight:500,zIndex:1,position:'relative'}}>{done?'✓':n}</div>
+          <div style={{fontSize:'0.5rem',letterSpacing:'0.08em',textTransform:'uppercase',color:active?'var(--text)':done?'var(--gold)':'var(--light)',textAlign:'center',lineHeight:1.3}}>{lbl}</div>
+        </div>);
+      })}
+    </div>
+
+    {/* Layout lado a lado */}
+    <div style={{maxWidth:'860px',margin:'0 auto',padding:'0 1.5rem 4rem',display:'grid',gridTemplateColumns:'1fr 1fr',gap:'2rem',alignItems:'start'}}>
+
+      {/* FOTO */}
+      <div style={{position:'sticky',top:'80px'}}>
+        <div style={{background:'var(--cream)',aspectRatio:'1',position:'relative',overflow:'hidden'}}>
+          {curProd?.imagen_url
+            ?<img src={curProd.imagen_url} alt={curProd.nombre} style={{width:'100%',height:'100%',objectFit:'cover'}}/>
+            :<div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100%',color:'var(--light)',fontSize:'0.65rem',letterSpacing:'0.1em',textTransform:'uppercase'}}>Sin fotos aún</div>
+          }
+          {step===1&&activeProds.length>1&&<>
+            <button onClick={prevImg} style={{position:'absolute',left:'0.4rem',top:'50%',transform:'translateY(-50%)',background:'rgba(255,255,255,0.92)',border:'1px solid var(--border)',width:'32px',height:'32px',borderRadius:'50%',cursor:'pointer',fontSize:'1.1rem',display:'flex',alignItems:'center',justifyContent:'center',lineHeight:1}}>‹</button>
+            <button onClick={nextImg} style={{position:'absolute',right:'0.4rem',top:'50%',transform:'translateY(-50%)',background:'rgba(255,255,255,0.92)',border:'1px solid var(--border)',width:'32px',height:'32px',borderRadius:'50%',cursor:'pointer',fontSize:'1.1rem',display:'flex',alignItems:'center',justifyContent:'center',lineHeight:1}}>›</button>
+          </>}
         </div>
-        <div className="pers-opts">
-          <div>
-            <span className="opt-label">Metal base</span>
-            <div className="metal-row">{[['gold','Oro 18K','linear-gradient(135deg,#f0d060,#c9922a,#e8c060)'],['silver','Plata','linear-gradient(135deg,#ebebeb,#a0a0a0,#d8d8d8)']].map(([m,n,bg])=><button key={m} className={`mbtn${metal===m?' sel':''}`} onClick={()=>setMetal(m)}><div className="mswatch" style={{background:bg}}/>{n}</button>)}</div>
+        {curProd&&<div style={{textAlign:'center',marginTop:'0.6rem'}}>
+          <div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',fontSize:'1rem',color:'var(--text)'}}>{curProd.nombre}</div>
+          {step===1&&<div style={{fontSize:'0.58rem',color:'var(--light)',letterSpacing:'0.1em',textTransform:'uppercase',marginTop:'0.15rem'}}>{imgIdx+1} / {activeProds.length}</div>}
+        </div>}
+        <div style={{textAlign:'center',marginTop:'0.6rem',fontSize:'1.3rem',color:'var(--gold)',fontWeight:500}}>${price.toLocaleString('es-CL')}</div>
+      </div>
+
+      {/* OPCIONES */}
+      <div style={{display:'flex',flexDirection:'column',gap:'1.5rem'}}>
+
+        {/* PASO 1 — Modelo */}
+        {step===1&&<div>
+          <p style={{fontSize:'0.65rem',color:'var(--muted)',marginBottom:'1rem',lineHeight:1.8}}>Navega entre los modelos para elegir tu inspiración.</p>
+          <button className="btn btn-dark btn-full" onClick={()=>setStep(2)}>Continuar →</button>
+        </div>}
+
+        {/* PASO 2 — Metal */}
+        {step===2&&<div>
+          <span style={{fontSize:'0.58rem',letterSpacing:'0.18em',textTransform:'uppercase',color:'var(--muted)',display:'block',marginBottom:'0.8rem'}}>Metal base</span>
+          <div style={{display:'flex',flexDirection:'column',gap:'0.5rem',marginBottom:'1.2rem'}}>
+            {[['gold','Oro 18K','linear-gradient(135deg,#f0d060,#c9922a,#e8c060)'],['silver','Plata','linear-gradient(135deg,#ebebeb,#a0a0a0,#d8d8d8)']].map(([m,n,bg])=>(
+              <button key={m} onClick={()=>setMetal(m)} style={{border:`2px solid ${metal===m?'var(--text)':'var(--border)'}`,background:metal===m?'var(--off)':'white',padding:'0.8rem 1rem',cursor:'pointer',display:'flex',alignItems:'center',gap:'0.8rem',transition:'all 0.2s',fontFamily:"'Montserrat',sans-serif"}}>
+                <div style={{width:'28px',height:'28px',borderRadius:'50%',background:bg,border:'1px solid rgba(0,0,0,0.1)',flexShrink:0}}/>
+                <span style={{fontSize:'0.7rem',letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--text)',fontWeight:metal===m?500:400}}>{n}</span>
+              </button>
+            ))}
           </div>
-          <div>
-            <span className="opt-label">Mostacillas rocalla</span>
-            <div className="bead-row">{beadColors.map(c=><div key={c} className={`bead${mc===c?' sel':''}`} style={{background:c}} onClick={()=>setMc(c)}/>)}<div className={`bead${mc==='multi'?' sel':''}`} style={{background:'conic-gradient(#c0392b,#f1c40f,#27ae60,#2980b9,#8e44ad,#c0392b)'}} onClick={()=>setMc('multi')}/></div>
+          <div style={{display:'flex',gap:'0.5rem'}}>
+            <button className="btn btn-outline" style={{flex:1}} onClick={()=>setStep(1)}>←</button>
+            <button className="btn btn-dark" style={{flex:3}} onClick={()=>setStep(3)}>Continuar →</button>
           </div>
-          <div>
-            <span className="opt-label">Forma</span>
-            <div className="shape-row">{shapes.map(s=><button key={s} className={`spill${shape===s?' sel':''}`} onClick={()=>setShape(s)}>{shapeLabels[s]}</button>)}</div>
+        </div>}
+
+        {/* PASO 3 — Colores */}
+        {step===3&&<div>
+          <span style={{fontSize:'0.58rem',letterSpacing:'0.18em',textTransform:'uppercase',color:'var(--muted)',display:'block',marginBottom:'0.8rem'}}>Mostacillas rocalla</span>
+          <div style={{display:'flex',flexDirection:'column',gap:'0.8rem',marginBottom:'1rem'}}>
+            {colors.map((c,i)=>(
+              <div key={i}>
+                <div style={{fontSize:'0.54rem',letterSpacing:'0.12em',textTransform:'uppercase',color:'var(--light)',marginBottom:'0.4rem',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                  <span>Color {i+1}</span>
+                  {colors.length>1&&<button onClick={()=>removeColor(i)} style={{background:'none',border:'none',cursor:'pointer',color:'var(--rose)',fontSize:'0.7rem',padding:0}}>× Quitar</button>}
+                </div>
+                <div style={{display:'flex',flexWrap:'wrap',gap:'0.35rem'}}>
+                  {allBeadColors.map(bc=>(
+                    <div key={bc} onClick={()=>changeColor(i,bc)} style={{width:'clamp(20px,5vw,26px)',height:'clamp(20px,5vw,26px)',borderRadius:'50%',background:bc,cursor:'pointer',border:c===bc?'3px solid var(--text)':'2px solid rgba(0,0,0,0.1)',transform:c===bc?'scale(1.2)':'scale(1)',transition:'all 0.15s',flexShrink:0,boxSizing:'border-box'}}/>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-          <div>
-            <span className="opt-label">Piedra central</span>
-            <div className="stone-row">{stones.map(s=><button key={s} className={`stpill${stone===s?' sel':''}`} onClick={()=>setStone(s)}>{stoneNames[s]}</button>)}</div>
+          {colors.length<3&&<button onClick={addColor} style={{border:'1.5px dashed var(--border2)',background:'white',color:'var(--muted)',padding:'0.5rem 1rem',fontSize:'0.6rem',letterSpacing:'0.1em',textTransform:'uppercase',cursor:'pointer',fontFamily:"'Montserrat',sans-serif",display:'flex',alignItems:'center',gap:'0.4rem',marginBottom:'1rem',width:'100%'}}>
+            <span style={{fontSize:'1rem',lineHeight:1}}>+</span> Agregar otro color
+          </button>}
+          <div style={{display:'flex',gap:'0.5rem'}}>
+            <button className="btn btn-outline" style={{flex:1}} onClick={()=>setStep(2)}>←</button>
+            <button className="btn btn-dark" style={{flex:3}} onClick={()=>setStep(4)}>Ver resumen →</button>
           </div>
-          <div className="pers-actions">
-            <button className="btn btn-dark btn-full" onClick={handleAdd}>Agregar al carrito</button>
-            <button className="btn btn-wa btn-full" onClick={sendWA}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
-              Consultar por WhatsApp
-            </button>
+        </div>}
+
+        {/* PASO 4 — Resumen */}
+        {step===4&&<div>
+          <span style={{fontSize:'0.58rem',letterSpacing:'0.18em',textTransform:'uppercase',color:'var(--muted)',display:'block',marginBottom:'0.8rem'}}>Tu personalizado</span>
+          <div style={{background:'var(--cream)',padding:'1.2rem',marginBottom:'1.2rem',borderLeft:'3px solid var(--gold)'}}>
+            {[['Modelo',curProd?.nombre||'—'],['Metal',mname]].map(([k,v])=>(
+              <div key={k} style={{display:'flex',justifyContent:'space-between',fontSize:'0.68rem',marginBottom:'0.5rem'}}>
+                <span style={{color:'var(--muted)'}}>{k}</span>
+                <span style={{color:'var(--text)',fontWeight:500}}>{v}</span>
+              </div>
+            ))}
+            <div style={{display:'flex',justifyContent:'space-between',fontSize:'0.68rem',marginBottom:'0.5rem',alignItems:'center'}}>
+              <span style={{color:'var(--muted)'}}>Mostacillas</span>
+              <div style={{display:'flex',gap:'5px',alignItems:'center'}}>
+                {colors.map((c,i)=><div key={i} style={{width:'16px',height:'16px',borderRadius:'50%',background:c,border:'1px solid rgba(0,0,0,0.12)'}}/>)}
+              </div>
+            </div>
+            <div style={{display:'flex',justifyContent:'space-between',fontSize:'0.82rem',marginTop:'0.8rem',paddingTop:'0.8rem',borderTop:'1px solid var(--border)'}}>
+              <span style={{color:'var(--muted)'}}>Precio referencia</span>
+              <span style={{color:'var(--gold)',fontWeight:500}}>${price.toLocaleString('es-CL')}</span>
+            </div>
           </div>
-        </div>
+          <div style={{display:'flex',gap:'0.5rem',marginBottom:'0.5rem'}}>
+            <button className="btn btn-outline" style={{flex:1}} onClick={()=>setStep(3)}>←</button>
+            <button className="btn btn-dark" style={{flex:3}} onClick={handleAdd}>Agregar al carrito</button>
+          </div>
+          <button className="btn btn-wa btn-full" onClick={sendWA}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </button>
+        </div>}
+
       </div>
     </div>
   </div>);
 }
+
 
 function NosotrasPage({goPage}){
   return(<div className="page active"><section className="sec"><div className="about-grid"><div className="about-vis"><div className="about-circ"><img src="uploads/logo.jpg" alt="Diente de León" style={{width:'200px',height:'200px',objectFit:'cover',display:'block'}}/></div></div><div className="about-text"><h2>Nuestra historia</h2><p>Somos una boutique artesanal de Los Muermos, en el sur de Chile. Cada joya nace de manos dedicadas: alambrismo cuidadoso, mostacillas rocallas tejidas en técnica ladrillo que forman una trama firme y llena de textura.</p><p>Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos. Creemos que cada persona merece una joya tan única como ella.</p><p>Con más de 466 publicaciones y 4.200 seguidoras en Instagram, nuestra comunidad crece desde la autenticidad y el amor por el oficio artesanal.</p><div className="pills">{['Los Muermos','Hecho a mano','Hipoalergénico','Personalizable','Envío Chile'].map(t=><span key={t} className="pill">{t}</span>)}</div><div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap'}}><button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button><button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button></div></div></div></section></div>);
@@ -620,7 +725,19 @@ function App(){
   function showToast(m){setToast(m);setTimeout(()=>setToast(''),2400);}
   function addToCart(item){setCart(c=>[...c,item]);showToast(item.name+' agregado al carrito');}
   function removeFromCart(i){setCart(c=>c.filter((_,idx)=>idx!==i));}
-  function checkoutWA(){let msg='Hola! Quiero hacer un pedido:\n';cart.forEach((it,i)=>{msg+=`${i+1}. ${it.name} (${it.metal}) - $${it.price.toLocaleString('es-CL')}\n`;});msg+=`\nTotal: $${cart.reduce((s,it)=>s+it.price,0).toLocaleString('es-CL')}`;window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');}
+  function checkoutWA(){
+    let msg='Hola! Quiero hacer un pedido:\n';
+    cart.forEach((it,i)=>{
+      msg+=`${i+1}. ${it.name} — $${it.price.toLocaleString('es-CL')}`;
+      if(it.personalizado&&it.detalles){
+        const d=it.detalles;
+        msg+=`\n   Metal: ${d.metal} | Mostacillas: ${d.colores?d.colores.join(' + '):'—'} | Modelo: ${d.modelo||'—'}`;
+      }
+      msg+='\n';
+    });
+    msg+=`\nTotal: $${cart.reduce((s,it)=>s+it.price,0).toLocaleString('es-CL')}`;
+    window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');
+  }
   function goPage(p){setPage(p);window.scrollTo(0,0);}
 
   return(<>
@@ -642,7 +759,7 @@ function App(){
     </nav>
     {page==='home'&&<HomePage products={products} loading={loading} onAdd={addToCart} onOpen={setModalProduct} goPage={goPage}/>}
     {page==='catalog'&&<CatalogPage products={products} loading={loading} onAdd={addToCart} onOpen={setModalProduct}/>}
-    {page==='pers'&&<PersPage onAdd={addToCart} goPage={goPage}/>}
+    {page==='pers'&&<PersPage products={products} onAdd={addToCart} goPage={goPage}/>}
     {page==='nosotras'&&<NosotrasPage goPage={goPage}/>}
     {modalProduct&&<ProductModal p={modalProduct} onAdd={addToCart} onClose={()=>setModalProduct(null)}/>}
     <footer>
