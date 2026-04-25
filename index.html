@@ -44,8 +44,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop
 .hero-desc{font-size:0.88rem;color:var(--muted);line-height:2;margin-bottom:2.5rem;max-width:380px}
 .hero-btns{display:flex;gap:0.8rem;flex-wrap:wrap}
 .hero-right{background:var(--cream2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.hero-main-svg{position:relative;z-index:2;width:min(380px,60%);animation:floatSvg 6s ease-in-out infinite}
-@keyframes floatSvg{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--text)}
 @media(max-width:1024px){.strip{grid-template-columns:repeat(2,1fr)}.strip-item:nth-child(2){border-right:none}.strip-item:nth-child(3){border-top:1px solid rgba(255,255,255,0.1)}.strip-item:nth-child(4){border-top:1px solid rgba(255,255,255,0.1)}}
 .strip-item{padding:2rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;align-items:center;gap:0.6rem;transition:background 0.28s,transform 0.22s,box-shadow 0.22s;cursor:default}
@@ -82,10 +80,42 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop
 .pcard:hover .qadd{transform:translateY(0)}
 .qadd:hover{background:var(--text)}
 .pbadge{position:absolute;top:10px;left:10px;font-size:0.54rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.65rem;color:white;z-index:1;font-weight:500}
-.pinfo{padding:1.2rem 1.2rem 1.4rem}
+.pinfo{padding:1.2rem 1.2rem 1.4rem;cursor:pointer}
 .pname{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;margin-bottom:0.25rem;line-height:1.2;color:var(--text)}
 .ptag{font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--light);margin-bottom:0.5rem}
 .pprice{font-size:0.9rem;color:var(--gold);font-weight:500}
+/* ── SKELETON LOADING ── */
+.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border-left:1px solid var(--border);border-top:1px solid var(--border)}
+.skeleton-card{border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.skeleton-img{aspect-ratio:1;background:linear-gradient(90deg,var(--cream) 25%,var(--cream2) 50%,var(--cream) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-body{padding:1.2rem}
+.skeleton-line{height:10px;background:linear-gradient(90deg,var(--cream) 25%,var(--cream2) 50%,var(--cream) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:0.6rem}
+.skeleton-line.short{width:60%}
+.skeleton-line.price{width:40%;height:14px;margin-top:0.4rem}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* ── PRODUCT MODAL ── */
+.pmodal-bg{position:fixed;inset:0;background:rgba(26,22,18,0.7);z-index:400;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fadeIn 0.25s ease}
+.pmodal{background:var(--white);width:100%;max-width:640px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,0.3)}
+.pmodal-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid var(--border);flex-shrink:0}
+.pmodal-head span{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--light)}
+.pmodal-close{background:none;border:none;cursor:pointer;font-size:1.6rem;color:var(--muted);line-height:1;transition:color 0.2s}
+.pmodal-close:hover{color:var(--text)}
+.pmodal-body{display:grid;grid-template-columns:1fr 1fr;flex:1;overflow:hidden}
+.pmodal-img{background:var(--cream);display:flex;align-items:center;justify-content:center;position:relative;padding:2rem}
+.pmodal-img canvas{width:200px;height:200px}
+.pmodal-img .mreal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pmodal-img .mbadge{position:absolute;top:12px;left:12px;font-size:0.54rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.65rem;color:white;font-weight:500}
+.pmodal-info{padding:2rem 1.8rem;display:flex;flex-direction:column;gap:1rem;overflow-y:auto}
+.pmodal-cat{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--light)}
+.pmodal-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;line-height:1.15;color:var(--text)}
+.pmodal-desc{font-size:0.72rem;color:var(--muted);line-height:1.9}
+.pmodal-pills{display:flex;flex-wrap:wrap;gap:0.35rem}
+.pmodal-pill{border:1px solid var(--border);padding:0.22rem 0.6rem;font-size:0.54rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.pmodal-price-row{display:flex;align-items:baseline;gap:0.6rem;border-top:1px solid var(--border);padding-top:1rem}
+.pmodal-price{font-size:1.4rem;color:var(--gold);font-weight:500}
+.pmodal-ship{font-size:0.6rem;color:var(--light);letter-spacing:0.06em}
+.pmodal-actions{display:flex;flex-direction:column;gap:0.5rem}
+@media(max-width:540px){.pmodal-body{grid-template-columns:1fr}.pmodal-img{padding:1.5rem;min-height:200px}.pmodal-img canvas{width:150px;height:150px}}
 .pers-wrap{max-width:960px;margin:0 auto;padding:0 2.5rem 5rem}
 .pers-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border)}
 .pers-preview{background:var(--cream);padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;gap:1.5rem;border-right:1px solid var(--border)}
@@ -157,45 +187,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop
 .drawer-foot{padding:1.4rem 1.8rem;border-top:1px solid var(--border)}
 .cart-total{display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:1rem;font-weight:400}
 .cart-total span:last-child{color:var(--gold)}
-.admin-wrap{min-height:100vh;background:#f4f4f2}
-.admin-nav{background:var(--text);padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between}
-.admin-nav-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:white;opacity:0.9}
-.admin-nav-right{display:flex;align-items:center;gap:1rem}
-.admin-nav-right span{font-size:0.62rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em}
-.admin-body{max-width:1100px;margin:0 auto;padding:2.5rem 2rem}
-.admin-h1{font-size:1.8rem;font-style:italic;margin-bottom:0.4rem}
-.admin-sub{font-size:0.7rem;color:var(--muted);margin-bottom:2rem}
-.admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem}
-.admin-card{background:white;border:1px solid var(--border);overflow:hidden;transition:box-shadow 0.2s}
-.admin-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-.admin-img-wrap{aspect-ratio:1;background:var(--cream);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.admin-img-wrap canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.admin-img-wrap .areal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
-.upload-zone{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(26,22,18,0.45);opacity:0;transition:opacity 0.2s;cursor:pointer}
-.admin-card:hover .upload-zone{opacity:1}
-.upload-inner{background:white;color:var(--text);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1rem;display:flex;align-items:center;gap:5px}
-.upload-inner input{display:none}
-.admin-info{padding:1rem}
-.afield{display:flex;flex-direction:column;gap:0.25rem;margin-bottom:0.7rem}
-.afield label{font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
-.afield input{border:1px solid var(--border);padding:0.45rem 0.6rem;font-size:0.8rem;color:var(--text);outline:none;transition:border-color 0.2s;background:var(--off);width:100%}
-.afield input:focus{border-color:var(--text);background:white}
-.afield input.gold{color:var(--gold)}
-.save-btn{background:var(--text);color:white;border:none;padding:0.55rem 1rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;width:100%;transition:background 0.2s}
-.save-btn:hover{background:var(--gold)}
-.saved{font-size:0.58rem;color:var(--sage);text-align:center;margin-top:0.5rem;height:14px;transition:opacity 0.3s}
-.login-bg{position:fixed;inset:0;background:rgba(26,22,18,0.88);z-index:300;display:flex;align-items:center;justify-content:center}
-.login-box{background:white;width:360px;padding:2.8rem 2.2rem}
-.login-logo{display:flex;justify-content:center;margin-bottom:1.6rem}
-.login-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;text-align:center;margin-bottom:0.3rem}
-.login-sub{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:2rem}
-.lfield{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:1rem}
-.lfield label{font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
-.lfield input{border:1px solid var(--border);border-bottom:2px solid var(--border);padding:0.7rem 0.8rem;font-size:0.88rem;outline:none;transition:border-color 0.2s;background:var(--off);width:100%}
-.lfield input:focus{border-color:var(--text);background:white}
-.login-err{font-size:0.63rem;color:var(--rose);text-align:center;margin-top:0.7rem;min-height:1rem}
-.login-back{font-size:0.58rem;color:var(--muted);text-align:center;margin-top:1.2rem;cursor:pointer;transition:color 0.2s}
-.login-back:hover{color:var(--text)}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--text);color:white;padding:0.75rem 1.4rem;font-size:0.63rem;letter-spacing:0.06em;transform:translateY(80px);opacity:0;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);z-index:500;pointer-events:none;border-left:3px solid var(--gold)}
+.toast.show{transform:translateY(0);opacity:1}
 footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem 2rem}
 .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.08)}
 .footer-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:rgba(255,255,255,0.85);margin-bottom:0.8rem}
@@ -204,10 +197,6 @@ footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem
 .footer-link{font-size:0.63rem;line-height:2.2;color:rgba(255,255,255,0.38);text-decoration:none;display:block;cursor:pointer;transition:color 0.2s;background:none;border:none;text-align:left;letter-spacing:0.03em}
 .footer-link:hover{color:rgba(255,255,255,0.75)}
 .footer-bot{display:flex;justify-content:space-between;align-items:center;font-size:0.58rem;letter-spacing:0.06em}
-.admin-link{color:rgba(255,255,255,0.15);cursor:pointer;transition:color 0.2s;background:none;border:none;font-size:0.55rem;letter-spacing:0.06em}
-.admin-link:hover{color:rgba(255,255,255,0.45)}
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--text);color:white;padding:0.75rem 1.4rem;font-size:0.63rem;letter-spacing:0.06em;transform:translateY(80px);opacity:0;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);z-index:500;pointer-events:none;border-left:3px solid var(--gold)}
-.toast.show{transform:translateY(0);opacity:1}
 .hero-mobile-img{display:none}
 @media(max-width:768px){
   nav{padding:0 1rem;grid-template-columns:auto 1fr auto;height:64px}
@@ -242,79 +231,41 @@ footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
 <script type="text/babel">
-const {useState,useEffect,useRef}=React;
-const PRODUCTS_DEFAULT=[
-  {id:1,name:'Aros Flor Rocalla Roja',cat:'aretes',metal:'gold',mc:'#c0392b',shape:'flower',stone:'none',price:18900,tag:'Oro 18K · Rocalla roja',badge:''},
-  {id:2,name:'Aros Corazón Violeta Cristal',cat:'aretes',metal:'silver',mc:'#8e44ad',shape:'heart',stone:'crystal',price:21900,tag:'Plata · Cristal',badge:'new'},
-  {id:3,name:'Aros Redondos Multicolor',cat:'aretes',metal:'gold',mc:'multi',shape:'hoop',stone:'none',price:16900,tag:'Oro 18K · Multicolor',badge:''},
-  {id:4,name:'Aros Atrapasueños Turquesa',cat:'aretes',metal:'gold',mc:'#16a085',shape:'dream',stone:'moonstone',price:24900,tag:'Oro 18K · Piedra luna',badge:'pop'},
-  {id:5,name:'Aros Estrella Negro',cat:'aretes',metal:'silver',mc:'#2c3e50',shape:'star',stone:'none',price:17900,tag:'Plata · Negro',badge:''},
-  {id:6,name:'Aros Mariposa Fucsia',cat:'aretes',metal:'gold',mc:'#e84393',shape:'butterfly',stone:'none',price:19900,tag:'Oro 18K · Fucsia',badge:''},
-  {id:7,name:'Aros Ovalados Rojo Cristal',cat:'aretes',metal:'silver',mc:'#c0392b',shape:'drop',stone:'crystal',price:18900,tag:'Plata · Cristal rojo',badge:''},
-  {id:8,name:'Aros Árbol de la Vida',cat:'aretes',metal:'silver',mc:'multi',shape:'tree',stone:'none',price:22900,tag:'Plata · Multicolor',badge:'pop'},
-  {id:9,name:'Aros Colgante Rojo Verde',cat:'aretes',metal:'silver',mc:'#27ae60',shape:'drop',stone:'none',price:18900,tag:'Plata · Rojo y verde',badge:''},
-  {id:10,name:'Aros Corazón Rosa Rocalla',cat:'aretes',metal:'gold',mc:'#e84393',shape:'heart',stone:'none',price:19900,tag:'Oro 18K · Rosa',badge:''},
-  {id:11,name:'Aros Multicolor Turquesa Dorado',cat:'aretes',metal:'gold',mc:'multi',shape:'hoop',stone:'none',price:19900,tag:'Oro 18K · Multicolor',badge:'new'},
-  {id:12,name:'Aros Aro Negro Plata',cat:'aretes',metal:'silver',mc:'#2c3e50',shape:'hoop',stone:'none',price:16900,tag:'Plata · Negro',badge:''},
-  {id:13,name:'Aros Colgante Verde Lima',cat:'aretes',metal:'gold',mc:'#27ae60',shape:'drop',stone:'none',price:18900,tag:'Oro 18K · Verde',badge:''},
-  {id:14,name:'Aros Abanico Rojo Dorado',cat:'aretes',metal:'gold',mc:'#c0392b',shape:'flower',stone:'none',price:21900,tag:'Oro 18K · Rojo',badge:'pop'},
-  {id:15,name:'Aros Redondos Violeta',cat:'aretes',metal:'silver',mc:'#8e44ad',shape:'hoop',stone:'none',price:18900,tag:'Plata · Violeta',badge:''},
-  {id:16,name:'Aros Colgante Verde Esmeralda',cat:'aretes',metal:'gold',mc:'#27ae60',shape:'drop',stone:'none',price:22900,tag:'Oro 18K · Verde esmeralda',badge:'new'},
-  {id:17,name:'Aros Redondos Fucsia',cat:'aretes',metal:'gold',mc:'#e84393',shape:'hoop',stone:'none',price:19900,tag:'Oro 18K · Fucsia',badge:''},
-  {id:18,name:'Aros Rombos Azul',cat:'aretes',metal:'silver',mc:'#2980b9',shape:'star',stone:'none',price:21900,tag:'Plata · Azul',badge:''},
-  {id:19,name:'Aros Colgante Violeta',cat:'aretes',metal:'silver',mc:'#8e44ad',shape:'drop',stone:'none',price:19900,tag:'Plata · Violeta',badge:''},
-  {id:20,name:'Aros Colgante Verde Agua',cat:'aretes',metal:'gold',mc:'#16a085',shape:'drop',stone:'none',price:21900,tag:'Oro 18K · Verde agua',badge:''},
-  {id:21,name:'Aros Corazón Rosa Delicado',cat:'aretes',metal:'gold',mc:'#e8b4b8',shape:'heart',stone:'none',price:18900,tag:'Oro 18K · Rosa',badge:''},
-  {id:22,name:'Aros Flor Roja',cat:'aretes',metal:'gold',mc:'#c0392b',shape:'flower',stone:'none',price:18900,tag:'Oro 18K · Rojo',badge:''},
-  {id:23,name:'Pulsera Corazón Multicolor',cat:'pulseras',metal:'silver',mc:'multi',shape:'heart',stone:'crystal',price:16900,tag:'Plata · Multicolor',badge:''},
-  {id:24,name:'Pulsera Corazón Rocalla',cat:'pulseras',metal:'silver',mc:'#e84393',shape:'heart',stone:'none',price:14900,tag:'Plata · Rosa',badge:''},
-  {id:25,name:'Collar Perlas Negro',cat:'collares',metal:'silver',mc:'#2c3e50',shape:'hoop',stone:'none',price:26900,tag:'Plata · Negro',badge:''},
-  {id:26,name:'Collar Colgante Multicolor',cat:'collares',metal:'gold',mc:'multi',shape:'dream',stone:'moonstone',price:28900,tag:'Oro 18K · Multicolor',badge:'pop'},
-];
-const badgeColors={new:'#8aaa88',pop:'#7ab8b0'};
-const badgeNames={new:'Nuevo',pop:'Popular'};
+const {useState,useEffect,useRef,useCallback}=React;
+
+// ── SUPABASE CONFIG ──
+const SB_URL='https://fzznsf vovotttjtznkzy.supabase.co'.replace(' ','');
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6em5zZnZvdm90dHRqdHpua3p5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNjczNDcsImV4cCI6MjA5MjY0MzM0N30.VuJNdHM-zvoIsvOhFlH7aodF9jlzbcAyPucVGYRfnoM';
+
+async function fetchProducts(){
+  try{
+    const res=await fetch(`${SB_URL}/rest/v1/productos?select=*&activo=eq.true&order=orden.asc,created_at.desc`,{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    });
+    if(!res.ok)throw new Error('Error '+res.status);
+    return await res.json();
+  }catch(e){
+    console.warn('Supabase error:',e.message);
+    return [];
+  }
+}
+
+// ── HELPERS ──
+const badgeColors={new:'#8aaa88',pop:'#7ab8b0',sale:'#d4788a'};
+const badgeNames={new:'Nuevo',pop:'Popular',sale:'Oferta'};
 const metalColors={gold:'#d4af37',silver:'#c0c0c0'};
+const stoneColors={none:null,crystal:'#d8f0ff',turquoise:'#40e0d0',moonstone:'#ede0ff',amethyst:'#9b59b6'};
+const stoneNames={none:'Sin piedra',crystal:'Cristal',turquoise:'Turquesa',moonstone:'Piedra luna',amethyst:'Amatista'};
 const shapeNames={flower:'Aros Flor',heart:'Aros Corazón',hoop:'Aros',dream:'Aros Atrapasueños',star:'Aros Estrella',butterfly:'Aros Mariposa',drop:'Aros Gota',tree:'Árbol de la Vida'};
 const shapePrices={flower:18900,heart:21900,hoop:16900,dream:24900,star:17900,butterfly:19900,drop:18900,tree:22900};
 const stoneExtra={none:0,crystal:2000,turquoise:3000,moonstone:4000,amethyst:3500};
-const stoneColors={none:null,crystal:'#d8f0ff',turquoise:'#40e0d0',moonstone:'#ede0ff',amethyst:'#9b59b6'};
-const stoneNames={none:'Sin piedra',crystal:'Cristal',turquoise:'Turquesa',moonstone:'Piedra luna',amethyst:'Amatista'};
 const beadColors=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7'];
-const DEFAULT_PHOTOS={
-  1:'uploads/joyeria_profesional (22).png',
-  2:'uploads/joyeria_profesional (3).png',
-  3:'uploads/joyeria_profesional 24.png',
-  4:'uploads/joyeria_profesional (27).png',
-  5:'uploads/joyeria_profesional (12).png',
-  6:'uploads/joyeria_profesional23.png',
-  7:'uploads/joyeria_profesional (26).png',
-  8:'uploads/joyeria_profesional (8).png',
-  9:'uploads/joyeria_profesional.png',
-  10:'uploads/joyeria_profesional (21).png',
-  11:'uploads/joyeria_profesional (11).png',
-  12:'uploads/joyeria_profesional (12).png',
-  13:'uploads/joyeria_profesional (13).png',
-  14:'uploads/joyeria_profesional (14).png',
-  15:'uploads/joyeria_profesional (15).png',
-  16:'uploads/joyeria_profesional (16).png',
-  17:'uploads/joyeria_profesional (17).png',
-  18:'uploads/joyeria_profesional (18).png',
-  19:'uploads/joyeria_profesional (19).png',
-  20:'uploads/joyeria_profesional (20).png',
-  21:'uploads/joyeria_profesional (21).png',
-  22:'uploads/joyeria_profesional (22).png',
-  23:'uploads/joyeria_pro.png',
-  24:'uploads/joyeria_profesional (29).png',
-  25:'uploads/joyeria_profesional (28).png',
-  26:'uploads/joyeria_profesional (30).png',
-};
-function loadProds(){try{const s=localStorage.getItem('dl_prods2');if(s)return JSON.parse(s);}catch(e){}return PRODUCTS_DEFAULT;}
-function saveProds(p){try{localStorage.setItem('dl_prods2',JSON.stringify(p));}catch(e){}}
-function loadPhotos(){try{const s=localStorage.getItem('dl_photos2');const saved=s?JSON.parse(s):{};return{...DEFAULT_PHOTOS,...saved};}catch(e){}return{...DEFAULT_PHOTOS};}
-function savePhotos(o){try{const f={};Object.keys(o).forEach(k=>{if(o[k]&&o[k].length<500000)f[k]=o[k];});localStorage.setItem('dl_photos2',JSON.stringify(f));}catch(e){}}
+const catLabels={aretes:'Aretes',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
+
 function gBC(b,i){if(b==='multi'){const c=['#c0392b','#e67e22','#f1c40f','#27ae60','#2980b9','#8e44ad','#e84393'];return c[i%c.length];}return b;}
+
 function jSVG(shape,metal,bead,stone,W,H){
-  const m=metalColors[metal]||'#d4af37',sc=stoneColors[stone],cx=W/2,cy=H/2,r=Math.min(W,H)/220;
+  const m=metalColors[metal]||'#d4af37',sc=stoneColors[stone]||null,cx=W/2,cy=H/2,r=Math.min(W,H)/220;
   let h='';
   if(shape==='flower'){[[cx,cy-38*r],[cx+36*r,cy-12*r],[cx+22*r,cy+30*r],[cx-22*r,cy+30*r],[cx-36*r,cy-12*r]].forEach(([px,py])=>{const a=Math.atan2(py-cy,px-cx)*180/Math.PI+90;h+=`<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="${14*r}" ry="${20*r}" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}" transform="rotate(${a} ${px.toFixed(1)} ${py.toFixed(1)})"/>`;});for(let i=0;i<22;i++){const a=i/22*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*38*r).toFixed(1)}" cy="${(cy+Math.sin(a)*38*r).toFixed(1)}" r="${i%3===0?4.5*r:3*r}" fill="${gBC(bead,i)}"/>`;}h+=`<circle cx="${cx}" cy="${cy}" r="${sc?13*r:9*r}" fill="${sc||m}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
   else if(shape==='heart'){h+=`<path d="M${cx} ${cy+55*r} C${cx} ${cy+55*r} ${cx-42*r} ${cy-2*r} a${26*r} ${26*r} 0 0 1 ${52*r} ${-16*r} a${26*r} ${26*r} 0 0 1 ${52*r} ${16*r} C${cx+42*r} ${cy+20*r} ${cx} ${cy+55*r}Z" fill="${m}" opacity="0.18" stroke="${m}" stroke-width="${1.5*r}"/>`;for(let i=-4;i<=4;i++)for(let j=-5;j<=3;j++){const x=cx+i*9*r,y=cy+j*8*r-5*r;if((x-cx)**2*0.8+(y-cy+5*r)**2<(38*r)**2*0.9)h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${2.8*r}" fill="${gBC(bead,Math.abs(i+j))}"/>`;}if(sc)h+=`<circle cx="${cx}" cy="${(cy-8*r).toFixed(1)}" r="${11*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
@@ -327,23 +278,390 @@ function jSVG(shape,metal,bead,stone,W,H){
   h+=`<line x1="${cx}" y1="${(cy-60*r).toFixed(1)}" x2="${cx}" y2="${(cy-46*r).toFixed(1)}" stroke="${m}" stroke-width="${2.5*r}" stroke-linecap="round"/>`;
   return h;
 }
-function drawOnCanvas(canvas,p){if(!canvas)return;const w=canvas.width,h=canvas.height;const ctx=canvas.getContext('2d');ctx.clearRect(0,0,w,h);const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 220 220">${jSVG(p.shape,p.metal,p.mc,p.stone,220,220)}</svg>`;const blob=new Blob([svg],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);const img=new Image();img.onload=()=>{ctx.drawImage(img,0,0,w,h);URL.revokeObjectURL(url);};img.src=url;}
-function LogoImg({size=56}){const [spin,setSpin]=useState(false);function handleClick(){if(spin)return;setSpin(true);setTimeout(()=>setSpin(false),700);}return<img src="uploads/logo.jpg" alt="Diente de León" className={spin?'spinning':''} onClick={handleClick} style={{width:size,height:size,borderRadius:'50%',objectFit:'cover',display:'block'}}/>;}
-function PCard({p,photos,onAdd,onLoad}){const cvRef=useRef(null);useEffect(()=>{if(cvRef.current&&!photos[p.id])drawOnCanvas(cvRef.current,p);},[p,photos]);const photoSrc=photos[p.id];return(<div className="pcard"><div className="pcard-img">{p.badge&&<div className="pbadge" style={{background:badgeColors[p.badge]||'#333'}}>{badgeNames[p.badge]||p.badge}</div>}<canvas ref={cvRef} width={180} height={180} style={{display:photoSrc?'none':'block'}}/>{photoSrc&&<img className="preal" src={photoSrc} alt={p.name} style={{display:'block',position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>}<div className="pcard-overlay"><button className="qadd" onClick={e=>{e.stopPropagation();onAdd(p);}}>Agregar al carrito</button></div></div><div className="pinfo" onClick={()=>onLoad(p)}><div className="pname">{p.name}</div><div className="ptag">{p.tag}</div><div className="pprice">${p.price.toLocaleString('es-CL')}</div></div></div>);}
+
+function drawOnCanvas(canvas,p){
+  if(!canvas)return;
+  const w=canvas.width,h=canvas.height;
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,w,h);
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 220 220">${jSVG(p.shape||'flower',p.metal||'gold',p.mc||'#c0392b',p.stone||'none',220,220)}</svg>`;
+  const blob=new Blob([svg],{type:'image/svg+xml'});
+  const url=URL.createObjectURL(blob);
+  const img=new Image();
+  img.onload=()=>{ctx.drawImage(img,0,0,w,h);URL.revokeObjectURL(url);};
+  img.src=url;
+}
+
+// ── SKELETON ──
+function SkeletonGrid(){
+  return(
+    <div className="skeleton-grid">
+      {Array.from({length:8}).map((_,i)=>(
+        <div className="skeleton-card" key={i}>
+          <div className="skeleton-img"/>
+          <div className="skeleton-body">
+            <div className="skeleton-line short"/>
+            <div className="skeleton-line"/>
+            <div className="skeleton-line short"/>
+            <div className="skeleton-line price"/>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── LOGO ──
+function LogoImg({size=56}){
+  const [spin,setSpin]=useState(false);
+  function handleClick(){if(spin)return;setSpin(true);setTimeout(()=>setSpin(false),700);}
+  return <img src="uploads/logo.jpg" alt="Diente de León" className={spin?'spinning':''} onClick={handleClick} style={{width:size,height:size,borderRadius:'50%',objectFit:'cover',display:'block'}}/>;
+}
+
+// ── PRODUCT MODAL ──
+function ProductModal({p,onAdd,onClose}){
+  const cvRef=useRef(null);
+  useEffect(()=>{
+    if(cvRef.current&&!p.imagen_url)drawOnCanvas(cvRef.current,p);
+  },[p]);
+  useEffect(()=>{
+    document.body.style.overflow='hidden';
+    return()=>{document.body.style.overflow='';};
+  },[]);
+  const metalLabel=p.metal==='gold'?'Oro 18K':'Plata';
+  const stoneLabel=p.stone&&p.stone!=='none'?stoneNames[p.stone]:'';
+  function sendWA(){
+    const msg=`Hola! Me interesa este producto:\n- ${p.nombre||p.name}\n- ${p.tag||''}\n- $${(p.precio||p.price||0).toLocaleString('es-CL')}\n\n¿Está disponible?`;
+    window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');
+  }
+  const nombre=p.nombre||p.name||'';
+  const precio=p.precio||p.price||0;
+  const tag=p.tag||'';
+  const categoria=p.categoria||p.cat||'';
+  const badge=p.badge||'';
+  const desc=p.descripcion||`Joya artesanal tejida a mano con mostacillas rocallas. Base en ${metalLabel}. Material 100% hipoalergénico, elaborada en Los Muermos, sur de Chile.`;
+  return(
+    <div className="pmodal-bg" onClick={onClose}>
+      <div className="pmodal" onClick={e=>e.stopPropagation()}>
+        <div className="pmodal-head">
+          <span>Detalle del producto</span>
+          <button className="pmodal-close" onClick={onClose}>×</button>
+        </div>
+        <div className="pmodal-body">
+          <div className="pmodal-img">
+            {badge&&<div className="mbadge" style={{background:badgeColors[badge]||'#333'}}>{badgeNames[badge]||badge}</div>}
+            {p.imagen_url
+              ?<img className="mreal" src={p.imagen_url} alt={nombre}/>
+              :<canvas ref={cvRef} width={200} height={200}/>
+            }
+          </div>
+          <div className="pmodal-info">
+            <div>
+              <p className="pmodal-cat">{catLabels[categoria]||categoria}</p>
+              <h3 className="pmodal-name">{nombre}</h3>
+            </div>
+            <p className="pmodal-desc">{desc}</p>
+            <div className="pmodal-pills">
+              <span className="pmodal-pill">{metalLabel}</span>
+              <span className="pmodal-pill">Hecho a mano</span>
+              <span className="pmodal-pill">Hipoalergénico</span>
+              {stoneLabel&&<span className="pmodal-pill">{stoneLabel}</span>}
+              <span className="pmodal-pill">Los Muermos</span>
+            </div>
+            <div className="pmodal-price-row">
+              <span className="pmodal-price">${precio.toLocaleString('es-CL')}</span>
+              <span className="pmodal-ship">Envío a todo Chile</span>
+            </div>
+            <div className="pmodal-actions">
+              <button className="btn btn-dark btn-full" onClick={()=>{onAdd({name:nombre,metal:metalLabel,price:precio,tag,shape:p.shape||'flower',mc:p.mc||'#c0392b',stone:p.stone||'none'});onClose();}}>Agregar al carrito</button>
+              <button className="btn btn-wa btn-full" onClick={sendWA}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+                Consultar por WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── PRODUCT CARD ──
+function PCard({p,onAdd,onOpen}){
+  const cvRef=useRef(null);
+  useEffect(()=>{if(cvRef.current&&!p.imagen_url)drawOnCanvas(cvRef.current,p);},[p]);
+  const nombre=p.nombre||p.name||'';
+  const precio=p.precio||p.price||0;
+  const tag=p.tag||'';
+  const badge=p.badge||'';
+  return(
+    <div className="pcard">
+      <div className="pcard-img" onClick={()=>onOpen(p)} style={{cursor:'pointer'}}>
+        {badge&&<div className="pbadge" style={{background:badgeColors[badge]||'#333'}}>{badgeNames[badge]||badge}</div>}
+        {p.imagen_url
+          ?<img className="preal" src={p.imagen_url} alt={nombre} style={{display:'block',position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>
+          :<canvas ref={cvRef} width={180} height={180}/>
+        }
+        <div className="pcard-overlay">
+          <button className="qadd" onClick={e=>{e.stopPropagation();onAdd({name:nombre,metal:p.metal==='gold'?'Oro 18K':'Plata',price:precio,tag,shape:p.shape||'flower',mc:p.mc||'#c0392b',stone:p.stone||'none'});}}>Agregar al carrito</button>
+        </div>
+      </div>
+      <div className="pinfo" onClick={()=>onOpen(p)}>
+        <div className="pname">{nombre}</div>
+        <div className="ptag">{tag}</div>
+        <div className="pprice">${precio.toLocaleString('es-CL')}</div>
+      </div>
+    </div>
+  );
+}
+
+// ── ANIMACIONES HERO ──
 const heroTexts=['Única como tú','Tejida a mano','Desde el sur de Chile','Tu joya, tu historia'];
-function RotatingText(){const [idx,setIdx]=useState(0);const [vis,setVis]=useState(true);useEffect(()=>{const t=setInterval(()=>{setVis(false);setTimeout(()=>{setIdx(i=>(i+1)%heroTexts.length);setVis(true);},400);},3000);return()=>clearInterval(t);},[]);return<div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',fontSize:'clamp(1rem,1.4vw,1.2rem)',color:'rgba(42,36,32,0.55)',transition:'opacity 0.4s ease',opacity:vis?1:0,letterSpacing:'0.02em',textAlign:'center'}}>{heroTexts[idx]}</div>;}
-function GoldSparkles(){const cvRef=useRef(null);useEffect(()=>{const canvas=cvRef.current;if(!canvas)return;const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;const particles=Array.from({length:28},()=>({x:Math.random()*W,y:Math.random()*H,r:1+Math.random()*2.5,vx:(Math.random()-0.5)*0.3,vy:-(0.2+Math.random()*0.4),alpha:Math.random(),dalpha:(Math.random()*0.008+0.003)*(Math.random()<0.5?1:-1),hue:40+Math.random()*20}));let raf;function tick(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.alpha+=p.dalpha;if(p.alpha<=0||p.alpha>=1)p.dalpha*=-1;if(p.y<-10)p.y=H+10;if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,p.alpha))*0.7;ctx.fillStyle=`hsl(${p.hue},70%,55%)`;ctx.shadowBlur=8;ctx.shadowColor=`hsl(${p.hue},80%,60%)`;ctx.beginPath();for(let i=0;i<4;i++){const a=i*Math.PI/2;ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+Math.cos(a)*p.r*2,p.y+Math.sin(a)*p.r*2);}ctx.strokeStyle=`hsl(${p.hue},70%,55%)`;ctx.lineWidth=0.8;ctx.stroke();ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();});raf=requestAnimationFrame(tick);}tick();return()=>cancelAnimationFrame(raf);},[]);return<canvas ref={cvRef} width={520} height={700} style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',zIndex:1}}/>;}
-function LiveJewel({shape,metal,mc,stone}){return<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" dangerouslySetInnerHTML={{__html:jSVG(shape,metal,mc,stone,220,220)}} style={{filter:'drop-shadow(0 8px 24px rgba(0,0,0,0.12))'}}/>;}
-function HomePage({products,photos,onAdd,onLoad,goPage}){const [filter,setFilter]=useState('all');const filtered=filter==='all'?products:products.filter(p=>p.cat===filter);const cats=['all','aretes','pulseras','collares','anillos'];const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};return(<div className="page active"><section className="hero"><div className="hero-left"><h1><span>Joyería artesanal</span><br/>Diente de León</h1><img src="uploads/hero-mobile.jpg" alt="Joyería Diente de León" className="hero-mobile-img"/><p className="hero-desc">Alambrismo tejido a mano con mostacillas rocallas, bases en oro 18K y plata. Cada pieza nace única e irrepetible desde el sur de Chile.</p><div className="hero-btns"><button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button><button className="btn btn-outline" onClick={()=>goPage('pers')}>Personalizar joya</button></div></div><div className="hero-right"><GoldSparkles/><div style={{position:'absolute',width:'340px',height:'340px',background:'#9ed4c8',borderRadius:'50%',filter:'blur(80px)',opacity:0.25,top:'10%',left:'20%'}}/><div style={{position:'absolute',width:'240px',height:'240px',background:'#e88ca0',borderRadius:'50%',filter:'blur(70px)',opacity:0.2,bottom:'15%',right:'10%'}}/><div style={{position:'absolute',top:'7%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 3rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.5rem'}}><RotatingText/><div style={{display:'flex',alignItems:'center',gap:'0.7rem'}}><div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/><p style={{fontFamily:"'Montserrat',sans-serif",fontSize:'0.58rem',letterSpacing:'0.22em',textTransform:'uppercase',color:'rgba(42,36,32,0.38)'}}>con amor desde el sur</p><div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/></div></div><img src="uploads/logo.jpg" alt="Diente de León" className="hero-main-svg" style={{borderRadius:'50%',boxShadow:'0 24px 80px rgba(0,0,0,0.18)',objectFit:'cover',position:'relative',zIndex:2}}/><div style={{position:'absolute',bottom:'8%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 2rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.6rem'}}><div style={{width:'36px',height:'1px',background:'rgba(42,36,32,0.35)'}}/><p style={{fontFamily:"'Montserrat',sans-serif",fontSize:'0.68rem',letterSpacing:'0.25em',textTransform:'uppercase',color:'rgba(42,36,32,0.6)',fontWeight:500}}>Los Muermos · Región de Los Lagos</p></div></div></section><div className="strip">{[{ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,t:'Hecho a mano',s:'Tejido con amor'},{ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,t:'Personalizable',s:'Tú eliges los colores'},{ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,t:'Hipoalergénico',s:'Seguro para tu piel'},{ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,t:'Envío a Chile',s:'Todo el país'}].map((item,i)=><div key={i} className="strip-item"><div className="strip-ico">{item.ico}</div><div className="strip-t">{item.t}</div><div className="strip-s">{item.s}</div></div>)}</div><section className="sec"><div className="sec-head center"><p className="sec-eyebrow">Piezas destacadas</p><h2 className="sec-title">Las más <em>amadas</em></h2><div className="sec-line"/></div><div className="filters" style={{marginBottom:'0'}}>{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>setFilter(c)}>{catLabel[c]}</button>)}</div><div className="pgrid">{filtered.map(p=><PCard key={p.id} p={p} photos={photos} onAdd={onAdd} onLoad={onLoad}/>)}</div></section><div className="editorial"><div className="editorial-q">Cada joya nace de<br/>manos <em>dedicadas</em></div><div><p className="editorial-body">En Los Muermos, en el corazón del sur de Chile, tejemos a mano con técnica ladrillo para que cada pieza tenga <strong>una textura firme y llena de vida</strong>. Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos.</p><div className="editorial-btns"><button className="btn-gold btn" onClick={()=>goPage('pers')}>Personalizar mi joya</button><button className="btn-outline-white btn" onClick={()=>goPage('nosotras')}>Nuestra historia</button></div></div></div></div>);}
-function CatalogPage({products,photos,onAdd,onLoad}){const [filter,setFilter]=useState('all');const filtered=filter==='all'?products:products.filter(p=>p.cat===filter);const cats=['all','aretes','pulseras','collares','anillos'];const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};return(<div className="page active"><section className="sec" style={{paddingBottom:'0'}}><div className="sec-head center"><p className="sec-eyebrow">Colección completa</p><h2 className="sec-title">Joyería <em>artesanal</em></h2><div className="sec-line"/></div><div className="filters">{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>setFilter(c)}>{catLabel[c]}</button>)}</div></section><div className="pgrid">{filtered.map(p=><PCard key={p.id} p={p} photos={photos} onAdd={onAdd} onLoad={onLoad}/>)}</div></div>);}
-function PersPage({onAdd,goPage,initialPers}){const [metal,setMetal]=useState(initialPers?.metal||'gold');const [mc,setMc]=useState(initialPers?.mc||'#c0392b');const [shape,setShape]=useState(initialPers?.shape||'flower');const [stone,setStone]=useState(initialPers?.stone||'none');const price=(shapePrices[shape]||18900)+(stoneExtra[stone]||0);const mname=metal==='gold'?'Oro 18K':'Plata';function handleAdd(){onAdd({name:(shapeNames[shape]||'Joya')+' personalizado',metal,mc,shape,stone,price,tag:`${mname}${stone!=='none'?' · '+stoneNames[stone]:''}`});}function sendWA(){const msg=`Hola! Me interesa una joya personalizada:\n- Tipo: ${shapeNames[shape]}\n- Metal: ${mname}\n- Piedra: ${stoneNames[stone]}\n- Precio estimado: $${price.toLocaleString('es-CL')}`;window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');}const shapes=['flower','heart','hoop','dream','star','butterfly','drop','tree'];const shapeLabels={flower:'Flor',heart:'Corazón',hoop:'Aro',dream:'Atrapasueños',star:'Estrella',butterfly:'Mariposa',drop:'Gota',tree:'Árbol de la Vida'};const stones=['none','crystal','turquoise','moonstone','amethyst'];return(<div className="page active"><section className="sec" style={{paddingBottom:'1.5rem'}}><div className="sec-head center"><p className="sec-eyebrow">Diseña tu joya</p><h2 className="sec-title">Tu pieza, <em>única</em></h2><div className="sec-line"/></div></section><div className="pers-wrap"><div className="pers-grid"><div className="pers-preview"><LiveJewel shape={shape} metal={metal} mc={mc} stone={stone}/><div className="pers-name">{(shapeNames[shape]||'Joya')+' personalizado'}</div><div className="pers-price">${price.toLocaleString('es-CL')}</div><div className="pers-desc">Alambrismo en {mname.toLowerCase()}{stone!=='none'?' · '+stoneNames[stone]:''} · Mostacillas rocallas</div></div><div className="pers-opts"><div><span className="opt-label">Metal base</span><div className="metal-row">{[['gold','Oro 18K','linear-gradient(135deg,#f0d060,#c9922a,#e8c060)'],['silver','Plata','linear-gradient(135deg,#ebebeb,#a0a0a0,#d8d8d8)']].map(([m,n,bg])=><button key={m} className={`mbtn${metal===m?' sel':''}`} onClick={()=>setMetal(m)}><div className="mswatch" style={{background:bg}}/>{n}</button>)}</div></div><div><span className="opt-label">Mostacillas rocalla</span><div className="bead-row">{beadColors.map(c=><div key={c} className={`bead${mc===c?' sel':''}`} style={{background:c}} onClick={()=>setMc(c)}/>)}<div className={`bead${mc==='multi'?' sel':''}`} style={{background:'conic-gradient(#c0392b,#f1c40f,#27ae60,#2980b9,#8e44ad,#c0392b)'}} onClick={()=>setMc('multi')}/></div></div><div><span className="opt-label">Forma</span><div className="shape-row">{shapes.map(s=><button key={s} className={`spill${shape===s?' sel':''}`} onClick={()=>setShape(s)}>{shapeLabels[s]}</button>)}</div></div><div><span className="opt-label">Piedra central</span><div className="stone-row">{stones.map(s=><button key={s} className={`stpill${stone===s?' sel':''}`} onClick={()=>setStone(s)}>{stoneNames[s]}</button>)}</div></div><div className="pers-actions"><button className="btn btn-dark btn-full" onClick={handleAdd}>Agregar al carrito</button><button className="btn btn-wa btn-full" onClick={sendWA}><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>Consultar por WhatsApp</button></div></div></div></div></div>);}
-function NosotrasPage({goPage}){return(<div className="page active"><section className="sec"><div className="about-grid"><div className="about-vis"><div className="about-circ"><img src="uploads/logo.jpg" alt="Diente de León" style={{width:'200px',height:'200px',objectFit:'cover',display:'block'}}/></div></div><div className="about-text"><h2>Nuestra historia</h2><p>Somos una boutique artesanal de Los Muermos, en el sur de Chile. Cada joya nace de manos dedicadas: alambrismo cuidadoso, mostacillas rocallas tejidas en técnica ladrillo que forman una trama firme y llena de textura.</p><p>Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos. Creemos que cada persona merece una joya tan única como ella.</p><p>Con más de 466 publicaciones y 4.200 seguidoras en Instagram, nuestra comunidad crece desde la autenticidad y el amor por el oficio artesanal.</p><div className="pills">{['Los Muermos','Hecho a mano','Hipoalergénico','Personalizable','Envío Chile'].map(t=><span key={t} className="pill">{t}</span>)}</div><div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap'}}><button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button><button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button></div></div></div></section></div>);}
-function CartDrawer({cart,onClose,onRemove,onCheckout}){const total=cart.reduce((s,i)=>s+i.price,0);const cvRefs=useRef({});useEffect(()=>{cart.forEach((item,i)=>{const cv=cvRefs.current[i];if(cv)drawOnCanvas(cv,{...item,metal:item.metal==='Oro 18K'?'gold':'silver'});});},[cart]);return(<div className="overlay open" onClick={onClose}><div className="drawer" onClick={e=>e.stopPropagation()}><div className="drawer-head"><h2>Tu carrito</h2><button className="drawer-close" onClick={onClose}>×</button></div><div className="drawer-body">{cart.length===0?<div className="drawer-empty">Tu carrito está vacío</div>:cart.map((item,i)=><div key={i} className="cart-item"><div className="cart-thumb"><canvas ref={el=>cvRefs.current[i]=el} width={56} height={56}/></div><div style={{flex:1}}><div className="cart-item-name">{item.name}</div><div className="cart-item-detail">{item.metal}</div><div className="cart-item-price">${item.price.toLocaleString('es-CL')}</div></div><button className="cart-remove" onClick={()=>onRemove(i)}>×</button></div>)}</div>{cart.length>0&&<div className="drawer-foot"><div className="cart-total"><span>Total</span><span>${total.toLocaleString('es-CL')}</span></div><button className="btn btn-dark btn-full" onClick={onCheckout}>Finalizar por WhatsApp</button></div>}</div></div>);}
-function AdminCard({p,photos,onPhotoUpload,onSave}){const cvRef=useRef(null);const [name,setName]=useState(p.name);const [price,setPrice]=useState(p.price);const [saved,setSaved]=useState(false);useEffect(()=>{if(cvRef.current&&!photos[p.id])drawOnCanvas(cvRef.current,p);},[p,photos]);function handleSave(){onSave(p.id,name,price);setSaved(true);setTimeout(()=>setSaved(false),2000);}return(<div className="admin-card"><div className="admin-img-wrap"><canvas ref={cvRef} width={200} height={200} style={{display:photos[p.id]?'none':'block'}}/>{photos[p.id]&&<img className="areal" src={photos[p.id]} alt={p.name} style={{display:'block'}}/>}<label className="upload-zone"><div className="upload-inner"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Subir foto</div><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>onPhotoUpload(e,p.id)}/></label></div><div className="admin-info"><div className="afield"><label>Nombre</label><input value={name} onChange={e=>setName(e.target.value)}/></div><div className="afield"><label>Precio (CLP)</label><input type="number" className="gold" value={price} step={100} onChange={e=>setPrice(parseInt(e.target.value)||p.price)}/></div><button className="save-btn" onClick={handleSave}>Guardar cambios</button><div className="saved" style={{opacity:saved?1:0}}>✓ Guardado</div></div></div>);}
-function AdminPanel({onLogout}){const [products,setProducts]=useState(loadProds);const [photos,setPhotos]=useState(loadPhotos);function handlePhotoUpload(e,id){const f=e.target.files[0];if(!f)return;const reader=new FileReader();reader.onload=ev=>{const data=ev.target.result;const np={...photos,[id]:data};setPhotos(np);savePhotos(np);};reader.readAsDataURL(f);}function handleSave(id,name,price){const np=products.map(p=>p.id===id?{...p,name,price}:p);setProducts(np);saveProds(np);}return(<div className="admin-wrap"><div className="admin-nav"><div className="admin-nav-brand">Diente de León · Admin</div><div className="admin-nav-right"><span>andrea</span><button className="btn btn-sm" style={{background:'none',color:'rgba(255,255,255,0.65)',border:'1px solid rgba(255,255,255,0.25)'}} onClick={onLogout}>Cerrar sesión</button></div></div><div className="admin-body"><h1 className="admin-h1">Panel de productos</h1><p className="admin-sub">Sube fotos y edita nombre y precio. Los cambios se reflejan en la tienda al instante.</p><div className="admin-grid">{products.map(p=><AdminCard key={p.id} p={p} photos={photos} onPhotoUpload={handlePhotoUpload} onSave={handleSave}/>)}</div></div></div>);}
-function LoginModal({onLogin,onClose}){const [user,setUser]=useState('');const [pass,setPass]=useState('');const [err,setErr]=useState('');function attempt(){if(user==='andrea'&&pass==='dientedeleon2025'){onLogin();}else{setErr('Usuario o contraseña incorrectos');setPass('');}}return(<div className="login-bg"><div className="login-box"><div className="login-logo"><LogoImg size={80}/></div><div className="login-title">Panel de Administración</div><div className="login-sub">Diente de León Boutique</div><div className="lfield"><label>Usuario</label><input value={user} onChange={e=>setUser(e.target.value)} placeholder="admin"/></div><div className="lfield"><label>Contraseña</label><input type="password" value={pass} onChange={e=>setPass(e.target.value)} onKeyDown={e=>e.key==='Enter'&&attempt()} placeholder="••••••••"/></div><button className="btn btn-dark btn-full" style={{marginTop:'0.5rem'}} onClick={attempt}>Ingresar</button><div className="login-err">{err}</div><div className="login-back" onClick={onClose}>← Volver a la tienda</div></div></div>);}
+function RotatingText(){
+  const [idx,setIdx]=useState(0);const [vis,setVis]=useState(true);
+  useEffect(()=>{const t=setInterval(()=>{setVis(false);setTimeout(()=>{setIdx(i=>(i+1)%heroTexts.length);setVis(true);},400);},3000);return()=>clearInterval(t);},[]);
+  return<div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',fontSize:'clamp(1rem,1.4vw,1.2rem)',color:'rgba(42,36,32,0.55)',transition:'opacity 0.4s ease',opacity:vis?1:0,letterSpacing:'0.02em',textAlign:'center'}}>{heroTexts[idx]}</div>;
+}
+function GoldSparkles(){
+  const cvRef=useRef(null);
+  useEffect(()=>{
+    const canvas=cvRef.current;if(!canvas)return;
+    const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+    const particles=Array.from({length:28},()=>({x:Math.random()*W,y:Math.random()*H,r:1+Math.random()*2.5,vx:(Math.random()-0.5)*0.3,vy:-(0.2+Math.random()*0.4),alpha:Math.random(),dalpha:(Math.random()*0.008+0.003)*(Math.random()<0.5?1:-1),hue:40+Math.random()*20}));
+    let raf;
+    function tick(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.alpha+=p.dalpha;if(p.alpha<=0||p.alpha>=1)p.dalpha*=-1;if(p.y<-10)p.y=H+10;if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,p.alpha))*0.7;ctx.fillStyle=`hsl(${p.hue},70%,55%)`;ctx.beginPath();for(let i=0;i<4;i++){const a=i*Math.PI/2;ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+Math.cos(a)*p.r*2,p.y+Math.sin(a)*p.r*2);}ctx.strokeStyle=`hsl(${p.hue},70%,55%)`;ctx.lineWidth=0.8;ctx.stroke();ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();});raf=requestAnimationFrame(tick);}
+    tick();return()=>cancelAnimationFrame(raf);
+  },[]);
+  return<canvas ref={cvRef} width={520} height={700} style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',zIndex:1}}/>;
+}
+function LiveJewel({shape,metal,mc,stone}){
+  return<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" dangerouslySetInnerHTML={{__html:jSVG(shape,metal,mc,stone,220,220)}} style={{filter:'drop-shadow(0 8px 24px rgba(0,0,0,0.12))'}}/>;
+}
+
+// ── PAGES ──
+function HomePage({products,loading,onAdd,onOpen,goPage}){
+  const [filter,setFilter]=useState('all');
+  const cats=['all','aretes','pulseras','collares','anillos'];
+  const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
+  const filtered=filter==='all'?products:products.filter(p=>(p.categoria||p.cat)===filter);
+  return(<div className="page active">
+    <section className="hero">
+      <div className="hero-left">
+        <h1><span>Joyería artesanal</span><br/>Diente de León</h1>
+        <img src="uploads/hero-mobile.jpg" alt="Joyería Diente de León" className="hero-mobile-img"/>
+        <p className="hero-desc">Alambrismo tejido a mano con mostacillas rocallas, bases en oro 18K y plata. Cada pieza nace única e irrepetible desde el sur de Chile.</p>
+        <div className="hero-btns">
+          <button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button>
+          <button className="btn btn-outline" onClick={()=>goPage('pers')}>Personalizar joya</button>
+        </div>
+      </div>
+      <div className="hero-right">
+        <GoldSparkles/>
+        <div style={{position:'absolute',width:'340px',height:'340px',background:'#9ed4c8',borderRadius:'50%',filter:'blur(80px)',opacity:0.25,top:'10%',left:'20%'}}/>
+        <div style={{position:'absolute',width:'240px',height:'240px',background:'#e88ca0',borderRadius:'50%',filter:'blur(70px)',opacity:0.2,bottom:'15%',right:'10%'}}/>
+        <div style={{position:'absolute',top:'7%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 3rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.5rem'}}>
+          <RotatingText/>
+          <div style={{display:'flex',alignItems:'center',gap:'0.7rem'}}>
+            <div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/>
+            <p style={{fontFamily:"'Montserrat',sans-serif",fontSize:'0.58rem',letterSpacing:'0.22em',textTransform:'uppercase',color:'rgba(42,36,32,0.38)'}}>con amor desde el sur</p>
+            <div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/>
+          </div>
+        </div>
+        <img src="uploads/logo.jpg" alt="Diente de León" className="hero-main-svg" style={{borderRadius:'50%',boxShadow:'0 24px 80px rgba(0,0,0,0.18)',objectFit:'cover',position:'relative',zIndex:2,width:'min(380px,60%)',animation:'floatSvg 6s ease-in-out infinite'}}/>
+        <style>{`@keyframes floatSvg{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}`}</style>
+        <div style={{position:'absolute',bottom:'8%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 2rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.6rem'}}>
+          <div style={{width:'36px',height:'1px',background:'rgba(42,36,32,0.35)'}}/>
+          <p style={{fontFamily:"'Montserrat',sans-serif",fontSize:'0.68rem',letterSpacing:'0.25em',textTransform:'uppercase',color:'rgba(42,36,32,0.6)',fontWeight:500}}>Los Muermos · Región de Los Lagos</p>
+        </div>
+      </div>
+    </section>
+    <div className="strip">{[
+      {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,t:'Hecho a mano',s:'Tejido con amor'},
+      {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,t:'Personalizable',s:'Tú eliges los colores'},
+      {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,t:'Hipoalergénico',s:'Seguro para tu piel'},
+      {ico:<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,t:'Envío a Chile',s:'Todo el país'},
+    ].map((item,i)=><div key={i} className="strip-item"><div className="strip-ico">{item.ico}</div><div className="strip-t">{item.t}</div><div className="strip-s">{item.s}</div></div>)}</div>
+    <section className="sec">
+      <div className="sec-head center">
+        <p className="sec-eyebrow">Piezas destacadas</p>
+        <h2 className="sec-title">Las más <em>amadas</em></h2>
+        <div className="sec-line"/>
+      </div>
+      <div className="filters" style={{marginBottom:'0'}}>{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>setFilter(c)}>{catLabel[c]}</button>)}</div>
+      {loading?<SkeletonGrid/>:<div className="pgrid">{filtered.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>}
+    </section>
+    <div className="editorial">
+      <div className="editorial-q">Cada joya nace de<br/>manos <em>dedicadas</em></div>
+      <div>
+        <p className="editorial-body">En Los Muermos, en el corazón del sur de Chile, tejemos a mano con técnica ladrillo para que cada pieza tenga <strong>una textura firme y llena de vida</strong>. Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos.</p>
+        <div className="editorial-btns">
+          <button className="btn-gold btn" onClick={()=>goPage('pers')}>Personalizar mi joya</button>
+          <button className="btn-outline-white btn" onClick={()=>goPage('nosotras')}>Nuestra historia</button>
+        </div>
+      </div>
+    </div>
+  </div>);
+}
+
+function CatalogPage({products,loading,onAdd,onOpen}){
+  const [filter,setFilter]=useState('all');
+  const cats=['all','aretes','pulseras','collares','anillos'];
+  const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
+  const filtered=filter==='all'?products:products.filter(p=>(p.categoria||p.cat)===filter);
+  return(<div className="page active">
+    <section className="sec" style={{paddingBottom:'0'}}>
+      <div className="sec-head center">
+        <p className="sec-eyebrow">Colección completa</p>
+        <h2 className="sec-title">Joyería <em>artesanal</em></h2>
+        <div className="sec-line"/>
+      </div>
+      <div className="filters">{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>setFilter(c)}>{catLabel[c]}</button>)}</div>
+    </section>
+    {loading?<SkeletonGrid/>:<div className="pgrid">{filtered.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>}
+  </div>);
+}
+
+function PersPage({onAdd,goPage}){
+  const [metal,setMetal]=useState('gold');
+  const [mc,setMc]=useState('#c0392b');
+  const [shape,setShape]=useState('flower');
+  const [stone,setStone]=useState('none');
+  const price=(shapePrices[shape]||18900)+(stoneExtra[stone]||0);
+  const mname=metal==='gold'?'Oro 18K':'Plata';
+  function handleAdd(){onAdd({name:(shapeNames[shape]||'Joya')+' personalizado',metal:mname,mc,shape,stone,price,tag:`${mname}${stone!=='none'?' · '+stoneNames[stone]:''}`});}
+  function sendWA(){const msg=`Hola! Me interesa una joya personalizada:\n- Tipo: ${shapeNames[shape]}\n- Metal: ${mname}\n- Piedra: ${stoneNames[stone]}\n- Precio estimado: $${price.toLocaleString('es-CL')}`;window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');}
+  const shapes=['flower','heart','hoop','dream','star','butterfly','drop','tree'];
+  const shapeLabels={flower:'Flor',heart:'Corazón',hoop:'Aro',dream:'Atrapasueños',star:'Estrella',butterfly:'Mariposa',drop:'Gota',tree:'Árbol de la Vida'};
+  const stones=['none','crystal','turquoise','moonstone','amethyst'];
+  return(<div className="page active">
+    <section className="sec" style={{paddingBottom:'1.5rem'}}>
+      <div className="sec-head center">
+        <p className="sec-eyebrow">Diseña tu joya</p>
+        <h2 className="sec-title">Tu pieza, <em>única</em></h2>
+        <div className="sec-line"/>
+      </div>
+    </section>
+    <div className="pers-wrap">
+      <div className="pers-grid">
+        <div className="pers-preview">
+          <LiveJewel shape={shape} metal={metal} mc={mc} stone={stone}/>
+          <div className="pers-name">{(shapeNames[shape]||'Joya')+' personalizado'}</div>
+          <div className="pers-price">${price.toLocaleString('es-CL')}</div>
+          <div className="pers-desc">Alambrismo en {mname.toLowerCase()}{stone!=='none'?' · '+stoneNames[stone]:''} · Mostacillas rocallas</div>
+        </div>
+        <div className="pers-opts">
+          <div>
+            <span className="opt-label">Metal base</span>
+            <div className="metal-row">{[['gold','Oro 18K','linear-gradient(135deg,#f0d060,#c9922a,#e8c060)'],['silver','Plata','linear-gradient(135deg,#ebebeb,#a0a0a0,#d8d8d8)']].map(([m,n,bg])=><button key={m} className={`mbtn${metal===m?' sel':''}`} onClick={()=>setMetal(m)}><div className="mswatch" style={{background:bg}}/>{n}</button>)}</div>
+          </div>
+          <div>
+            <span className="opt-label">Mostacillas rocalla</span>
+            <div className="bead-row">{beadColors.map(c=><div key={c} className={`bead${mc===c?' sel':''}`} style={{background:c}} onClick={()=>setMc(c)}/>)}<div className={`bead${mc==='multi'?' sel':''}`} style={{background:'conic-gradient(#c0392b,#f1c40f,#27ae60,#2980b9,#8e44ad,#c0392b)'}} onClick={()=>setMc('multi')}/></div>
+          </div>
+          <div>
+            <span className="opt-label">Forma</span>
+            <div className="shape-row">{shapes.map(s=><button key={s} className={`spill${shape===s?' sel':''}`} onClick={()=>setShape(s)}>{shapeLabels[s]}</button>)}</div>
+          </div>
+          <div>
+            <span className="opt-label">Piedra central</span>
+            <div className="stone-row">{stones.map(s=><button key={s} className={`stpill${stone===s?' sel':''}`} onClick={()=>setStone(s)}>{stoneNames[s]}</button>)}</div>
+          </div>
+          <div className="pers-actions">
+            <button className="btn btn-dark btn-full" onClick={handleAdd}>Agregar al carrito</button>
+            <button className="btn btn-wa btn-full" onClick={sendWA}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+              Consultar por WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>);
+}
+
+function NosotrasPage({goPage}){
+  return(<div className="page active"><section className="sec"><div className="about-grid"><div className="about-vis"><div className="about-circ"><img src="uploads/logo.jpg" alt="Diente de León" style={{width:'200px',height:'200px',objectFit:'cover',display:'block'}}/></div></div><div className="about-text"><h2>Nuestra historia</h2><p>Somos una boutique artesanal de Los Muermos, en el sur de Chile. Cada joya nace de manos dedicadas: alambrismo cuidadoso, mostacillas rocallas tejidas en técnica ladrillo que forman una trama firme y llena de textura.</p><p>Usamos bases bañadas en oro 18K y plata, con materiales 100% hipoalergénicos. Creemos que cada persona merece una joya tan única como ella.</p><p>Con más de 466 publicaciones y 4.200 seguidoras en Instagram, nuestra comunidad crece desde la autenticidad y el amor por el oficio artesanal.</p><div className="pills">{['Los Muermos','Hecho a mano','Hipoalergénico','Personalizable','Envío Chile'].map(t=><span key={t} className="pill">{t}</span>)}</div><div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap'}}><button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button><button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button></div></div></div></section></div>);
+}
+
+function CartDrawer({cart,onClose,onRemove,onCheckout}){
+  const total=cart.reduce((s,i)=>s+i.price,0);
+  const cvRefs=useRef({});
+  useEffect(()=>{cart.forEach((item,i)=>{const cv=cvRefs.current[i];if(cv)drawOnCanvas(cv,{shape:item.shape||'flower',metal:item.metal==='Oro 18K'?'gold':'silver',mc:item.mc||'#c0392b',stone:item.stone||'none'});});},[cart]);
+  return(<div className="overlay open" onClick={onClose}><div className="drawer" onClick={e=>e.stopPropagation()}><div className="drawer-head"><h2>Tu carrito</h2><button className="drawer-close" onClick={onClose}>×</button></div><div className="drawer-body">{cart.length===0?<div className="drawer-empty">Tu carrito está vacío</div>:cart.map((item,i)=><div key={i} className="cart-item"><div className="cart-thumb"><canvas ref={el=>cvRefs.current[i]=el} width={56} height={56}/></div><div style={{flex:1}}><div className="cart-item-name">{item.name}</div><div className="cart-item-detail">{item.metal}</div><div className="cart-item-price">${item.price.toLocaleString('es-CL')}</div></div><button className="cart-remove" onClick={()=>onRemove(i)}>×</button></div>)}</div>{cart.length>0&&<div className="drawer-foot"><div className="cart-total"><span>Total</span><span>${total.toLocaleString('es-CL')}</span></div><button className="btn btn-dark btn-full" onClick={onCheckout}>Finalizar por WhatsApp</button></div>}</div></div>);
+}
+
 function Toast({msg}){return<div className={`toast${msg?' show':''}`}>{msg}</div>;}
-function App(){const [page,setPage]=useState(()=>localStorage.getItem('dl_page')||'home');const [cart,setCart]=useState([]);const [cartOpen,setCartOpen]=useState(false);const [products,setProducts]=useState(loadProds);const [photos,setPhotos]=useState(loadPhotos);const [toast,setToast]=useState('');const [isAdmin,setIsAdmin]=useState(false);const [showLogin,setShowLogin]=useState(false);const [persPref,setPersPref]=useState(null);useEffect(()=>{localStorage.setItem('dl_page',page);},[page]);function showToast(m){setToast(m);setTimeout(()=>setToast(''),2400);}function addToCart(item){setCart(c=>[...c,item]);showToast(item.name+' agregado al carrito');}function removeFromCart(i){setCart(c=>c.filter((_,idx)=>idx!==i));}function checkoutWA(){let msg='Hola! Quiero hacer un pedido:\n';cart.forEach((it,i)=>{msg+=`${i+1}. ${it.name} (${it.metal}) - $${it.price.toLocaleString('es-CL')}\n`;});msg+=`\nTotal: $${cart.reduce((s,it)=>s+it.price,0).toLocaleString('es-CL')}`;window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');}function loadProduct(p){setPersPref(p);setPage('pers');window.scrollTo(0,0);}function goPage(p){setPage(p);window.scrollTo(0,0);}if(isAdmin)return<><AdminPanel onLogout={()=>setIsAdmin(false)}/><Toast msg={toast}/></>;return(<><div className="announce">Envío a todo Chile · Material hipoalergénico · Hecho a mano en Los Muermos</div><nav><div className="nav-left"><button className="nav-link" onClick={()=>goPage('home')}>Inicio</button><button className="nav-link" onClick={()=>goPage('catalog')}>Colección</button><button className="nav-link" onClick={()=>goPage('pers')}>Personalizar</button></div><div className="nav-logo" onClick={()=>goPage('home')}><LogoImg/><span className="nav-logo-text">Diente de León</span></div><div className="nav-right"><button className="nav-link" onClick={()=>goPage('nosotras')}>Nosotras</button><button className="cart-btn" onClick={()=>setCartOpen(true)}><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>{cart.length>0&&<span className="cart-count">{cart.length}</span>}</button></div></nav>{page==='home'&&<HomePage products={products} photos={photos} onAdd={addToCart} onLoad={loadProduct} goPage={goPage}/>}{page==='catalog'&&<CatalogPage products={products} photos={photos} onAdd={addToCart} onLoad={loadProduct}/>}{page==='pers'&&<PersPage onAdd={p=>{addToCart(p);}} goPage={goPage} initialPers={persPref}/>}{page==='nosotras'&&<NosotrasPage goPage={goPage}/>}{showLogin&&<LoginModal onLogin={()=>{setShowLogin(false);setIsAdmin(true);}} onClose={()=>setShowLogin(false)}/>}<footer><div className="footer-top"><div><div className="footer-brand">Diente de León</div><p className="footer-tagline">Boutique artesanal · Los Muermos<br/>Región de Los Lagos, Chile<br/>Hecho con amor desde el sur</p></div><div><div className="footer-head">Tienda</div>{[['home','Inicio'],['catalog','Colección'],['pers','Personalizar'],['nosotras','Nosotras']].map(([pg,label])=><button key={pg} className="footer-link" onClick={()=>goPage(pg)}>{label}</button>)}</div><div><div className="footer-head">Contacto</div><a className="footer-link" href="https://www.instagram.com/joyeria_diente_de_leon" target="_blank" rel="noreferrer">@joyeria_diente_de_leon</a><button className="footer-link" onClick={()=>window.open('https://wa.me/56934828288','_blank')}>WhatsApp</button></div></div><div className="footer-bot"><span>© 2025 Diente de León Boutique</span><button className="admin-link" onClick={()=>setShowLogin(true)}>admin</button></div></footer>{cartOpen&&<CartDrawer cart={cart} onClose={()=>setCartOpen(false)} onRemove={removeFromCart} onCheckout={checkoutWA}/>}<Toast msg={toast}/><a href="https://wa.me/56934828288?text=Hola!%20Me%20interesa%20conocer%20más%20sobre%20sus%20joyas%20✨" target="_blank" rel="noreferrer" style={{position:'fixed',bottom:'1.8rem',right:'1.8rem',width:'56px',height:'56px',borderRadius:'50%',background:'#25d366',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 4px 20px rgba(37,211,102,0.45)',zIndex:500,transition:'transform 0.2s',cursor:'pointer',textDecoration:'none'}}><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg></a></>);}
+
+// ── APP ──
+function App(){
+  const [page,setPage]=useState('home');
+  const [cart,setCart]=useState([]);
+  const [cartOpen,setCartOpen]=useState(false);
+  const [products,setProducts]=useState([]);
+  const [loading,setLoading]=useState(true);
+  const [toast,setToast]=useState('');
+  const [modalProduct,setModalProduct]=useState(null);
+
+  useEffect(()=>{
+    fetchProducts().then(data=>{
+      setProducts(data);
+      setLoading(false);
+    });
+  },[]);
+
+  function showToast(m){setToast(m);setTimeout(()=>setToast(''),2400);}
+  function addToCart(item){setCart(c=>[...c,item]);showToast(item.name+' agregado al carrito');}
+  function removeFromCart(i){setCart(c=>c.filter((_,idx)=>idx!==i));}
+  function checkoutWA(){let msg='Hola! Quiero hacer un pedido:\n';cart.forEach((it,i)=>{msg+=`${i+1}. ${it.name} (${it.metal}) - $${it.price.toLocaleString('es-CL')}\n`;});msg+=`\nTotal: $${cart.reduce((s,it)=>s+it.price,0).toLocaleString('es-CL')}`;window.open(`https://wa.me/56934828288?text=${encodeURIComponent(msg)}`,'_blank');}
+  function goPage(p){setPage(p);window.scrollTo(0,0);}
+
+  return(<>
+    <div className="announce">Envío a todo Chile · Material hipoalergénico · Hecho a mano en Los Muermos</div>
+    <nav>
+      <div className="nav-left">
+        <button className="nav-link" onClick={()=>goPage('home')}>Inicio</button>
+        <button className="nav-link" onClick={()=>goPage('catalog')}>Colección</button>
+        <button className="nav-link" onClick={()=>goPage('pers')}>Personalizar</button>
+      </div>
+      <div className="nav-logo" onClick={()=>goPage('home')}><LogoImg/><span className="nav-logo-text">Diente de León</span></div>
+      <div className="nav-right">
+        <button className="nav-link" onClick={()=>goPage('nosotras')}>Nosotras</button>
+        <button className="cart-btn" onClick={()=>setCartOpen(true)}>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          {cart.length>0&&<span className="cart-count">{cart.length}</span>}
+        </button>
+      </div>
+    </nav>
+    {page==='home'&&<HomePage products={products} loading={loading} onAdd={addToCart} onOpen={setModalProduct} goPage={goPage}/>}
+    {page==='catalog'&&<CatalogPage products={products} loading={loading} onAdd={addToCart} onOpen={setModalProduct}/>}
+    {page==='pers'&&<PersPage onAdd={addToCart} goPage={goPage}/>}
+    {page==='nosotras'&&<NosotrasPage goPage={goPage}/>}
+    {modalProduct&&<ProductModal p={modalProduct} onAdd={addToCart} onClose={()=>setModalProduct(null)}/>}
+    <footer>
+      <div className="footer-top">
+        <div>
+          <div className="footer-brand">Diente de León</div>
+          <p className="footer-tagline">Boutique artesanal · Los Muermos<br/>Región de Los Lagos, Chile<br/>Hecho con amor desde el sur</p>
+        </div>
+        <div>
+          <div className="footer-head">Tienda</div>
+          {[['home','Inicio'],['catalog','Colección'],['pers','Personalizar'],['nosotras','Nosotras']].map(([pg,label])=><button key={pg} className="footer-link" onClick={()=>goPage(pg)}>{label}</button>)}
+        </div>
+        <div>
+          <div className="footer-head">Contacto</div>
+          <a className="footer-link" href="https://www.instagram.com/joyeria_diente_de_leon" target="_blank" rel="noreferrer">@joyeria_diente_de_leon</a>
+          <button className="footer-link" onClick={()=>window.open('https://wa.me/56934828288','_blank')}>WhatsApp</button>
+        </div>
+      </div>
+      <div className="footer-bot"><span>© 2025 Diente de León Boutique</span></div>
+    </footer>
+    {cartOpen&&<CartDrawer cart={cart} onClose={()=>setCartOpen(false)} onRemove={removeFromCart} onCheckout={checkoutWA}/>}
+    <Toast msg={toast}/>
+    <a href="https://wa.me/56934828288?text=Hola!%20Me%20interesa%20conocer%20más%20sobre%20sus%20joyas%20✨" target="_blank" rel="noreferrer" style={{position:'fixed',bottom:'1.8rem',right:'1.8rem',width:'56px',height:'56px',borderRadius:'50%',background:'#25d366',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 4px 20px rgba(37,211,102,0.45)',zIndex:500,cursor:'pointer',textDecoration:'none'}}>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.872.49 3.627 1.346 5.152L2 22l4.942-1.297A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.323-.46-4.71-1.26l-.337-.2-3.498.919.934-3.408-.22-.35A7.962 7.962 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+    </a>
+  </>);
+}
 ReactDOM.createRoot(document.getElementById('store')).render(<App/>);
 document.getElementById('store').style.display='block';
 </script>
