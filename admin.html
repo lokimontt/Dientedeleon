@@ -10,20 +10,16 @@
 :root{
   --bg:#f7f5f2;--surface:#ffffff;--surface2:#f0ede8;
   --text:#1a1612;--muted:#7a7068;--light:#b0a898;
-  --gold:#b8922a;--gold2:#e8c96a;--rose:#d4788a;--sage:#6a9e68;--teal:#5a9e98;
-  --border:#e2ddd6;--border2:#ccc8c0;
-  --red:#c0392b;--red-bg:#fdf0ee;
+  --gold:#b8922a;--gold2:#e8c96a;--rose:#d4788a;--sage:#6a9e68;
+  --border:#e2ddd6;--border2:#ccc8c0;--red:#c0392b;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Montserrat',sans-serif;font-weight:400;background:var(--bg);color:var(--text);font-size:13px;-webkit-font-smoothing:antialiased;min-height:100vh}
-.serif{font-family:'Cormorant Garamond',serif}
 button{font-family:'Montserrat',sans-serif;cursor:pointer}
 input,textarea,select{font-family:'Montserrat',sans-serif}
-
-/* ── LOGIN ── */
 .login-screen{position:fixed;inset:0;background:var(--text);display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity 0.4s}
 .login-screen.hide{opacity:0;pointer-events:none}
-.login-card{background:var(--surface);width:360px;padding:3rem 2.5rem;position:relative}
+.login-card{background:var(--surface);width:360px;padding:3rem 2.5rem}
 .login-top{text-align:center;margin-bottom:2.5rem}
 .login-logo{width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 1.2rem;display:block;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
 .login-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;margin-bottom:0.25rem}
@@ -34,16 +30,15 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
 .lf input:focus{border-bottom-color:var(--text)}
 .login-btn{width:100%;background:var(--text);color:white;border:none;padding:0.9rem;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem;transition:background 0.2s}
 .login-btn:hover{background:var(--gold)}
+.login-btn:disabled{opacity:0.5;cursor:not-allowed}
 .login-err{font-size:0.62rem;color:var(--rose);text-align:center;margin-top:0.7rem;min-height:1rem}
-
-/* ── LAYOUT ── */
-.app{display:none;min-height:100vh}
-.app.visible{display:flex;flex-direction:column}
+.app{display:none;min-height:100vh;flex-direction:column}
+.app.visible{display:flex}
 .topbar{background:var(--text);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:50}
 .topbar-left{display:flex;align-items:center;gap:14px}
 .topbar-logo{width:36px;height:36px;border-radius:50%;object-fit:cover;opacity:0.9}
 .topbar-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:white;opacity:0.9}
-.topbar-sep{color:rgba(255,255,255,0.2);font-size:1rem}
+.topbar-sep{color:rgba(255,255,255,0.2)}
 .topbar-page{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
 .topbar-right{display:flex;align-items:center;gap:1rem}
 .topbar-user{font-size:0.6rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em}
@@ -51,18 +46,12 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
 .topbar-btn:hover{border-color:rgba(255,255,255,0.5);color:white}
 .topbar-store-btn{background:var(--gold);color:white;border:none;padding:0.4rem 1rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
 .topbar-store-btn:hover{background:var(--gold2);color:var(--text)}
-
 .main{flex:1;padding:2rem}
 .inner{max-width:1200px;margin:0 auto}
-
-/* ── STATS BAR ── */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
 .stat{background:var(--surface);border:1px solid var(--border);padding:1.2rem 1.5rem;display:flex;flex-direction:column;gap:0.3rem}
 .stat-val{font-size:1.8rem;font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--text);line-height:1}
 .stat-lbl{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--light)}
-.stat-sub{font-size:0.65rem;color:var(--sage)}
-
-/* ── TOOLBAR ── */
 .toolbar{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.5rem;flex-wrap:wrap}
 .toolbar-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;flex:1}
 .cat-tabs{display:flex;gap:0;border:1px solid var(--border);overflow:hidden}
@@ -76,20 +65,18 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
 .search-ico{position:absolute;left:0.6rem;top:50%;transform:translateY(-50%);color:var(--light)}
 .add-btn{background:var(--text);color:white;border:none;padding:0.6rem 1.2rem;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;display:flex;align-items:center;gap:6px;transition:background 0.2s;white-space:nowrap}
 .add-btn:hover{background:var(--gold)}
-
-/* ── PRODUCT GRID ── */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
-.pcard{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s;position:relative}
-.pcard:hover{box-shadow:0 4px 24px rgba(0,0,0,0.08);border-color:var(--border2)}
+.pcard{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:box-shadow 0.2s;position:relative}
+.pcard:hover{box-shadow:0 4px 24px rgba(0,0,0,0.08)}
 .pcard.inactive{opacity:0.5}
 .pcard-img{aspect-ratio:1;background:var(--surface2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .pcard-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pcard-img canvas{position:absolute;inset:0;width:100%;height:100%}
-.pcard-img-overlay{position:absolute;inset:0;background:rgba(26,22,18,0.55);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.pcard-img-overlay{position:absolute;inset:0;background:rgba(26,22,18,0.55);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center}
 .pcard:hover .pcard-img-overlay{opacity:1}
-.img-action{background:white;color:var(--text);border:none;padding:0.45rem 0.9rem;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s;display:flex;align-items:center;gap:4px}
+.img-action{background:white;color:var(--text);border:none;padding:0.45rem 0.9rem;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s;display:flex;align-items:center;gap:4px;cursor:pointer}
 .img-action:hover{background:var(--gold);color:white}
-.img-action input{display:none}
+.badge-pill{position:absolute;top:8px;left:8px;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;color:white;font-weight:500;z-index:2}
 .pcard-body{padding:1.1rem}
 .pcard-cat{font-size:0.54rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--light);margin-bottom:0.35rem}
 .pcard-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;line-height:1.2;margin-bottom:0.5rem;color:var(--text)}
@@ -100,9 +87,6 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
 .pact:hover{background:var(--text);color:white;border-color:var(--text)}
 .pact.danger:hover{background:var(--red);border-color:var(--red)}
 .pact.success:hover{background:var(--sage);border-color:var(--sage)}
-.badge-pill{position:absolute;top:8px;left:8px;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;color:white;font-weight:500;z-index:2}
-
-/* ── MODAL ── */
 .modal-bg{position:fixed;inset:0;background:rgba(26,22,18,0.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fadeIn 0.2s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .modal{background:var(--surface);width:100%;max-width:680px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.25)}
@@ -120,10 +104,9 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
 .field textarea{resize:vertical;min-height:80px;line-height:1.7}
 .field input.gold{color:var(--gold)}
 .field-hint{font-size:0.58rem;color:var(--light);margin-top:0.2rem}
-.img-upload-zone{border:1.5px dashed var(--border2);padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;cursor:pointer;transition:all 0.2s;background:var(--bg);position:relative}
+.img-upload-zone{border:1.5px dashed var(--border2);padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;cursor:pointer;transition:all 0.2s;background:var(--bg);position:relative;overflow:hidden}
 .img-upload-zone:hover{border-color:var(--gold);background:var(--surface2)}
 .img-upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.img-upload-zone img{width:100%;max-height:160px;object-fit:contain;margin-top:0.5rem}
 .img-upload-lbl{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--light)}
 .color-row{display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center}
 .color-dot{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:all 0.2s;flex-shrink:0}
@@ -137,52 +120,28 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
 .btn-save{background:var(--text);color:white;border:none;padding:0.65rem 1.8rem;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;transition:background 0.2s;display:flex;align-items:center;gap:6px}
 .btn-save:hover{background:var(--gold)}
 .btn-save:disabled{opacity:0.5;cursor:not-allowed}
-
-/* ── CONFIRM MODAL ── */
 .confirm-modal{background:var(--surface);width:360px;padding:2rem;box-shadow:0 24px 60px rgba(0,0,0,0.2)}
 .confirm-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:0.7rem}
 .confirm-msg{font-size:0.72rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
 .confirm-actions{display:flex;gap:0.5rem;justify-content:flex-end}
 .btn-danger{background:var(--red);color:white;border:none;padding:0.6rem 1.4rem;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;transition:opacity 0.2s}
 .btn-danger:hover{opacity:0.85}
-
-/* ── TOAST ── */
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text);color:white;padding:0.75rem 1.8rem;font-size:0.65rem;letter-spacing:0.08em;opacity:0;transition:all 0.3s;z-index:600;pointer-events:none;border-left:3px solid var(--gold);white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .toast.error{border-left-color:var(--rose)}
-
-/* ── LOADING ── */
 .loading{display:flex;align-items:center;justify-content:center;padding:4rem;flex-direction:column;gap:1rem}
 .spinner{width:32px;height:32px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite}
+.spinner.sm{width:14px;height:14px;border-width:1.5px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-txt{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--light)}
-
-/* ── EMPTY ── */
 .empty{text-align:center;padding:4rem 2rem;border:1px dashed var(--border2);background:var(--surface)}
-.empty-ico{font-size:2rem;margin-bottom:0.8rem;color:var(--light)}
 .empty-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin-bottom:0.4rem}
 .empty-sub{font-size:0.68rem;color:var(--muted)}
-
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .stats{grid-template-columns:1fr 1fr}
-  .form-row{grid-template-columns:1fr}
-  .form-row.tri{grid-template-columns:1fr 1fr}
-  .toolbar{gap:0.5rem}
-  .search-wrap{flex:0 0 160px}
-  .main{padding:1rem}
-}
-@media(max-width:480px){
-  .stats{grid-template-columns:1fr 1fr}
-  .cat-tabs{display:none}
-  .search-wrap{flex:1}
-  .topbar-user{display:none}
-}
+@media(max-width:768px){.stats{grid-template-columns:1fr 1fr}.form-row,.form-row.tri{grid-template-columns:1fr}.main{padding:1rem}.cat-tabs{display:none}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-card">
     <div class="login-top">
@@ -190,22 +149,14 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
       <div class="login-title">Panel de Administración</div>
       <div class="login-sub">Diente de León · Boutique Artesanal</div>
     </div>
-    <div class="lf">
-      <label>Usuario</label>
-      <input type="text" id="loginUser" placeholder="andrea" autocomplete="username">
-    </div>
-    <div class="lf">
-      <label>Contraseña</label>
-      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
-    </div>
-    <button class="login-btn" onclick="doLogin()">Ingresar</button>
+    <div class="lf"><label>Email</label><input type="email" id="loginEmail" placeholder="andrea.barria88@gmail.com" autocomplete="email"></div>
+    <div class="lf"><label>Contraseña</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"></div>
+    <button class="login-btn" id="loginBtn" onclick="doLogin()">Ingresar</button>
     <div class="login-err" id="loginErr"></div>
   </div>
 </div>
 
-<!-- APP -->
 <div class="app" id="app">
-  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-left">
       <img src="uploads/logo.jpg" class="topbar-logo" onerror="this.style.display='none'">
@@ -222,168 +173,68 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
       <button class="topbar-btn" onclick="doLogout()">Cerrar sesión</button>
     </div>
   </div>
-
-  <div class="main">
-    <div class="inner">
-
-      <!-- Stats -->
-      <div class="stats" id="statsBar">
-        <div class="stat"><div class="stat-val" id="statTotal">—</div><div class="stat-lbl">Productos totales</div></div>
-        <div class="stat"><div class="stat-val" id="statAretes">—</div><div class="stat-lbl">Aros</div></div>
-        <div class="stat"><div class="stat-val" id="statPulseras">—</div><div class="stat-lbl">Pulseras</div></div>
-        <div class="stat"><div class="stat-val" id="statCollares">—</div><div class="stat-lbl">Collares · Anillos</div></div>
-      </div>
-
-      <!-- Toolbar -->
-      <div class="toolbar">
-        <div class="toolbar-title">Productos</div>
-        <div class="cat-tabs">
-          <button class="cat-tab active" data-cat="all" onclick="setCat('all',this)">Todos</button>
-          <button class="cat-tab" data-cat="aretes" onclick="setCat('aretes',this)">Aros</button>
-          <button class="cat-tab" data-cat="pulseras" onclick="setCat('pulseras',this)">Pulseras</button>
-          <button class="cat-tab" data-cat="collares" onclick="setCat('collares',this)">Collares</button>
-          <button class="cat-tab" data-cat="anillos" onclick="setCat('anillos',this)">Anillos</button>
-        </div>
-        <div class="search-wrap">
-          <svg class="search-ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="renderGrid()">
-        </div>
-        <button class="add-btn" onclick="openModal()">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Nuevo producto
-        </button>
-      </div>
-
-      <!-- Grid -->
-      <div id="gridWrap"></div>
-
+  <div class="main"><div class="inner">
+    <div class="stats">
+      <div class="stat"><div class="stat-val" id="statTotal">—</div><div class="stat-lbl">Productos totales</div></div>
+      <div class="stat"><div class="stat-val" id="statAretes">—</div><div class="stat-lbl">Aros</div></div>
+      <div class="stat"><div class="stat-val" id="statPulseras">—</div><div class="stat-lbl">Pulseras</div></div>
+      <div class="stat"><div class="stat-val" id="statCollares">—</div><div class="stat-lbl">Collares · Anillos</div></div>
     </div>
-  </div>
+    <div class="toolbar">
+      <div class="toolbar-title">Productos</div>
+      <div class="cat-tabs">
+        <button class="cat-tab active" onclick="setCat('all',this)">Todos</button>
+        <button class="cat-tab" onclick="setCat('aretes',this)">Aros</button>
+        <button class="cat-tab" onclick="setCat('pulseras',this)">Pulseras</button>
+        <button class="cat-tab" onclick="setCat('collares',this)">Collares</button>
+        <button class="cat-tab" onclick="setCat('anillos',this)">Anillos</button>
+      </div>
+      <div class="search-wrap">
+        <svg class="search-ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="renderGrid()">
+      </div>
+      <button class="add-btn" onclick="openModal()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nuevo producto
+      </button>
+    </div>
+    <div id="gridWrap"></div>
+  </div></div>
 </div>
 
-<!-- PRODUCT MODAL -->
 <div class="modal-bg" id="productModal" style="display:none" onclick="if(event.target===this)closeModal()">
   <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-head">
-      <h2 id="modalTitle">Nuevo producto</h2>
-      <button class="modal-close" onclick="closeModal()">×</button>
-    </div>
+    <div class="modal-head"><h2 id="modalTitle">Nuevo producto</h2><button class="modal-close" onclick="closeModal()">×</button></div>
     <div class="modal-body">
-
-      <!-- Imagen -->
       <div class="field">
         <label>Foto del producto</label>
-        <div class="img-upload-zone" id="uploadZone">
+        <div class="img-upload-zone">
           <input type="file" id="imgFile" accept="image/*" onchange="previewImg(this)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b0a898" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           <div class="img-upload-lbl" id="uploadLbl">Clic o arrastra una foto aquí</div>
           <img id="imgPreview" style="display:none;max-height:160px;width:100%;object-fit:contain;margin-top:0.5rem">
         </div>
       </div>
-
-      <!-- Nombre y categoría -->
       <div class="form-row">
-        <div class="field">
-          <label>Nombre del producto *</label>
-          <input type="text" id="fNombre" placeholder="Ej: Aros Flor Rocalla Roja">
-        </div>
-        <div class="field">
-          <label>Categoría *</label>
-          <select id="fCategoria">
-            <option value="">— Seleccionar —</option>
-            <option value="aretes">Aros</option>
-            <option value="pulseras">Pulseras</option>
-            <option value="collares">Collares</option>
-            <option value="anillos">Anillos</option>
-          </select>
-        </div>
+        <div class="field"><label>Nombre del producto *</label><input type="text" id="fNombre" placeholder="Ej: Aros Flor Rocalla Roja" maxlength="120"></div>
+        <div class="field"><label>Categoría *</label><select id="fCategoria"><option value="">— Seleccionar —</option><option value="aretes">Aros</option><option value="pulseras">Pulseras</option><option value="collares">Collares</option><option value="anillos">Anillos</option></select></div>
       </div>
-
-      <!-- Descripción -->
-      <div class="field">
-        <label>Descripción</label>
-        <textarea id="fDescripcion" placeholder="Describe el material, técnica, colores y características únicas de la pieza..."></textarea>
-      </div>
-
-      <!-- Tag y precio -->
+      <div class="field"><label>Descripción</label><textarea id="fDescripcion" placeholder="Describe el material, técnica y características únicas..." maxlength="600"></textarea></div>
       <div class="form-row">
-        <div class="field">
-          <label>Etiqueta (ej: Oro 18K · Rocalla roja)</label>
-          <input type="text" id="fTag" placeholder="Metal · Material">
-        </div>
-        <div class="field">
-          <label>Precio (CLP) *</label>
-          <input type="number" id="fPrecio" class="gold" placeholder="18900" step="100" min="0">
-        </div>
+        <div class="field"><label>Etiqueta (ej: Oro 18K · Rocalla roja)</label><input type="text" id="fTag" placeholder="Metal · Material" maxlength="80"></div>
+        <div class="field"><label>Precio (CLP) *</label><input type="number" id="fPrecio" class="gold" placeholder="18900" step="100" min="0" max="9999999"></div>
       </div>
-
-      <!-- Metal, forma, piedra -->
       <div class="form-row tri">
-        <div class="field">
-          <label>Metal base</label>
-          <select id="fMetal">
-            <option value="gold">Oro 18K</option>
-            <option value="silver">Plata</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Forma / diseño</label>
-          <select id="fShape">
-            <option value="flower">Flor</option>
-            <option value="heart">Corazón</option>
-            <option value="hoop">Aro</option>
-            <option value="dream">Atrapasueños</option>
-            <option value="star">Estrella</option>
-            <option value="butterfly">Mariposa</option>
-            <option value="drop">Gota</option>
-            <option value="tree">Árbol de la Vida</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Piedra central</label>
-          <select id="fStone">
-            <option value="none">Sin piedra</option>
-            <option value="crystal">Cristal</option>
-            <option value="turquoise">Turquesa</option>
-            <option value="moonstone">Piedra luna</option>
-            <option value="amethyst">Amatista</option>
-          </select>
-        </div>
+        <div class="field"><label>Metal base</label><select id="fMetal"><option value="gold">Oro 18K</option><option value="silver">Plata</option></select></div>
+        <div class="field"><label>Forma / diseño</label><select id="fShape"><option value="flower">Flor</option><option value="heart">Corazón</option><option value="hoop">Aro</option><option value="dream">Atrapasueños</option><option value="star">Estrella</option><option value="butterfly">Mariposa</option><option value="drop">Gota</option><option value="tree">Árbol de la Vida</option></select></div>
+        <div class="field"><label>Piedra central</label><select id="fStone"><option value="none">Sin piedra</option><option value="crystal">Cristal</option><option value="turquoise">Turquesa</option><option value="moonstone">Piedra luna</option><option value="amethyst">Amatista</option></select></div>
       </div>
-
-      <!-- Color mostacilla -->
-      <div class="field">
-        <label>Color mostacilla rocalla</label>
-        <div class="color-row" id="colorRow"></div>
-      </div>
-
-      <!-- Badge -->
-      <div class="field">
-        <label>Badge destacado</label>
-        <div class="badge-row">
-          <button type="button" class="badge-opt" data-badge="" onclick="selBadge('')">Sin badge</button>
-          <button type="button" class="badge-opt" data-badge="new" onclick="selBadge('new')">Nuevo</button>
-          <button type="button" class="badge-opt" data-badge="pop" onclick="selBadge('pop')">Popular</button>
-          <button type="button" class="badge-opt" data-badge="sale" onclick="selBadge('sale')">Oferta</button>
-        </div>
-      </div>
-
-      <!-- Orden -->
+      <div class="field"><label>Color mostacilla rocalla</label><div class="color-row" id="colorRow"></div></div>
+      <div class="field"><label>Badge destacado</label><div class="badge-row"><button type="button" class="badge-opt sel" data-badge="" onclick="selBadge('')">Sin badge</button><button type="button" class="badge-opt" data-badge="new" onclick="selBadge('new')">Nuevo</button><button type="button" class="badge-opt" data-badge="pop" onclick="selBadge('pop')">Popular</button><button type="button" class="badge-opt" data-badge="sale" onclick="selBadge('sale')">Oferta</button></div></div>
       <div class="form-row">
-        <div class="field">
-          <label>Orden en la tienda</label>
-          <input type="number" id="fOrden" placeholder="0" min="0">
-          <div class="field-hint">Menor número = aparece primero</div>
-        </div>
-        <div class="field">
-          <label>Estado</label>
-          <select id="fActivo">
-            <option value="true">Activo (visible en tienda)</option>
-            <option value="false">Inactivo (oculto)</option>
-          </select>
-        </div>
+        <div class="field"><label>Orden en la tienda</label><input type="number" id="fOrden" placeholder="0" min="0" max="9999"><div class="field-hint">Menor número = aparece primero</div></div>
+        <div class="field"><label>Estado</label><select id="fActivo"><option value="true">Activo (visible en tienda)</option><option value="false">Inactivo (oculto)</option></select></div>
       </div>
-
     </div>
     <div class="modal-foot">
       <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
@@ -395,10 +246,9 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
   </div>
 </div>
 
-<!-- CONFIRM MODAL -->
 <div class="modal-bg" id="confirmModal" style="display:none" onclick="if(event.target===this)closeConfirm()">
   <div class="confirm-modal">
-    <div class="confirm-title" id="confirmTitle">Eliminar producto</div>
+    <div class="confirm-title">Eliminar producto</div>
     <div class="confirm-msg" id="confirmMsg">¿Estás segura? Esta acción no se puede deshacer.</div>
     <div class="confirm-actions">
       <button class="btn-cancel" onclick="closeConfirm()">Cancelar</button>
@@ -407,30 +257,21 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG SUPABASE ──
-const SB_URL = 'https://fzznsf vovotttjtznkzy.supabase.co'.replace(' ','');
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6em5zZnZvdm90dHRqdHpua3p5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNjczNDcsImV4cCI6MjA5MjY0MzM0N30.VuJNdHM-zvoIsvOhFlH7aodF9jlzbcAyPucVGYRfnoM';
-const BUCKET = 'fotos-productos';
+const SB_URL='https://fzznsf vovotttjtznkzy.supabase.co'.replace(' ','');
+const SB_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6em5zZnZvdm90dHRqdHpua3p5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNjczNDcsImV4cCI6MjA5MjY0MzM0N30.VuJNdHM-zvoIsvOhFlH7aodF9jlzbcAyPucVGYRfnoM';
+const BUCKET='fotos-productos';
+const metalColors={gold:'#d4af37',silver:'#c0c0c0'};
+const stoneColors={none:null,crystal:'#d8f0ff',turquoise:'#40e0d0',moonstone:'#ede0ff',amethyst:'#9b59b6'};
+const beadColorList=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7','multi'];
+const badgeColors={new:'#8aaa88',pop:'#7ab8b0',sale:'#d4788a'};
+const badgeNames={new:'Nuevo',pop:'Popular',sale:'Oferta'};
+const catNames={aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
+let products=[],currentCat='all',editingId=null,selectedColor='#c0392b',selectedBadge='',newImgFile=null,accessToken=null;
 
-// ── CREDENCIALES ADMIN ──
-const ADMIN_USER = 'andrea';
-const ADMIN_PASS = 'dientedeleon2025';
-
-// ── SVG HELPERS ──
-const metalColors = {gold:'#d4af37',silver:'#c0c0c0'};
-const stoneColors = {none:null,crystal:'#d8f0ff',turquoise:'#40e0d0',moonstone:'#ede0ff',amethyst:'#9b59b6'};
-const beadColorList = ['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#8e44ad','#e84393','#e8b4b8','#2c3e50','#bdc3c7','multi'];
-const badgeColors = {new:'#8aaa88',pop:'#7ab8b0',sale:'#d4788a'};
-const badgeNames = {new:'Nuevo',pop:'Popular',sale:'Oferta'};
-
-function gBC(b,i){
-  if(b==='multi'){const c=['#c0392b','#e67e22','#f1c40f','#27ae60','#2980b9','#8e44ad','#e84393'];return c[i%c.length];}
-  return b;
-}
+function gBC(b,i){if(b==='multi'){const c=['#c0392b','#e67e22','#f1c40f','#27ae60','#2980b9','#8e44ad','#e84393'];return c[i%c.length];}return b||'#c0392b';}
 
 function jSVG(shape,metal,bead,stone,W,H){
   const m=metalColors[metal]||'#d4af37',sc=stoneColors[stone]||null,cx=W/2,cy=H/2,r=Math.min(W,H)/220;
@@ -438,6 +279,7 @@ function jSVG(shape,metal,bead,stone,W,H){
   if(shape==='flower'){[[cx,cy-38*r],[cx+36*r,cy-12*r],[cx+22*r,cy+30*r],[cx-22*r,cy+30*r],[cx-36*r,cy-12*r]].forEach(([px,py])=>{const a=Math.atan2(py-cy,px-cx)*180/Math.PI+90;h+=`<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="${14*r}" ry="${20*r}" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}" transform="rotate(${a} ${px.toFixed(1)} ${py.toFixed(1)})"/>`;});for(let i=0;i<22;i++){const a=i/22*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*38*r).toFixed(1)}" cy="${(cy+Math.sin(a)*38*r).toFixed(1)}" r="${i%3===0?4.5*r:3*r}" fill="${gBC(bead,i)}"/>`;}h+=`<circle cx="${cx}" cy="${cy}" r="${sc?13*r:9*r}" fill="${sc||m}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
   else if(shape==='heart'){h+=`<path d="M${cx} ${cy+55*r} C${cx} ${cy+55*r} ${cx-42*r} ${cy-2*r} a${26*r} ${26*r} 0 0 1 ${52*r} ${-16*r} a${26*r} ${26*r} 0 0 1 ${52*r} ${16*r} C${cx+42*r} ${cy+20*r} ${cx} ${cy+55*r}Z" fill="${m}" opacity="0.18" stroke="${m}" stroke-width="${1.5*r}"/>`;for(let i=-4;i<=4;i++)for(let j=-5;j<=3;j++){const x=cx+i*9*r,y=cy+j*8*r-5*r;if((x-cx)**2*0.8+(y-cy+5*r)**2<(38*r)**2*0.9)h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${2.8*r}" fill="${gBC(bead,Math.abs(i+j))}"/>`;}if(sc)h+=`<circle cx="${cx}" cy="${(cy-8*r).toFixed(1)}" r="${11*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
   else if(shape==='hoop'){h+=`<circle cx="${cx}" cy="${cy}" r="${58*r}" fill="none" stroke="${m}" stroke-width="${12*r}"/>`;for(let i=0;i<30;i++){const a=i/30*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*58*r).toFixed(1)}" cy="${(cy+Math.sin(a)*58*r).toFixed(1)}" r="${i%4===0?4.5*r:3*r}" fill="${gBC(bead,i)}"/>`;}if(sc)h+=`<circle cx="${cx}" cy="${cy}" r="${16*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
+  else if(shape==='dream'){h+=`<circle cx="${cx}" cy="${(cy-12*r).toFixed(1)}" r="${44*r}" fill="none" stroke="${m}" stroke-width="${1.5*r}"/>`;for(let i=0;i<8;i++){const a=i/8*Math.PI*2;h+=`<line x1="${cx}" y1="${(cy-12*r).toFixed(1)}" x2="${(cx+Math.cos(a)*44*r).toFixed(1)}" y2="${(cy-12*r+Math.sin(a)*44*r).toFixed(1)}" stroke="${m}" stroke-width="${r}" opacity="0.4"/>`;}for(const f of[0.35,0.65,1])for(let i=0;i<20;i++){const a=i/20*Math.PI*2;h+=`<circle cx="${(cx+Math.cos(a)*44*r*f).toFixed(1)}" cy="${(cy-12*r+Math.sin(a)*44*r*f).toFixed(1)}" r="${2.5*r}" fill="${gBC(bead,i)}"/>`;}[[cx-18*r,cy+36*r],[cx,cy+36*r],[cx+18*r,cy+36*r]].forEach(([x,y],i)=>{for(let k=0;k<(i===1?4:3);k++)h+=`<circle cx="${x.toFixed(1)}" cy="${(y+k*10*r).toFixed(1)}" r="${3*r}" fill="${gBC(bead,i*4+k)}"/>`;});if(sc)h+=`<circle cx="${cx}" cy="${(cy-12*r).toFixed(1)}" r="${13*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
   else if(shape==='star'){const sp=Array.from({length:10},(_,i)=>{const a=i/10*Math.PI*2-Math.PI/2,ri=i%2===0?48*r:24*r;return`${i===0?'M':'L'}${(cx+Math.cos(a)*ri).toFixed(1)},${(cy+Math.sin(a)*ri).toFixed(1)}`;}).join(' ')+'Z';h+=`<path d="${sp}" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}"/>`;for(let i=0;i<5;i++){const a=i/5*Math.PI*2-Math.PI/2;h+=`<circle cx="${(cx+Math.cos(a)*48*r).toFixed(1)}" cy="${(cy+Math.sin(a)*48*r).toFixed(1)}" r="${4.5*r}" fill="${gBC(bead,i)}"/>`;}h+=sc?`<circle cx="${cx}" cy="${cy}" r="${12*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`:`<circle cx="${cx}" cy="${cy}" r="${8*r}" fill="${m}"/>`;}
   else if(shape==='butterfly'){h+=`<path d="M${cx} ${cy} C${cx-8*r} ${cy-8*r} ${cx-44*r} ${cy-18*r} ${cx-42*r} ${cy} C${cx-40*r} ${cy+18*r} ${cx-8*r} ${cy+8*r} ${cx} ${cy}Z" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}"/>`;h+=`<path d="M${cx} ${cy} C${cx+8*r} ${cy-8*r} ${cx+44*r} ${cy-18*r} ${cx+42*r} ${cy} C${cx+40*r} ${cy+18*r} ${cx+8*r} ${cy+8*r} ${cx} ${cy}Z" fill="${m}" opacity="0.22" stroke="${m}" stroke-width="${1.5*r}"/>`;for(let i=0;i<16;i++){const a=i/8*Math.PI,s=i<8?-1:1;h+=`<circle cx="${(cx+s*(20+Math.cos(a)*22)*r).toFixed(1)}" cy="${(cy+Math.sin(a)*16*r).toFixed(1)}" r="${2.8*r}" fill="${gBC(bead,i)}"/>`;}h+=`<ellipse cx="${cx}" cy="${cy}" rx="${5*r}" ry="${16*r}" fill="${m}" opacity="0.5"/>`;}
   else if(shape==='drop'){h+=`<path d="M${cx} ${cy-52*r} C${cx} ${cy-52*r} ${cx-36*r} ${cy-20*r} ${cx-36*r} ${cy} A${36*r} ${36*r} 0 0 0 ${cx+36*r} ${cy} C${cx+36*r} ${cy-20*r} ${cx} ${cy-52*r}Z" fill="${m}" opacity="0.18" stroke="${m}" stroke-width="${1.5*r}"/>`;for(let i=-3;i<=3;i++)for(let j=-4;j<=2;j++){const x=cx+i*10*r,y=cy+j*10*r;if((x-cx)**2*0.9+(y-cy+8*r)**2<(32*r)**2)h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${3*r}" fill="${gBC(bead,Math.abs(i+j))}"/>`;}if(sc)h+=`<circle cx="${cx}" cy="${cy}" r="${11*r}" fill="${sc}" stroke="${m}" stroke-width="${1.5*r}"/>`;}
@@ -449,8 +291,7 @@ function jSVG(shape,metal,bead,stone,W,H){
 
 function drawSVGOnCanvas(canvas,p){
   if(!canvas)return;
-  const w=canvas.width,h=canvas.height;
-  const ctx=canvas.getContext('2d');
+  const w=canvas.width,h=canvas.height,ctx=canvas.getContext('2d');
   ctx.clearRect(0,0,w,h);
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 220 220">${jSVG(p.shape||'flower',p.metal||'gold',p.mc||'#c0392b',p.stone||'none',220,220)}</svg>`;
   const blob=new Blob([svg],{type:'image/svg+xml'});
@@ -460,457 +301,232 @@ function drawSVGOnCanvas(canvas,p){
   img.src=url;
 }
 
-// ── STATE ──
-let products = [];
-let currentCat = 'all';
-let editingId = null;
-let selectedColor = '#c0392b';
-let selectedBadge = '';
-let newImgFile = null;
-let confirmCallback = null;
-
-// ── SUPABASE FETCH ──
-async function sbFetch(path, opts={}) {
-  const res = await fetch(SB_URL + path, {
-    ...opts,
-    headers: {
-      'apikey': SB_KEY,
-      'Authorization': 'Bearer ' + SB_KEY,
-      'Content-Type': 'application/json',
-      'Prefer': opts.prefer || '',
-      ...opts.headers
-    }
-  });
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(err);
-  }
-  const txt = await res.text();
-  return txt ? JSON.parse(txt) : null;
-}
-
-async function sbUpload(file, path) {
-  const res = await fetch(`${SB_URL}/storage/v1/object/${BUCKET}/${path}`, {
-    method: 'POST',
-    headers: {
-      'apikey': SB_KEY,
-      'Authorization': 'Bearer ' + SB_KEY,
-      'Content-Type': file.type,
-      'Cache-Control': '3600',
-      'x-upsert': 'true'
-    },
-    body: file
-  });
-  if (!res.ok) throw new Error(await res.text());
-  return `${SB_URL}/storage/v1/object/public/${BUCKET}/${path}`;
-}
-
-// ── LOGIN ──
-function doLogin() {
-  const u = document.getElementById('loginUser').value.trim();
-  const p = document.getElementById('loginPass').value;
-  if (u === ADMIN_USER && p === ADMIN_PASS) {
-    document.getElementById('loginErr').textContent = '';
+// ── AUTH ──
+async function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const btn=document.getElementById('loginBtn');
+  const err=document.getElementById('loginErr');
+  err.textContent='';btn.disabled=true;btn.textContent='Ingresando...';
+  try{
+    const res=await fetch(`${SB_URL}/auth/v1/token?grant_type=password`,{
+      method:'POST',
+      headers:{'apikey':SB_ANON,'Content-Type':'application/json'},
+      body:JSON.stringify({email,password:pass})
+    });
+    const data=await res.json();
+    if(!res.ok||!data.access_token){err.textContent='Email o contraseña incorrectos';return;}
+    accessToken=data.access_token;
     document.getElementById('loginScreen').classList.add('hide');
     document.getElementById('app').classList.add('visible');
-    document.getElementById('topbarUser').textContent = u;
-    setTimeout(() => {
-      document.getElementById('loginScreen').style.display = 'none';
-    }, 400);
+    document.getElementById('topbarUser').textContent=data.user?.email||'';
+    setTimeout(()=>document.getElementById('loginScreen').style.display='none',400);
     loadProducts();
-  } else {
-    document.getElementById('loginErr').textContent = 'Usuario o contraseña incorrectos';
-    document.getElementById('loginPass').value = '';
-  }
+  }catch(e){err.textContent='Error de conexión. Intenta de nuevo.';}
+  finally{btn.disabled=false;btn.textContent='Ingresar';}
 }
 
-document.getElementById('loginPass').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doLogin();
-});
-
-function doLogout() {
+async function doLogout(){
+  try{await fetch(`${SB_URL}/auth/v1/logout`,{method:'POST',headers:{'apikey':SB_ANON,'Authorization':'Bearer '+accessToken}});}catch(e){}
+  accessToken=null;products=[];
   document.getElementById('app').classList.remove('visible');
-  document.getElementById('loginScreen').style.display = 'flex';
-  setTimeout(() => document.getElementById('loginScreen').classList.remove('hide'), 10);
-  document.getElementById('loginUser').value = '';
-  document.getElementById('loginPass').value = '';
+  document.getElementById('loginScreen').style.display='flex';
+  setTimeout(()=>document.getElementById('loginScreen').classList.remove('hide'),10);
+  document.getElementById('loginEmail').value='';document.getElementById('loginPass').value='';
 }
 
-// ── LOAD PRODUCTS ──
-async function loadProducts() {
+document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+// ── SUPABASE (autenticado) ──
+async function sbFetch(path,opts={}){
+  const res=await fetch(SB_URL+path,{...opts,headers:{'apikey':SB_ANON,'Authorization':'Bearer '+accessToken,'Content-Type':'application/json','Prefer':opts.prefer||'',...opts.headers}});
+  if(res.status===401){showToast('Sesión expirada. Vuelve a iniciar sesión.',true);doLogout();throw new Error('Unauthorized');}
+  if(!res.ok){throw new Error(await res.text());}
+  const txt=await res.text();return txt?JSON.parse(txt):null;
+}
+
+async function sbUpload(file,path){
+  const res=await fetch(`${SB_URL}/storage/v1/object/${BUCKET}/${path}`,{method:'POST',headers:{'apikey':SB_ANON,'Authorization':'Bearer '+accessToken,'Content-Type':file.type,'Cache-Control':'3600','x-upsert':'true'},body:file});
+  if(!res.ok)throw new Error(await res.text());
+  return`${SB_URL}/storage/v1/object/public/${BUCKET}/${path}`;
+}
+
+// ── PRODUCTOS ──
+async function loadProducts(){
   showLoading();
-  try {
-    const data = await sbFetch('/rest/v1/productos?select=*&order=orden.asc,created_at.desc');
-    products = data || [];
-    updateStats();
-    renderGrid();
-  } catch(e) {
-    showToast('Error al cargar productos: ' + e.message, true);
-    showEmpty('Error de conexión con la base de datos.');
-  }
+  try{
+    const data=await sbFetch('/rest/v1/productos?select=*&order=orden.asc,created_at.desc');
+    products=data||[];updateStats();renderGrid();
+  }catch(e){if(e.message!=='Unauthorized')showToast('Error al cargar productos',true);}
 }
 
-function updateStats() {
-  document.getElementById('statTotal').textContent = products.length;
-  document.getElementById('statAretes').textContent = products.filter(p=>p.categoria==='aretes').length;
-  document.getElementById('statPulseras').textContent = products.filter(p=>p.categoria==='pulseras').length;
-  document.getElementById('statCollares').textContent = products.filter(p=>p.categoria==='collares'||p.categoria==='anillos').length;
+function updateStats(){
+  document.getElementById('statTotal').textContent=products.length;
+  document.getElementById('statAretes').textContent=products.filter(p=>p.categoria==='aretes').length;
+  document.getElementById('statPulseras').textContent=products.filter(p=>p.categoria==='pulseras').length;
+  document.getElementById('statCollares').textContent=products.filter(p=>p.categoria==='collares'||p.categoria==='anillos').length;
 }
 
-// ── RENDER GRID ──
-function setCat(cat, btn) {
-  currentCat = cat;
-  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
+function setCat(cat,btn){
+  currentCat=cat;
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
   renderGrid();
 }
 
-function renderGrid() {
-  const search = document.getElementById('searchInput').value.toLowerCase();
-  let filtered = products.filter(p => {
-    const matchCat = currentCat === 'all' || p.categoria === currentCat;
-    const matchSearch = !search || p.nombre.toLowerCase().includes(search) || (p.tag||'').toLowerCase().includes(search);
-    return matchCat && matchSearch;
-  });
-
-  const wrap = document.getElementById('gridWrap');
-
-  if (filtered.length === 0) {
-    wrap.innerHTML = `
-      <div class="empty">
-        <div class="empty-ico">✦</div>
-        <div class="empty-title">Sin productos en esta categoría</div>
-        <div class="empty-sub">Haz clic en "Nuevo producto" para agregar uno.</div>
-      </div>`;
-    return;
+function renderGrid(){
+  const search=document.getElementById('searchInput').value.toLowerCase();
+  const filtered=products.filter(p=>(currentCat==='all'||p.categoria===currentCat)&&(!search||p.nombre.toLowerCase().includes(search)||(p.tag||'').toLowerCase().includes(search)));
+  const wrap=document.getElementById('gridWrap');
+  wrap.innerHTML='';
+  if(filtered.length===0){
+    const e=document.createElement('div');e.className='empty';
+    const t=document.createElement('div');t.className='empty-title';t.textContent='Sin productos en esta categoría';
+    const s=document.createElement('div');s.className='empty-sub';s.textContent='Haz clic en "Nuevo producto" para agregar uno.';
+    e.appendChild(t);e.appendChild(s);wrap.appendChild(e);return;
   }
-
-  wrap.innerHTML = `<div class="pgrid" id="prodGrid"></div>`;
-  const grid = document.getElementById('prodGrid');
-
-  filtered.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'pcard' + (p.activo === false ? ' inactive' : '');
-    card.id = 'card-' + p.id;
-
-    const catNames = {aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
-
-    card.innerHTML = `
-      <div class="pcard-img">
-        ${p.badge ? `<div class="badge-pill" style="background:${badgeColors[p.badge]||'#888'}">${badgeNames[p.badge]||p.badge}</div>` : ''}
-        ${p.imagen_url
-          ? `<img src="${p.imagen_url}" alt="${p.nombre}" loading="lazy">`
-          : `<canvas width="260" height="260" id="cv-${p.id}"></canvas>`
-        }
-        <div class="pcard-img-overlay">
-          <label class="img-action">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            Cambiar foto
-            <input type="file" accept="image/*" onchange="quickUploadPhoto(this, ${p.id})">
-          </label>
-        </div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-cat">${catNames[p.categoria]||p.categoria}</div>
-        <div class="pcard-name">${p.nombre}</div>
-        <div class="pcard-tag">${p.tag||''}</div>
-        <div class="pcard-price">$${(p.precio||0).toLocaleString('es-CL')}</div>
-        <div class="pcard-actions">
-          <button class="pact" onclick="openModal(${p.id})">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            Editar
-          </button>
-          <button class="pact success" onclick="toggleActivo(${p.id}, ${p.activo})">
-            ${p.activo === false
-              ? `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Activar`
-              : `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Ocultar`
-            }
-          </button>
-          <button class="pact danger" onclick="confirmDelete(${p.id}, '${p.nombre.replace(/'/g,"\\'")}')">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-            Eliminar
-          </button>
-        </div>
-      </div>`;
-
-    grid.appendChild(card);
-
-    // Draw SVG canvas if no photo
-    if (!p.imagen_url) {
-      setTimeout(() => {
-        const cv = document.getElementById('cv-' + p.id);
-        if (cv) drawSVGOnCanvas(cv, p);
-      }, 50);
-    }
+  const grid=document.createElement('div');grid.className='pgrid';wrap.appendChild(grid);
+  filtered.forEach(p=>{
+    const card=document.createElement('div');card.className='pcard'+(p.activo===false?' inactive':'');
+    const imgWrap=document.createElement('div');imgWrap.className='pcard-img';
+    if(p.badge){const bp=document.createElement('div');bp.className='badge-pill';bp.style.background=badgeColors[p.badge]||'#888';bp.textContent=badgeNames[p.badge]||p.badge;imgWrap.appendChild(bp);}
+    if(p.imagen_url){const img=document.createElement('img');img.src=p.imagen_url;img.alt=p.nombre;img.loading='lazy';imgWrap.appendChild(img);}
+    else{const cv=document.createElement('canvas');cv.width=260;cv.height=260;imgWrap.appendChild(cv);setTimeout(()=>drawSVGOnCanvas(cv,p),50);}
+    const overlay=document.createElement('div');overlay.className='pcard-img-overlay';
+    const lbl=document.createElement('label');lbl.className='img-action';
+    lbl.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Cambiar foto';
+    const fi=document.createElement('input');fi.type='file';fi.accept='image/*';fi.style.display='none';
+    fi.addEventListener('change',()=>quickUploadPhoto(fi,p.id));
+    lbl.appendChild(fi);overlay.appendChild(lbl);imgWrap.appendChild(overlay);card.appendChild(imgWrap);
+    const body=document.createElement('div');body.className='pcard-body';
+    const cat=document.createElement('div');cat.className='pcard-cat';cat.textContent=catNames[p.categoria]||p.categoria;
+    const name=document.createElement('div');name.className='pcard-name';name.textContent=p.nombre;
+    const tag=document.createElement('div');tag.className='pcard-tag';tag.textContent=p.tag||'';
+    const price=document.createElement('div');price.className='pcard-price';price.textContent='$'+(p.precio||0).toLocaleString('es-CL');
+    const actions=document.createElement('div');actions.className='pcard-actions';
+    const bEdit=document.createElement('button');bEdit.className='pact';bEdit.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar';bEdit.addEventListener('click',()=>openModal(p.id));
+    const bTog=document.createElement('button');bTog.className='pact success';
+    bTog.innerHTML=p.activo===false?'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Activar':'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Ocultar';
+    bTog.addEventListener('click',()=>toggleActivo(p.id,p.activo));
+    const bDel=document.createElement('button');bDel.className='pact danger';bDel.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg> Eliminar';
+    bDel.addEventListener('click',()=>confirmDelete(p.id,p.nombre));
+    actions.appendChild(bEdit);actions.appendChild(bTog);actions.appendChild(bDel);
+    body.appendChild(cat);body.appendChild(name);body.appendChild(tag);body.appendChild(price);body.appendChild(actions);
+    card.appendChild(body);grid.appendChild(card);
   });
 }
 
-function showLoading() {
-  document.getElementById('gridWrap').innerHTML = `
-    <div class="loading">
-      <div class="spinner"></div>
-      <div class="loading-txt">Cargando productos...</div>
-    </div>`;
-}
+function showLoading(){const w=document.getElementById('gridWrap');w.innerHTML='';const l=document.createElement('div');l.className='loading';const sp=document.createElement('div');sp.className='spinner';const tx=document.createElement('div');tx.className='loading-txt';tx.textContent='Cargando productos...';l.appendChild(sp);l.appendChild(tx);w.appendChild(l);}
 
-function showEmpty(msg) {
-  document.getElementById('gridWrap').innerHTML = `
-    <div class="empty">
-      <div class="empty-ico">⚠</div>
-      <div class="empty-title">Sin resultados</div>
-      <div class="empty-sub">${msg}</div>
-    </div>`;
-}
-
-// ── QUICK PHOTO UPLOAD ──
-async function quickUploadPhoto(input, productId) {
-  const file = input.files[0];
-  if (!file) return;
+async function quickUploadPhoto(input,productId){
+  const file=input.files[0];if(!file)return;
   showToast('Subiendo foto...');
-  try {
-    const ext = file.name.split('.').pop();
-    const path = `producto-${productId}-${Date.now()}.${ext}`;
-    const url = await sbUpload(file, path);
-    await sbFetch(`/rest/v1/productos?id=eq.${productId}`, {
-      method: 'PATCH',
-      prefer: 'return=minimal',
-      body: JSON.stringify({ imagen_url: url })
-    });
-    const idx = products.findIndex(p => p.id === productId);
-    if (idx !== -1) products[idx].imagen_url = url;
-    renderGrid();
-    showToast('Foto actualizada ✓');
-  } catch(e) {
-    showToast('Error al subir foto: ' + e.message, true);
-  }
+  try{
+    const ext=file.name.split('.').pop();
+    const url=await sbUpload(file,`producto-${productId}-${Date.now()}.${ext}`);
+    await sbFetch(`/rest/v1/productos?id=eq.${productId}`,{method:'PATCH',prefer:'return=minimal',body:JSON.stringify({imagen_url:url})});
+    const idx=products.findIndex(p=>p.id===productId);
+    if(idx!==-1)products[idx].imagen_url=url;
+    renderGrid();showToast('Foto actualizada ✓');
+  }catch(e){if(e.message!=='Unauthorized')showToast('Error: '+e.message,true);}
 }
 
-// ── MODAL ──
-function buildColorRow() {
-  const row = document.getElementById('colorRow');
-  row.innerHTML = beadColorList.map(c => {
-    const bg = c === 'multi'
-      ? 'conic-gradient(#c0392b,#f1c40f,#27ae60,#2980b9,#8e44ad,#c0392b)'
-      : c;
-    const sel = c === selectedColor ? ' sel' : '';
-    return `<div class="color-dot${sel}" style="background:${bg}" onclick="selColor('${c}')" title="${c}"></div>`;
-  }).join('');
-}
-
-function selColor(c) {
-  selectedColor = c;
-  buildColorRow();
-}
-
-function selBadge(b) {
-  selectedBadge = b;
-  document.querySelectorAll('.badge-opt').forEach(el => {
-    el.classList.toggle('sel', el.dataset.badge === b);
+function buildColorRow(){
+  const row=document.getElementById('colorRow');row.innerHTML='';
+  beadColorList.forEach(c=>{
+    const dot=document.createElement('div');dot.className='color-dot'+(c===selectedColor?' sel':'');
+    dot.style.background=c==='multi'?'conic-gradient(#c0392b,#f1c40f,#27ae60,#2980b9,#8e44ad,#c0392b)':c;
+    dot.addEventListener('click',()=>selColor(c));row.appendChild(dot);
   });
 }
+function selColor(c){selectedColor=c;buildColorRow();}
+function selBadge(b){selectedBadge=b;document.querySelectorAll('.badge-opt').forEach(el=>el.classList.toggle('sel',el.dataset.badge===b));}
 
-function openModal(id = null) {
-  editingId = id;
-  newImgFile = null;
-
-  const modal = document.getElementById('productModal');
-  const title = document.getElementById('modalTitle');
-
-  if (id) {
-    const p = products.find(x => x.id === id);
-    if (!p) return;
-    title.textContent = 'Editar producto';
-    document.getElementById('fNombre').value = p.nombre || '';
-    document.getElementById('fCategoria').value = p.categoria || '';
-    document.getElementById('fDescripcion').value = p.descripcion || '';
-    document.getElementById('fTag').value = p.tag || '';
-    document.getElementById('fPrecio').value = p.precio || '';
-    document.getElementById('fMetal').value = p.metal || 'gold';
-    document.getElementById('fShape').value = p.shape || 'flower';
-    document.getElementById('fStone').value = p.stone || 'none';
-    document.getElementById('fOrden').value = p.orden || 0;
-    document.getElementById('fActivo').value = String(p.activo !== false);
-    selectedColor = p.mc || '#c0392b';
-    selectedBadge = p.badge || '';
-    // Preview
-    if (p.imagen_url) {
-      document.getElementById('imgPreview').src = p.imagen_url;
-      document.getElementById('imgPreview').style.display = 'block';
-      document.getElementById('uploadLbl').textContent = 'Clic para cambiar foto';
-    } else {
-      document.getElementById('imgPreview').style.display = 'none';
-      document.getElementById('uploadLbl').textContent = 'Clic o arrastra una foto aquí';
-    }
-  } else {
-    title.textContent = 'Nuevo producto';
-    document.getElementById('fNombre').value = '';
-    document.getElementById('fCategoria').value = '';
-    document.getElementById('fDescripcion').value = '';
-    document.getElementById('fTag').value = '';
-    document.getElementById('fPrecio').value = '';
-    document.getElementById('fMetal').value = 'gold';
-    document.getElementById('fShape').value = 'flower';
-    document.getElementById('fStone').value = 'none';
-    document.getElementById('fOrden').value = 0;
-    document.getElementById('fActivo').value = 'true';
-    document.getElementById('imgPreview').style.display = 'none';
-    document.getElementById('uploadLbl').textContent = 'Clic o arrastra una foto aquí';
-    document.getElementById('imgFile').value = '';
-    selectedColor = '#c0392b';
-    selectedBadge = '';
+function openModal(id=null){
+  editingId=id;newImgFile=null;
+  if(id){
+    const p=products.find(x=>x.id===id);if(!p)return;
+    document.getElementById('modalTitle').textContent='Editar producto';
+    document.getElementById('fNombre').value=p.nombre||'';
+    document.getElementById('fCategoria').value=p.categoria||'';
+    document.getElementById('fDescripcion').value=p.descripcion||'';
+    document.getElementById('fTag').value=p.tag||'';
+    document.getElementById('fPrecio').value=p.precio||'';
+    document.getElementById('fMetal').value=p.metal||'gold';
+    document.getElementById('fShape').value=p.shape||'flower';
+    document.getElementById('fStone').value=p.stone||'none';
+    document.getElementById('fOrden').value=p.orden||0;
+    document.getElementById('fActivo').value=String(p.activo!==false);
+    selectedColor=p.mc||'#c0392b';selectedBadge=p.badge||'';
+    if(p.imagen_url){document.getElementById('imgPreview').src=p.imagen_url;document.getElementById('imgPreview').style.display='block';document.getElementById('uploadLbl').textContent='Clic para cambiar foto';}
+    else{document.getElementById('imgPreview').style.display='none';document.getElementById('uploadLbl').textContent='Clic o arrastra una foto aquí';}
+  }else{
+    document.getElementById('modalTitle').textContent='Nuevo producto';
+    ['fNombre','fDescripcion','fTag','fPrecio'].forEach(i=>document.getElementById(i).value='');
+    document.getElementById('fCategoria').value='';document.getElementById('fMetal').value='gold';document.getElementById('fShape').value='flower';document.getElementById('fStone').value='none';document.getElementById('fOrden').value=0;document.getElementById('fActivo').value='true';
+    document.getElementById('imgPreview').style.display='none';document.getElementById('uploadLbl').textContent='Clic o arrastra una foto aquí';document.getElementById('imgFile').value='';
+    selectedColor='#c0392b';selectedBadge='';
   }
-
-  buildColorRow();
-  selBadge(selectedBadge);
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  buildColorRow();selBadge(selectedBadge);
+  document.getElementById('productModal').style.display='flex';document.body.style.overflow='hidden';
 }
+function closeModal(){document.getElementById('productModal').style.display='none';document.body.style.overflow='';editingId=null;newImgFile=null;}
+function previewImg(input){const file=input.files[0];if(!file)return;newImgFile=file;const r=new FileReader();r.onload=e=>{document.getElementById('imgPreview').src=e.target.result;document.getElementById('imgPreview').style.display='block';document.getElementById('uploadLbl').textContent=file.name;};r.readAsDataURL(file);}
 
-function closeModal() {
-  document.getElementById('productModal').style.display = 'none';
-  document.body.style.overflow = '';
-  editingId = null;
-  newImgFile = null;
-}
-
-function previewImg(input) {
-  const file = input.files[0];
-  if (!file) return;
-  newImgFile = file;
-  const reader = new FileReader();
-  reader.onload = e => {
-    document.getElementById('imgPreview').src = e.target.result;
-    document.getElementById('imgPreview').style.display = 'block';
-    document.getElementById('uploadLbl').textContent = file.name;
-  };
-  reader.readAsDataURL(file);
-}
-
-// ── SAVE ──
-async function saveProduct() {
-  const nombre = document.getElementById('fNombre').value.trim();
-  const categoria = document.getElementById('fCategoria').value;
-  const precio = parseInt(document.getElementById('fPrecio').value) || 0;
-
-  if (!nombre) { showToast('El nombre es obligatorio', true); return; }
-  if (!categoria) { showToast('Selecciona una categoría', true); return; }
-  if (!precio) { showToast('Ingresa un precio válido', true); return; }
-
-  const btn = document.getElementById('btnSave');
-  btn.disabled = true;
-  btn.innerHTML = '<div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Guardando...';
-
-  try {
-    let imagen_url = null;
-
-    // Upload photo if new
-    if (newImgFile) {
-      const ext = newImgFile.name.split('.').pop();
-      const path = `producto-${Date.now()}.${ext}`;
-      imagen_url = await sbUpload(newImgFile, path);
-    } else if (editingId) {
-      const existing = products.find(p => p.id === editingId);
-      imagen_url = existing?.imagen_url || null;
-    }
-
-    const payload = {
-      nombre,
-      categoria,
-      descripcion: document.getElementById('fDescripcion').value.trim() || null,
-      tag: document.getElementById('fTag').value.trim() || null,
-      precio,
-      metal: document.getElementById('fMetal').value,
-      shape: document.getElementById('fShape').value,
-      stone: document.getElementById('fStone').value,
-      mc: selectedColor,
-      badge: selectedBadge || null,
-      orden: parseInt(document.getElementById('fOrden').value) || 0,
-      activo: document.getElementById('fActivo').value === 'true',
-      imagen_url
-    };
-
-    if (editingId) {
-      await sbFetch(`/rest/v1/productos?id=eq.${editingId}`, {
-        method: 'PATCH',
-        prefer: 'return=representation',
-        body: JSON.stringify(payload)
-      });
-      const idx = products.findIndex(p => p.id === editingId);
-      if (idx !== -1) products[idx] = { ...products[idx], ...payload };
+async function saveProduct(){
+  const nombre=document.getElementById('fNombre').value.trim();
+  const categoria=document.getElementById('fCategoria').value;
+  const precio=parseInt(document.getElementById('fPrecio').value)||0;
+  if(!nombre){showToast('El nombre es obligatorio',true);return;}
+  if(!categoria){showToast('Selecciona una categoría',true);return;}
+  if(!precio){showToast('Ingresa un precio válido',true);return;}
+  const btn=document.getElementById('btnSave');
+  btn.disabled=true;btn.innerHTML='<div class="spinner sm" style="display:inline-block;margin-right:6px"></div> Guardando...';
+  try{
+    let imagen_url=null;
+    if(newImgFile){const ext=newImgFile.name.split('.').pop();imagen_url=await sbUpload(newImgFile,`producto-${Date.now()}.${ext}`);}
+    else if(editingId)imagen_url=products.find(p=>p.id===editingId)?.imagen_url||null;
+    const payload={nombre,categoria,descripcion:document.getElementById('fDescripcion').value.trim()||null,tag:document.getElementById('fTag').value.trim()||null,precio,metal:document.getElementById('fMetal').value,shape:document.getElementById('fShape').value,stone:document.getElementById('fStone').value,mc:selectedColor,badge:selectedBadge||null,orden:parseInt(document.getElementById('fOrden').value)||0,activo:document.getElementById('fActivo').value==='true',imagen_url};
+    if(editingId){
+      await sbFetch(`/rest/v1/productos?id=eq.${editingId}`,{method:'PATCH',prefer:'return=representation',body:JSON.stringify(payload)});
+      const idx=products.findIndex(p=>p.id===editingId);if(idx!==-1)products[idx]={...products[idx],...payload};
       showToast('Producto actualizado ✓');
-    } else {
-      const result = await sbFetch('/rest/v1/productos', {
-        method: 'POST',
-        prefer: 'return=representation',
-        body: JSON.stringify(payload)
-      });
-      if (result && result[0]) products.unshift(result[0]);
+    }else{
+      const result=await sbFetch('/rest/v1/productos',{method:'POST',prefer:'return=representation',body:JSON.stringify(payload)});
+      if(result&&result[0])products.unshift(result[0]);
       showToast('Producto creado ✓');
     }
-
-    closeModal();
-    updateStats();
-    renderGrid();
-  } catch(e) {
-    showToast('Error al guardar: ' + e.message, true);
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardar producto`;
-  }
+    closeModal();updateStats();renderGrid();
+  }catch(e){if(e.message!=='Unauthorized')showToast('Error al guardar: '+e.message,true);}
+  finally{btn.disabled=false;btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardar producto';}
 }
 
-// ── TOGGLE ACTIVO ──
-async function toggleActivo(id, current) {
-  const newVal = current === false ? true : false;
-  try {
-    await sbFetch(`/rest/v1/productos?id=eq.${id}`, {
-      method: 'PATCH',
-      prefer: 'return=minimal',
-      body: JSON.stringify({ activo: newVal })
-    });
-    const idx = products.findIndex(p => p.id === id);
-    if (idx !== -1) products[idx].activo = newVal;
-    renderGrid();
-    showToast(newVal ? 'Producto activado ✓' : 'Producto ocultado');
-  } catch(e) {
-    showToast('Error: ' + e.message, true);
-  }
+async function toggleActivo(id,current){
+  try{
+    const newVal=current===false;
+    await sbFetch(`/rest/v1/productos?id=eq.${id}`,{method:'PATCH',prefer:'return=minimal',body:JSON.stringify({activo:newVal})});
+    const idx=products.findIndex(p=>p.id===id);if(idx!==-1)products[idx].activo=newVal;
+    renderGrid();showToast(newVal?'Producto activado ✓':'Producto ocultado');
+  }catch(e){if(e.message!=='Unauthorized')showToast('Error: '+e.message,true);}
 }
 
-// ── DELETE ──
-function confirmDelete(id, nombre) {
-  confirmCallback = async () => {
-    try {
-      await sbFetch(`/rest/v1/productos?id=eq.${id}`, { method: 'DELETE' });
-      products = products.filter(p => p.id !== id);
-      updateStats();
-      renderGrid();
-      showToast('Producto eliminado');
-    } catch(e) {
-      showToast('Error al eliminar: ' + e.message, true);
-    }
+function confirmDelete(id,nombre){
+  document.getElementById('confirmMsg').textContent=`¿Eliminar "${nombre}"? Esta acción no se puede deshacer.`;
+  document.getElementById('confirmBtn').onclick=async()=>{
+    try{
+      await sbFetch(`/rest/v1/productos?id=eq.${id}`,{method:'DELETE'});
+      products=products.filter(p=>p.id!==id);updateStats();renderGrid();showToast('Producto eliminado');
+    }catch(e){if(e.message!=='Unauthorized')showToast('Error al eliminar',true);}
     closeConfirm();
   };
-  document.getElementById('confirmMsg').textContent = `¿Eliminar "${nombre}"? Esta acción no se puede deshacer.`;
-  document.getElementById('confirmBtn').onclick = confirmCallback;
-  document.getElementById('confirmModal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  document.getElementById('confirmModal').style.display='flex';document.body.style.overflow='hidden';
 }
+function closeConfirm(){document.getElementById('confirmModal').style.display='none';document.body.style.overflow='';}
 
-function closeConfirm() {
-  document.getElementById('confirmModal').style.display = 'none';
-  document.body.style.overflow = '';
-  confirmCallback = null;
-}
-
-// ── TOAST ──
 let toastTimer;
-function showToast(msg, isError = false) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (isError ? ' error' : '');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { t.className = 'toast'; }, 2800);
+function showToast(msg,isError=false){
+  const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(isError?' error':'');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.className='toast';},2800);
 }
 </script>
 </body>
