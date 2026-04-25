@@ -441,9 +441,11 @@ function LiveJewel({shape,metal,mc,stone}){
 // ── PAGES ──
 function HomePage({products,loading,onAdd,onOpen,goPage}){
   const [filter,setFilter]=useState('all');
+  const [visibleCount,setVisibleCount]=useState(10);
   const cats=['all','aretes','pulseras','collares','anillos'];
   const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
   const filtered=filter==='all'?products:products.filter(p=>(p.categoria||p.cat)===filter);
+  const visible=filtered.slice(0,visibleCount);
   return(<div className="page active">
     <section className="hero">
       <div className="hero-left">
@@ -487,8 +489,9 @@ function HomePage({products,loading,onAdd,onOpen,goPage}){
         <h2 className="sec-title">Las más <em>amadas</em></h2>
         <div className="sec-line"/>
       </div>
-      <div className="filters" style={{marginBottom:'0'}}>{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>setFilter(c)}>{catLabel[c]}</button>)}</div>
-      {loading?<SkeletonGrid/>:<div className="pgrid">{filtered.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>}
+      <div className="filters" style={{marginBottom:'0'}}>{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>{setFilter(c);setVisibleCount(10);}}>{catLabel[c]}</button>)}</div>
+      <div className="pgrid">{visible.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>
+      {!loading&&visibleCount<filtered.length&&<div style={{textAlign:'center',padding:'2rem 0 0'}}><button onClick={()=>setVisibleCount(c=>c+10)} style={{background:'var(--text)',color:'white',border:'none',padding:'0.85rem 2.5rem',fontSize:'0.65rem',letterSpacing:'0.15em',textTransform:'uppercase',cursor:'pointer',fontFamily:"'Montserrat',sans-serif"}} onMouseOver={e=>e.currentTarget.style.background='var(--gold)'} onMouseOut={e=>e.currentTarget.style.background='var(--text)'}>Ver más productos</button></div>}
     </section>
     <div className="editorial">
       <div className="editorial-q">Cada joya nace de<br/>manos <em>dedicadas</em></div>
@@ -505,9 +508,11 @@ function HomePage({products,loading,onAdd,onOpen,goPage}){
 
 function CatalogPage({products,loading,onAdd,onOpen}){
   const [filter,setFilter]=useState('all');
+  const [visibleCount,setVisibleCount]=useState(10);
   const cats=['all','aretes','pulseras','collares','anillos'];
   const catLabel={all:'Todos',aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
   const filtered=filter==='all'?products:products.filter(p=>(p.categoria||p.cat)===filter);
+  const visible=filtered.slice(0,visibleCount);
   return(<div className="page active">
     <section className="sec" style={{paddingBottom:'0'}}>
       <div className="sec-head center">
@@ -515,9 +520,12 @@ function CatalogPage({products,loading,onAdd,onOpen}){
         <h2 className="sec-title">Joyería <em>artesanal</em></h2>
         <div className="sec-line"/>
       </div>
-      <div className="filters">{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>setFilter(c)}>{catLabel[c]}</button>)}</div>
+      <div className="filters">{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>{setFilter(c);setVisibleCount(10);}}>{catLabel[c]}</button>)}</div>
     </section>
-    {loading?<SkeletonGrid/>:<div className="pgrid">{filtered.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>}
+    <div>
+      {loading?<SkeletonGrid/>:<div className="pgrid">{visible.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>}
+      {!loading&&visibleCount<filtered.length&&<div style={{textAlign:'center',padding:'2rem 0'}}><button onClick={()=>setVisibleCount(c=>c+10)} style={{background:'var(--text)',color:'white',border:'none',padding:'0.85rem 2.5rem',fontSize:'0.65rem',letterSpacing:'0.15em',textTransform:'uppercase',cursor:'pointer',fontFamily:"'Montserrat',sans-serif"}} onMouseOver={e=>e.currentTarget.style.background='var(--gold)'} onMouseOut={e=>e.currentTarget.style.background='var(--text)'}>Ver más productos</button></div>}
+    </div>
   </div>);
 }
 
