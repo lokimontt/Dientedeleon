@@ -269,7 +269,7 @@ const beadColorList=['#c0392b','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9'
 const badgeColors={new:'#8aaa88',pop:'#7ab8b0',sale:'#d4788a'};
 const badgeNames={new:'Nuevo',pop:'Popular',sale:'Oferta'};
 const catNames={aretes:'Aros',pulseras:'Pulseras',collares:'Collares',anillos:'Anillos'};
-let products=[],currentCat='all',editingId=null,selectedColor='#c0392b',selectedBadge='',newImgFile=null,accessToken=null,visibleCount=10;
+let products=[],currentCat='all',editingId=null,selectedColor='#c0392b',selectedBadge='',newImgFile=null,accessToken=null;
 
 function gBC(b,i){if(b==='multi'){const c=['#c0392b','#e67e22','#f1c40f','#27ae60','#2980b9','#8e44ad','#e84393'];return c[i%c.length];}return b||'#c0392b';}
 
@@ -368,7 +368,7 @@ function updateStats(){
 }
 
 function setCat(cat,btn){
-  currentCat=cat;visibleCount=10;
+  currentCat=cat;
   document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
   renderGrid();
@@ -385,7 +385,7 @@ function renderGrid(){
     const s=document.createElement('div');s.className='empty-sub';s.textContent='Haz clic en "Nuevo producto" para agregar uno.';
     e.appendChild(t);e.appendChild(s);wrap.appendChild(e);return;
   }
-  const visible=filtered.slice(0,visibleCount);
+  const visible=filtered;
   const grid=document.createElement('div');grid.className='pgrid';wrap.appendChild(grid);
   visible.forEach(p=>{
     const card=document.createElement('div');card.className='pcard'+(p.activo===false?' inactive':'');
@@ -415,17 +415,6 @@ function renderGrid(){
     body.appendChild(cat);body.appendChild(name);body.appendChild(tag);body.appendChild(price);body.appendChild(actions);
     card.appendChild(body);grid.appendChild(card);
   });
-  if(visibleCount<filtered.length){
-    const btnWrap=document.createElement('div');
-    btnWrap.style.cssText='text-align:center;padding:2rem 0';
-    const btn=document.createElement('button');
-    btn.textContent='Ver más productos';
-    btn.style.cssText='background:var(--text);color:white;border:none;padding:0.85rem 2.5rem;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;font-family:Montserrat,sans-serif;transition:background 0.2s';
-    btn.addEventListener('mouseover',()=>btn.style.background='var(--gold)');
-    btn.addEventListener('mouseout',()=>btn.style.background='var(--text)');
-    btn.addEventListener('click',()=>{visibleCount+=10;renderGrid();});
-    btnWrap.appendChild(btn);wrap.appendChild(btnWrap);
-  }
 }
 
 function showLoading(){const w=document.getElementById('gridWrap');w.innerHTML='';const l=document.createElement('div');l.className='loading';const sp=document.createElement('div');sp.className='spinner';const tx=document.createElement('div');tx.className='loading-txt';tx.textContent='Cargando productos...';l.appendChild(sp);l.appendChild(tx);w.appendChild(l);}
