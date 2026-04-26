@@ -149,10 +149,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop
 .btn-wa:hover{background:#1a6130;color:white}
 .btn-sm{padding:0.55rem 1.2rem;font-size:0.6rem}
 .btn-full{width:100%}
-.about-grid{display:grid;grid-template-columns:1fr 1.2fr;border:1px solid var(--border);max-width:880px;margin:0 auto}
-.about-vis{background:var(--cream);display:flex;align-items:center;justify-content:center;padding:3.5rem;border-right:1px solid var(--border)}
-.about-circ{width:200px;height:200px;border-radius:50%;overflow:hidden;box-shadow:0 16px 50px rgba(0,0,0,0.1)}
-.about-text{padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:center}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;border:1px solid var(--border);max-width:920px;margin:0 auto;align-items:start}
+.about-vis{background:var(--cream);display:flex;align-items:center;justify-content:center;padding:2.5rem 2rem;border-right:1px solid var(--border);position:sticky;top:80px;align-self:start}
+.about-circ{width:180px;height:180px;border-radius:50%;overflow:hidden;box-shadow:0 16px 50px rgba(0,0,0,0.1)}
+.about-text{padding:2.5rem 2.5rem;display:flex;flex-direction:column}
 .about-text h2{font-size:2.2rem;font-style:italic;margin-bottom:1.2rem}
 .about-text p{font-size:0.74rem;color:var(--muted);line-height:2;margin-bottom:0.8rem}
 .pills{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.2rem;margin-bottom:1.5rem}
@@ -494,7 +494,7 @@ function HomePage({products,loading,onAdd,onOpen,goPage}){
             <div style={{width:'24px',height:'1px',background:'rgba(42,36,32,0.25)'}}/>
           </div>
         </div>
-        <img src="uploads/logo.jpg" alt="Diente de León" className="hero-main-svg" style={{borderRadius:'50%',boxShadow:'0 24px 80px rgba(0,0,0,0.18)',objectFit:'cover',position:'relative',zIndex:2,width:'min(380px,60%)',animation:'floatSvg 6s ease-in-out infinite'}}/>
+        <img src="https://fzznsfvovotttjtznkzy.supabase.co/storage/v1/object/public/fotos-productos/banner/banner-4.jpg" alt="Diente de León" className="hero-main-svg" style={{borderRadius:'18px',boxShadow:'0 24px 80px rgba(0,0,0,0.22)',objectFit:'cover',objectPosition:'center top',position:'relative',zIndex:2,width:'min(360px,62%)',aspectRatio:'3/4',animation:'floatSvg 6s ease-in-out infinite'}}/>
         <style>{`@keyframes floatSvg{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}`}</style>
         <div style={{position:'absolute',bottom:'8%',left:0,right:0,textAlign:'center',zIndex:3,padding:'0 2rem',display:'flex',flexDirection:'column',alignItems:'center',gap:'0.6rem'}}>
           <div style={{width:'36px',height:'1px',background:'rgba(42,36,32,0.35)'}}/>
@@ -725,7 +725,30 @@ function PersPage({products,onAdd,goPage}){
 
 
 function NosotrasPage({goPage}){
-  return(<div className="page active"><section className="sec"><div className="about-grid"><div className="about-vis"><div className="about-circ"><img src="uploads/logo.jpg" alt="Diente de León" style={{width:'200px',height:'200px',objectFit:'cover',display:'block'}}/></div></div><div className="about-text"><h2>Nuestra historia</h2><p>Somos una boutique artesanal de Los Muermos, en el sur de Chile. Cada una de nuestras joyas es elaborada de forma artesanal, cuidando cada detalle en su diseño y confección.</p><h3 style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',fontSize:'1.4rem',color:'var(--text)',marginTop:'1.5rem',marginBottom:'0.6rem'}}>Técnica de alambrismo</h3><p>Trabajamos con <strong>alambre de alta calidad con núcleo de cobre AAA</strong>, reconocido por su resistencia a la humedad, altas temperaturas, salitre y cloro. Su recubrimiento de <strong>polímero termoplástico</strong> permite conservar el color gold o silver, evitando la oxidación y asegurando una excelente durabilidad en el tiempo.</p><h3 style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',fontSize:'1.4rem',color:'var(--text)',marginTop:'1.5rem',marginBottom:'0.6rem'}}>Tejido tipo ladrillo</h3><p>Como complemento incorporamos la <strong>técnica de tejido tipo ladrillo</strong>, realizada con hilo y mostacillas rocallas seleccionadas con cuidado, logrando piezas delicadas, versátiles y con identidad propia.</p><h3 style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:'italic',fontSize:'1.4rem',color:'var(--text)',marginTop:'1.5rem',marginBottom:'0.6rem'}}>Bases enchapadas</h3><p>Todas nuestras bases son <strong>enchapadas en oro de 18k y plata</strong>, lo que garantiza un acabado elegante, resistente y de alta calidad.</p><p style={{fontStyle:'italic',color:'var(--gold)',marginTop:'1.2rem'}}>Cada pieza refleja un trabajo hecho a mano, pensado para acompañarte y perdurar en el tiempo.</p><div className="pills">{['Los Muermos','Hecho a mano','Cobre AAA','Oro 18k · Plata','Resistente','Personalizable'].map(t=><span key={t} className="pill">{t}</span>)}</div><div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap'}}><button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button><button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button></div></div></div></section></div>);
+  return(<div className="page active"><section className="sec" style={{padding:'3rem 1.5rem'}}><div style={{maxWidth:'640px',margin:'0 auto',textAlign:'center'}}>
+    <p style={{fontSize:'0.7rem',letterSpacing:'0.3em',textTransform:'uppercase',color:'var(--gold)',margin:'0 0 1rem',fontFamily:"'Montserrat',sans-serif"}}>Nuestra historia</p>
+    <div style={{width:'40px',height:'1px',background:'var(--gold)',margin:'0 auto 2.5rem'}}/>
+    <p style={{fontSize:'1.4rem',lineHeight:1.5,color:'var(--text)',fontStyle:'italic',margin:'0 0 0.5rem',fontWeight:400,fontFamily:"'Cormorant Garamond',serif"}}>"Cada pieza refleja un trabajo hecho a mano, pensado para acompañarte y perdurar en el tiempo."</p>
+    <div style={{width:'8px',height:'8px',background:'var(--gold)',borderRadius:'50%',margin:'2rem auto 3rem'}}/>
+  </div>
+  <div style={{maxWidth:'580px',margin:'0 auto',textAlign:'left'}}>
+    <p style={{fontSize:'0.85rem',color:'var(--muted)',lineHeight:1.9,margin:'0 0 1.5rem'}}>Somos una joyería de Los Muermos, en el sur de Chile. Cada pieza es elaborada de forma manual, cuidando el detalle en su diseño y confección.</p>
+    <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:'1.4rem',fontStyle:'italic',color:'var(--text)',margin:'2.5rem 0 0.6rem',fontWeight:400}}>Técnica de alambrismo</h3>
+    <p style={{fontSize:'0.85rem',color:'var(--muted)',lineHeight:1.9,margin:'0 0 1.5rem'}}>Trabajamos con <strong>alambre de alta calidad con núcleo de cobre AAA</strong>, reconocido por su resistencia a la humedad, altas temperaturas, salitre y cloro. Su recubrimiento de <strong>polímero termoplástico</strong> permite conservar el color gold o silver, evitando la oxidación y asegurando una excelente durabilidad en el tiempo.</p>
+    <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:'1.4rem',fontStyle:'italic',color:'var(--text)',margin:'2.5rem 0 0.6rem',fontWeight:400}}>Tejido tipo ladrillo</h3>
+    <p style={{fontSize:'0.85rem',color:'var(--muted)',lineHeight:1.9,margin:'0 0 1.5rem'}}>Como complemento incorporamos la <strong>técnica de tejido tipo ladrillo</strong>, realizada con hilo y mostacillas rocallas, logrando piezas delicadas, versátiles y con identidad propia.</p>
+    <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:'1.4rem',fontStyle:'italic',color:'var(--text)',margin:'2.5rem 0 0.6rem',fontWeight:400}}>Bases enchapadas</h3>
+    <p style={{fontSize:'0.85rem',color:'var(--muted)',lineHeight:1.9,margin:'0 0 2rem'}}>Todas nuestras bases son <strong>enchapadas en oro de 18k y plata</strong>, lo que garantiza un acabado elegante, resistente y de alta calidad.</p>
+    <div style={{width:'60px',height:'1px',background:'var(--gold)',margin:'3rem auto'}}/>
+    <div style={{display:'flex',gap:'0.5rem',justifyContent:'center',flexWrap:'wrap',marginTop:'2rem'}}>
+      {['Los Muermos','Hecho a mano','Cobre AAA','Oro 18k','Plata','Resistente','Personalizable'].map(t=><span key={t} className="pill">{t}</span>)}
+    </div>
+    <div style={{display:'flex',gap:'0.7rem',flexWrap:'wrap',justifyContent:'center',marginTop:'2.5rem'}}>
+      <button className="btn btn-dark" onClick={()=>goPage('catalog')}>Ver colección</button>
+      <button className="btn btn-outline" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>Instagram</button>
+    </div>
+  </div>
+  </section></div>);
 }
 
 function CartDrawer({cart,onClose,onRemove,onCheckout}){
@@ -798,7 +821,7 @@ function App(){
       <div className="footer-top">
         <div>
           <div className="footer-brand">Diente de León</div>
-          <p className="footer-tagline">Boutique artesanal · Los Muermos<br/>Región de Los Lagos, Chile<br/>Hecho con amor desde el sur</p>
+          <p className="footer-tagline">Joyería · Los Muermos<br/>Región de Los Lagos, Chile<br/>Hecho con amor desde el sur</p>
         </div>
         <div>
           <div className="footer-head">Tienda</div>
@@ -810,7 +833,7 @@ function App(){
           <button className="footer-link" onClick={()=>window.open('https://wa.me/56934828288','_blank')}>WhatsApp</button>
         </div>
       </div>
-      <div className="footer-bot"><span>© 2025 Diente de León Boutique</span></div>
+      <div className="footer-bot"><span>© 2025 Diente de León Joyería</span></div>
     </footer>
     {cartOpen&&<CartDrawer cart={cart} onClose={()=>setCartOpen(false)} onRemove={removeFromCart} onCheckout={checkoutWA}/>}
     <Toast msg={toast}/>
