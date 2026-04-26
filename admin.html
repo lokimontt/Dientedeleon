@@ -221,13 +221,11 @@ input,textarea,select{font-family:'Montserrat',sans-serif}
       </div>
       <div class="field"><label>Descripción</label><textarea id="fDescripcion" placeholder="Describe el material, técnica y características únicas..." maxlength="600"></textarea></div>
       <div class="form-row">
-        <div class="field"><label>Etiqueta (ej: Oro 18K · Rocalla roja)</label><input type="text" id="fTag" placeholder="Metal · Material" maxlength="80"></div>
+        <div class="field"><label>Etiqueta (ej: Golden · Rocalla roja)</label><input type="text" id="fTag" placeholder="Metal · Material" maxlength="80"></div>
         <div class="field"><label>Precio (CLP) *</label><input type="number" id="fPrecio" class="gold" placeholder="18900" step="100" min="0" max="9999999"></div>
       </div>
       <div class="form-row tri">
-        <div class="field"><label>Metal base</label><select id="fMetal"><option value="gold">Oro 18K</option><option value="silver">Plata</option></select></div>
-        <div class="field"><label>Forma / diseño</label><select id="fShape"><option value="flower">Flor</option><option value="heart">Corazón</option><option value="hoop">Aro</option><option value="dream">Atrapasueños</option><option value="star">Estrella</option><option value="butterfly">Mariposa</option><option value="drop">Gota</option><option value="tree">Árbol de la Vida</option></select></div>
-        <div class="field"><label>Piedra central</label><select id="fStone"><option value="none">Sin piedra</option><option value="crystal">Cristal</option><option value="turquoise">Turquesa</option><option value="moonstone">Piedra luna</option><option value="amethyst">Amatista</option></select></div>
+        <div class="field"><label>Metal base</label><select id="fMetal"><option value="gold">Golden</option><option value="silver">Plata</option></select></div>
       </div>
       <div class="field"><label>Color mostacilla rocalla</label><div class="color-row" id="colorRow"></div></div>
       <div class="field"><label>Badge destacado</label><div class="badge-row"><button type="button" class="badge-opt sel" data-badge="" onclick="selBadge('')">Sin badge</button><button type="button" class="badge-opt" data-badge="new" onclick="selBadge('new')">Nuevo</button><button type="button" class="badge-opt" data-badge="pop" onclick="selBadge('pop')">Popular</button><button type="button" class="badge-opt" data-badge="sale" onclick="selBadge('sale')">Oferta</button></div></div>
@@ -454,8 +452,6 @@ function openModal(id=null){
     document.getElementById('fTag').value=p.tag||'';
     document.getElementById('fPrecio').value=p.precio||'';
     document.getElementById('fMetal').value=p.metal||'gold';
-    document.getElementById('fShape').value=p.shape||'flower';
-    document.getElementById('fStone').value=p.stone||'none';
     document.getElementById('fOrden').value=p.orden||0;
     document.getElementById('fActivo').value=String(p.activo!==false);
     selectedColor=p.mc||'#c0392b';selectedBadge=p.badge||'';
@@ -464,7 +460,7 @@ function openModal(id=null){
   }else{
     document.getElementById('modalTitle').textContent='Nuevo producto';
     ['fNombre','fDescripcion','fTag','fPrecio'].forEach(i=>document.getElementById(i).value='');
-    document.getElementById('fCategoria').value='';document.getElementById('fMetal').value='gold';document.getElementById('fShape').value='flower';document.getElementById('fStone').value='none';document.getElementById('fOrden').value=0;document.getElementById('fActivo').value='true';
+    document.getElementById('fCategoria').value='';document.getElementById('fMetal').value='gold';document.getElementById('fOrden').value=0;document.getElementById('fActivo').value='true';
     document.getElementById('imgPreview').style.display='none';document.getElementById('uploadLbl').textContent='Clic o arrastra una foto aquí';document.getElementById('imgFile').value='';
     selectedColor='#c0392b';selectedBadge='';
   }
@@ -487,7 +483,7 @@ async function saveProduct(){
     let imagen_url=null;
     if(newImgFile){const ext=newImgFile.name.split('.').pop();imagen_url=await sbUpload(newImgFile,`producto-${Date.now()}.${ext}`);}
     else if(editingId)imagen_url=products.find(p=>p.id===editingId)?.imagen_url||null;
-    const payload={nombre,categoria,descripcion:document.getElementById('fDescripcion').value.trim()||null,tag:document.getElementById('fTag').value.trim()||null,precio,metal:document.getElementById('fMetal').value,shape:document.getElementById('fShape').value,stone:document.getElementById('fStone').value,mc:selectedColor,badge:selectedBadge||null,orden:parseInt(document.getElementById('fOrden').value)||0,activo:document.getElementById('fActivo').value==='true',imagen_url};
+    const payload={nombre,categoria,descripcion:document.getElementById('fDescripcion').value.trim()||null,tag:document.getElementById('fTag').value.trim()||null,precio,metal:document.getElementById('fMetal').value,mc:selectedColor,badge:selectedBadge||null,orden:parseInt(document.getElementById('fOrden').value)||0,activo:document.getElementById('fActivo').value==='true',imagen_url};
     if(editingId){
       await sbFetch(`/rest/v1/productos?id=eq.${editingId}`,{method:'PATCH',prefer:'return=representation',body:JSON.stringify(payload)});
       const idx=products.findIndex(p=>p.id===editingId);if(idx!==-1)products[idx]={...products[idx],...payload};
