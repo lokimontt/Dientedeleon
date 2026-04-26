@@ -66,6 +66,11 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop
 .sec-line{width:40px;height:1px;background:var(--border2);margin-top:1.2rem}
 .filters{display:flex;border-bottom:2px solid var(--border);margin-bottom:0;overflow-x:auto;scrollbar-width:none;gap:0.2rem;padding:0 0.5rem}
 .filters::-webkit-scrollbar{display:none}
+.filters-wrap{position:relative}
+.filters-arrow{display:none}
+.filters-arrow{display:none}
+@keyframes filtersPeek{0%{transform:translateX(0)}30%{transform:translateX(-50px)}60%{transform:translateX(0)}100%{transform:translateX(0)}}
+@keyframes arrowBounce{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(-50%) translateX(5px)}}
 .ftab{background:none;border:none;border-bottom:3px solid transparent;padding:1rem 1.6rem;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;margin-bottom:-2px;transition:all 0.22s;font-family:'Montserrat',sans-serif;font-weight:500}
 .ftab:hover{color:var(--gold);background:var(--cream)}
 .ftab.active{color:var(--text);border-bottom-color:var(--gold);font-weight:600}
@@ -220,6 +225,14 @@ footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem
   .about-grid{grid-template-columns:1fr}
   .about-vis{display:none}
   .pers-grid{grid-template-columns:1fr}
+  .filters-wrap::before{content:'';position:absolute;top:0;left:0;bottom:2px;width:50px;background:linear-gradient(90deg,#fff 30%,transparent);pointer-events:none;z-index:1;opacity:0;transition:opacity 0.3s}
+  .filters-wrap::after{content:'';position:absolute;top:0;right:0;bottom:2px;width:50px;background:linear-gradient(90deg,transparent,#fff 70%);pointer-events:none;z-index:1;opacity:0;transition:opacity 0.3s}
+  .filters-wrap:has(.filters-arrow-left)::before{opacity:1}
+  .filters-wrap:has(.filters-arrow-right)::after{opacity:1}
+  .filters-arrow{display:flex;align-items:center;justify-content:center;position:absolute;top:50%;transform:translateY(-50%);color:var(--gold);font-size:22px;font-weight:300;z-index:3;line-height:1;background:rgba(255,255,255,0.85);border:1px solid var(--gold);border-radius:50%;width:32px;height:32px;cursor:pointer;padding:0;font-family:inherit;-webkit-tap-highlight-color:transparent}
+  .filters-arrow-right{right:8px;animation:arrowBounce 1.6s ease-in-out infinite}
+  .filters-arrow-left{left:8px}
+  .filters-wrap .filters{animation:filtersPeek 2.8s ease-in-out 0.6s 1}
   .pers-preview{border-right:none;border-bottom:1px solid var(--border)}
   .footer-top{grid-template-columns:1fr;gap:2rem}
   .drawer{width:100%}
@@ -465,6 +478,24 @@ function BannerSlideshow(){
   </section>);
 }
 
+function FiltersBar({cats,catLabel,filter,setFilter,onChange}){
+  const ref=useRef(null);
+  const [showLeft,setShowLeft]=useState(false);
+  const [showRight,setShowRight]=useState(true);
+  function check(){
+    const el=ref.current;if(!el)return;
+    setShowLeft(el.scrollLeft>5);
+    setShowRight(el.scrollLeft+el.clientWidth<el.scrollWidth-5);
+  }
+  useEffect(()=>{check();const el=ref.current;if(!el)return;el.addEventListener('scroll',check);window.addEventListener('resize',check);return()=>{el.removeEventListener('scroll',check);window.removeEventListener('resize',check);};},[]);
+  function scrollBy(dir){const el=ref.current;if(!el)return;el.scrollBy({left:dir*120,behavior:'smooth'});}
+  return(<div className="filters-wrap">
+    {showLeft&&<button className="filters-arrow filters-arrow-left" onClick={()=>scrollBy(-1)} aria-label="Anterior">‹</button>}
+    <div className="filters" ref={ref}>{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>{setFilter(c);if(onChange)onChange();}}>{catLabel[c]}</button>)}</div>
+    {showRight&&<button className="filters-arrow filters-arrow-right" onClick={()=>scrollBy(1)} aria-label="Siguiente">›</button>}
+  </div>);
+}
+
 function HomePage({products,loading,onAdd,onOpen,goPage}){
   const [filter,setFilter]=useState('all');
   const [visibleCount,setVisibleCount]=useState(10);
@@ -516,7 +547,7 @@ function HomePage({products,loading,onAdd,onOpen,goPage}){
         <h2 className="sec-title">Las más <em>amadas</em></h2>
         <div className="sec-line"/>
       </div>
-      <div className="filters" style={{marginBottom:'0'}}>{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>{setFilter(c);setVisibleCount(10);}}>{catLabel[c]}</button>)}</div>
+      <FiltersBar cats={cats} catLabel={catLabel} filter={filter} setFilter={setFilter} onChange={()=>setVisibleCount(10)}/>
       <div className="pgrid">{visible.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>
       {!loading&&visibleCount<filtered.length&&<div style={{textAlign:'center',padding:'2rem 0 0'}}><button onClick={()=>setVisibleCount(c=>c+10)} style={{background:'var(--text)',color:'white',border:'none',padding:'0.85rem 2.5rem',fontSize:'0.65rem',letterSpacing:'0.15em',textTransform:'uppercase',cursor:'pointer',fontFamily:"'Montserrat',sans-serif"}} onMouseOver={e=>e.currentTarget.style.background='var(--gold)'} onMouseOut={e=>e.currentTarget.style.background='var(--text)'}>Ver más productos</button></div>}
     </section>
@@ -547,7 +578,7 @@ function CatalogPage({products,loading,onAdd,onOpen}){
         <h2 className="sec-title">Joyería <em>artesanal</em></h2>
         <div className="sec-line"/>
       </div>
-      <div className="filters">{cats.map(c=><button key={c} className={`ftab${filter===c?' active':''}`} onClick={()=>{setFilter(c);setVisibleCount(10);}}>{catLabel[c]}</button>)}</div>
+      <FiltersBar cats={cats} catLabel={catLabel} filter={filter} setFilter={setFilter} onChange={()=>setVisibleCount(10)}/>
     </section>
     <div>
       {loading?<SkeletonGrid/>:<div className="pgrid">{visible.map(p=><PCard key={p.id} p={p} onAdd={onAdd} onOpen={onOpen}/>)}</div>}
