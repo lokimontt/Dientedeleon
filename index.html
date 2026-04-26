@@ -559,8 +559,10 @@ function PersPage({products,onAdd,goPage}){
   const [step,setStep]=useState(1);
   const [metal,setMetal]=useState('gold');
   const [colors,setColors]=useState(['#c0392b']);
+  const [persCat,setPersCat]=useState('all');
 
-  const activeProds=products.filter(p=>p.activo!==false&&p.imagen_url);
+  const allActive=products.filter(p=>p.activo!==false&&p.imagen_url);
+  const activeProds=persCat==='all'?allActive:allActive.filter(p=>(p.categoria||p.cat)===persCat);
   const curProd=activeProds[imgIdx];
   const price=curProd?.precio||18900;
   const mname=metal==='gold'?'Golden':'Silver';
@@ -633,6 +635,11 @@ function PersPage({products,onAdd,goPage}){
         {/* PASO 1 — Modelo */}
         {step===1&&<div>
           <p style={{fontSize:'0.65rem',color:'var(--muted)',marginBottom:'1rem',lineHeight:1.8}}>Navega entre los modelos para elegir tu inspiración.</p>
+          <div style={{display:'flex',flexWrap:'wrap',gap:'0.4rem',marginBottom:'1.5rem'}}>
+            {[['all','Todos'],['aretes','Aros'],['pulseras','Pulseras'],['collares','Collares'],['anillos','Anillos']].map(([c,lbl])=>(
+              <button key={c} onClick={()=>{setPersCat(c);setImgIdx(0);}} style={{border:`1.5px solid ${persCat===c?'var(--text)':'var(--border)'}`,background:persCat===c?'var(--text)':'white',color:persCat===c?'white':'var(--muted)',padding:'0.4rem 0.8rem',fontSize:'0.6rem',letterSpacing:'0.06em',textTransform:'uppercase',cursor:'pointer',fontFamily:"'Montserrat',sans-serif",transition:'all 0.2s'}}>{lbl}</button>
+            ))}
+          </div>
           <button className="btn btn-dark btn-full" onClick={()=>setStep(2)}>Continuar →</button>
         </div>}
 
