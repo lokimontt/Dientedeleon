@@ -225,6 +225,7 @@ footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem
   .about-grid{grid-template-columns:1fr}
   .about-vis{display:none}
   .pers-grid{grid-template-columns:1fr}
+  .nosotras-eyebrow{font-size:0.7rem !important;letter-spacing:0.3em !important;color:var(--gold) !important;font-weight:400 !important}
   .filters-wrap::before{content:'';position:absolute;top:0;left:0;bottom:2px;width:50px;background:linear-gradient(90deg,#fff 30%,transparent);pointer-events:none;z-index:1;opacity:0;transition:opacity 0.3s}
   .filters-wrap::after{content:'';position:absolute;top:0;right:0;bottom:2px;width:50px;background:linear-gradient(90deg,transparent,#fff 70%);pointer-events:none;z-index:1;opacity:0;transition:opacity 0.3s}
   .filters-wrap:has(.filters-arrow-left)::before{opacity:1}
@@ -759,7 +760,7 @@ function PersPage({products,onAdd,goPage}){
 
 function NosotrasPage({goPage}){
   return(<div className="page active"><section className="sec" style={{padding:'3rem 1.5rem'}}><div style={{maxWidth:'640px',margin:'0 auto',textAlign:'center'}}>
-    <p style={{fontSize:'0.7rem',letterSpacing:'0.3em',textTransform:'uppercase',color:'var(--gold)',margin:'0 0 1rem',fontFamily:"'Montserrat',sans-serif"}}>Nuestra historia</p>
+    <p className="nosotras-eyebrow" style={{fontSize:'0.78rem',letterSpacing:'0.42em',textTransform:'uppercase',color:'#a87f30',margin:'0 0 1rem',fontFamily:"'Montserrat',sans-serif",fontWeight:500}}>Nuestra historia</p>
     <div style={{width:'40px',height:'1px',background:'var(--gold)',margin:'0 auto 2.5rem'}}/>
     <p style={{fontSize:'1.4rem',lineHeight:1.5,color:'var(--text)',fontStyle:'italic',margin:'0 0 0.5rem',fontWeight:400,fontFamily:"'Cormorant Garamond',serif"}}>"Cada pieza refleja un trabajo hecho a mano, pensado para acompañarte y perdurar en el tiempo."</p>
     <div style={{width:'8px',height:'8px',background:'var(--gold)',borderRadius:'50%',margin:'2rem auto 3rem'}}/>
