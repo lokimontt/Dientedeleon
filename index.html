@@ -30,6 +30,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop
 .nav-logo img.spinning{transform:rotate(360deg)}
 .nav-logo-text{display:none;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--text);white-space:nowrap}
 @media(max-width:768px){.nav-logo-text{display:block}}
+.nav-burger{display:none}
+.menu-overlay{display:none}
+.menu-panel{display:none}
 .cart-btn{background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:6px;transition:color 0.2s;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase}
 .cart-btn:hover{color:var(--text)}
 .cart-count{background:var(--rose);color:white;border-radius:50%;width:16px;height:16px;font-size:0.5rem;display:flex;align-items:center;justify-content:center;font-weight:500}
@@ -225,6 +228,30 @@ footer{background:var(--text);color:rgba(255,255,255,0.45);padding:3.5rem 2.5rem
   .about-grid{grid-template-columns:1fr}
   .about-vis{display:none}
   .pers-grid{grid-template-columns:1fr}
+  .nav-burger{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:14px;background:none;border:none;cursor:pointer;padding:0;margin-right:0.5rem;flex-shrink:0}
+  .nav-burger span{display:block;height:1.2px;background:var(--text);width:100%;border-radius:2px;transition:all 0.2s}
+  .nav-logo{gap:0.4rem;display:flex;align-items:center}
+  .menu-overlay{display:block;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);z-index:998;animation:fadeIn 0.25s ease}
+  .menu-panel{display:flex;flex-direction:column;position:fixed;top:0;left:-90%;width:78%;max-width:300px;height:100vh;background:white;z-index:999;transition:left 0.32s cubic-bezier(0.32,0.72,0.4,1);box-shadow:2px 0 30px rgba(0,0,0,0.1);overflow-y:auto}
+  .menu-panel.open{left:0}
+  .menu-head{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 1.4rem 1.2rem;border-bottom:1px solid #f0e9dc}
+  .menu-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--text);font-weight:400}
+  .menu-close{background:none;border:none;font-size:1.6rem;color:#999;cursor:pointer;line-height:1;padding:0;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:300}
+  .menu-nav{display:flex;flex-direction:column;padding:0.6rem 0}
+  .menu-item{background:none;border:none;text-align:left;padding:0.85rem 1.4rem;font-size:1.05rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;color:var(--text);cursor:pointer;letter-spacing:0.02em;display:flex;align-items:center;gap:0.6rem;transition:color 0.15s}
+  .menu-item:active{color:var(--gold)}
+  .menu-toggle{justify-content:space-between;width:100%}
+  .menu-arrow{transition:transform 0.25s;color:var(--gold);font-size:1rem;font-style:normal}
+  .menu-arrow.open{transform:rotate(90deg)}
+  .menu-sub{padding:0.3rem 0}
+  .menu-subitem{background:none;border:none;text-align:left;padding:0.55rem 1.4rem 0.55rem 2.6rem;font-size:0.78rem;font-family:'Montserrat',sans-serif;color:#7a7268;cursor:pointer;letter-spacing:0.05em;display:block;width:100%;position:relative;transition:color 0.15s}
+  .menu-subitem::before{content:'';position:absolute;left:1.9rem;top:50%;transform:translateY(-50%);width:4px;height:4px;border-radius:50%;background:#d4c5a8;transition:background 0.15s}
+  .menu-subitem:active{color:var(--gold)}
+  .menu-subitem:active::before{background:var(--gold)}
+  .menu-divider{height:1px;background:#f0e9dc;margin:0.6rem 1.4rem}
+  .menu-section-label{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);padding:0.3rem 1.4rem 0.3rem;margin:0;font-weight:500;font-family:'Montserrat',sans-serif}
+  .menu-social{font-family:'Montserrat',sans-serif !important;font-style:normal !important;font-size:0.85rem !important;color:#7a7268 !important;letter-spacing:0.05em !important}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   .nosotras-eyebrow{font-size:0.7rem !important;letter-spacing:0.3em !important;color:var(--gold) !important;font-weight:400 !important}
   .filters-wrap::before{content:'';position:absolute;top:0;left:0;bottom:2px;width:50px;background:linear-gradient(90deg,#fff 30%,transparent);pointer-events:none;z-index:1;opacity:0;transition:opacity 0.3s}
   .filters-wrap::after{content:'';position:absolute;top:0;right:0;bottom:2px;width:50px;background:linear-gradient(90deg,transparent,#fff 70%);pointer-events:none;z-index:1;opacity:0;transition:opacity 0.3s}
@@ -799,6 +826,8 @@ function App(){
   const [page,setPage]=useState('home');
   const [cart,setCart]=useState([]);
   const [cartOpen,setCartOpen]=useState(false);
+  const [menuOpen,setMenuOpen]=useState(false);
+  const [submenuColeccion,setSubmenuColeccion]=useState(false);
   const [products,setProducts]=useState([]);
   const [loading,setLoading]=useState(true);
   const [toast,setToast]=useState('');
@@ -837,7 +866,12 @@ function App(){
         <button className="nav-link" onClick={()=>goPage('catalog')}>Colección</button>
         <button className="nav-link" onClick={()=>goPage('pers')}>Personalizar</button>
       </div>
-      <div className="nav-logo" onClick={()=>goPage('home')}><LogoImg/><span className="nav-logo-text">Diente de León</span></div>
+      <div className="nav-logo" onClick={()=>goPage('home')}>
+        <button className="nav-burger" onClick={(e)=>{e.stopPropagation();setMenuOpen(true);}} aria-label="Menú">
+          <span/><span/><span/>
+        </button>
+        <LogoImg/><span className="nav-logo-text">Diente de León</span>
+      </div>
       <div className="nav-right">
         <button className="nav-link" onClick={()=>goPage('nosotras')}>Nosotras</button>
         <button className="cart-btn" onClick={()=>setCartOpen(true)}>
@@ -846,6 +880,41 @@ function App(){
         </button>
       </div>
     </nav>
+    {menuOpen&&<div className="menu-overlay" onClick={()=>setMenuOpen(false)}/>}
+    <aside className={`menu-panel${menuOpen?' open':''}`}>
+      <div className="menu-head">
+        <span className="menu-title">Menú</span>
+        <button className="menu-close" onClick={()=>setMenuOpen(false)} aria-label="Cerrar">×</button>
+      </div>
+      <nav className="menu-nav">
+        <button className="menu-item" onClick={()=>{goPage('home');setMenuOpen(false);}}>Inicio</button>
+        <div className="menu-collapsible">
+          <button className="menu-item menu-toggle" onClick={()=>setSubmenuColeccion(s=>!s)}>
+            <span>Colección</span>
+            <span className={`menu-arrow${submenuColeccion?' open':''}`}>›</span>
+          </button>
+          {submenuColeccion&&<div className="menu-sub">
+            <button className="menu-subitem" onClick={()=>{goPage('catalog');setMenuOpen(false);}}>Todos</button>
+            <button className="menu-subitem" onClick={()=>{goPage('catalog');setMenuOpen(false);}}>Aros</button>
+            <button className="menu-subitem" onClick={()=>{goPage('catalog');setMenuOpen(false);}}>Pulseras</button>
+            <button className="menu-subitem" onClick={()=>{goPage('catalog');setMenuOpen(false);}}>Collares</button>
+            <button className="menu-subitem" onClick={()=>{goPage('catalog');setMenuOpen(false);}}>Anillos</button>
+          </div>}
+        </div>
+        <button className="menu-item" onClick={()=>{goPage('pers');setMenuOpen(false);}}>Personalizado</button>
+        <button className="menu-item" onClick={()=>{goPage('nosotras');setMenuOpen(false);}}>Nosotras</button>
+        <div className="menu-divider"/>
+        <p className="menu-section-label">Redes sociales</p>
+        <button className="menu-item menu-social" onClick={()=>window.open('https://www.instagram.com/joyeria_diente_de_leon','_blank')}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          Instagram
+        </button>
+        <button className="menu-item menu-social" onClick={()=>window.open('https://wa.me/56934828288','_blank')}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2.1-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.3-.3.3-1 1-1 2.4 0 1.4 1.1 2.8 1.2 3 .1.2 2.1 3.2 5 4.5 1.8.8 2.5.8 3.4.7.5-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.2-.2-.3-.3-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3C8.6 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+          WhatsApp
+        </button>
+      </nav>
+    </aside>
     {page==='home'&&<HomePage products={products} loading={loading} onAdd={addToCart} onOpen={setModalProduct} goPage={goPage}/>}
     {page==='catalog'&&<CatalogPage products={products} loading={loading} onAdd={addToCart} onOpen={setModalProduct}/>}
     {page==='pers'&&<PersPage products={products} onAdd={addToCart} goPage={goPage}/>}
